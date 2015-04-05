@@ -21,9 +21,13 @@ SccmTools provides various commands for SCCM 2012 interaction
 ## Commands
 =========================	
 ### CreateApplicationFromPackageDefinition
-	Create a SCCM 2012 application from a package definition file (https://technet.microsoft.com/en-ca/library/bb632631.aspx). 
-	The package definition file is required to have a [INSTALL] program and a [UNINSTALL] program.
-	The MSI product code on the format '{{...guid...}}' must be located any where in the '[Package Definition]Comment' field.
+
+Create a SCCM 2012 application from a package definition file 
+as documented here: https://technet.microsoft.com/en-ca/library/bb632631.aspx). 
+
+The package definition file is required to have a [INSTALL] program and a [UNINSTALL] program.
+
+The MSI product code on the format '{guid}' must be located any where in the '[Package Definition]Comment' field.
 	
 #### Supported package definition values:
 	
@@ -40,6 +44,7 @@ SccmTools provides various commands for SCCM 2012 interaction
 	
 #### Example package definition file
 
+```dosini
 [PDF]
 Version=2.0
 
@@ -69,3 +74,4 @@ UserInputRequired=False
 AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
+```
