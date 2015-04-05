@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.8</ProductVersion>
+    <ProjectGuid>92a8fc86-184a-43c3-b1e8-ab56270132c2</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>SccmTools</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <DefineSolutionProperties>false</DefineSolutionProperties>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Setup</OutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\..\..\obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Setup</OutputPath>
+    <IntermediateOutputPath>$(MSBuildProjectDirectory)\..\..\obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Components.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Product-en-us.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="License.rtf" />
+    <Content Include="NCmdLiner.ico" />
+    <Content Include="WixUIBanner.bmp" />
+    <Content Include="WiXUiDialog.bmp" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>-->
+  <Target Name="AfterBuild">
+    <GetAssemblyIdentity AssemblyFiles="$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Library\SccmTools.Library.dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Setup\en-us\$(OutputName).msi" DestinationFiles="$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Setup\en-us\$(OutputName).%(AssemblyVersion.Version).msi" />
+    <Delete Files="$(MSBuildProjectDirectory)\..\..\bin\$(Configuration)\SccmTools.Setup\en-us\$(OutputName).msi" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>mkdir "$(TargetDir)..\$(TargetName)\Libs"
+copy "$(TargetDir)..\$(TargetName)\%2a.dll" "$(TargetDir)..\$(TargetName)\Libs"
+del "$(TargetDir)..\$(TargetName)\Libs\$(TargetName)%2a.%2a"
+del "$(TargetDir)..\$(TargetName)\Libs\SccmTools.Library%2a.%2a"
+mkdir "$(TargetDir)..\$(TargetName)\Libs\NMultiTool"
+xcopy "$(ProjectDir)..\..\tools\NMultiTool" "$(TargetDir)..\$(TargetName)\Libs\NMultiTool" /Y /E
+del "$(TargetDir)..\$(TargetName)\Libs\NMultiTool\(null)%2a"
+"$(ProjectDir)..\..\Tools\NMultiTool\NMultiTool.exe" Folder2Wxs /harvestFolder="$(TargetDir)..\$(TargetName)\Libs" /wxsFileName="$(ProjectDir)Components.wxs" /targetFolderId="TargetFolder" /componentGroupId="Components_WiXComponentGroup" /diskIds="[%271%27]" /addExecutables2AppsPath="False"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

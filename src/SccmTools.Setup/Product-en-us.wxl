@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <String Id="LanguageCode">1033</String>
+  <String Id="NewerVersionIsInstalled">A newer version of [ProductName] is already installed.</String>
+  <String Id="DotNetFrameWorkConditionMessage">[ProductName] depends on minumum .NET Framework 4.5.2 which can be dowloaded from http://www.microsoft.com/en-gb/download/details.aspx?id=42642 </String>
+</WixLocalization>
