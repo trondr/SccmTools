@@ -29,7 +29,7 @@ The package definition file is required to have a [INSTALL] program and a [UNINS
 
 The MSI product code on the format '{guid}' must be located any where in the '[Package Definition]Comment' field.
 	
-#### Supported package definition values:
+#### Recognized package definition values:
 	
 	*[Package Definition]Name
 	*[Package Definition]Version

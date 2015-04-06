@@ -62,6 +62,7 @@
     <Compile Include="IntegrationTests\ExampleIntegrationTests.cs" />
     <Compile Include="IntegrationTests\StandardUser\ExampleStandardUserIntegrationTests.cs" />
     <Compile Include="IntegrationTests\StandardUser\StandardUserImpersonationTests.cs" />
+    <Compile Include="UnitTests\ConfigurationManagerConsoleInfoTests.cs" />
     <Compile Include="UnitTests\ProductCodeProviderTests.cs" />
     <Compile Include="UnitTests\SccmInfoProviderTests.cs" />
     <Compile Include="UnitTests\UnitTestsTemplate.cs" />

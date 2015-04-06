@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration.Install;
 using System.IO;
+using System.Runtime.Serialization.Formatters;
 using System.Xml.Serialization;
 using Microsoft.ConfigurationManagement.AdminConsole.Schema;
 
@@ -18,7 +19,7 @@ namespace SccmTools.Library.Common.Install
         public void Install(string nodeGuid, string commandName, string command, string arguments, InstallContext installContext)
         {
             installContext.LogMessage(string.Format("Installing command '{0}' to node guid '{1}'", commandName, nodeGuid));
-            if(!Directory.Exists(_configurationManagerConsoleInfo.ActionsExtensionsPath))
+            if(string.IsNullOrWhiteSpace(_configurationManagerConsoleInfo.ActionsExtensionsPath) || !Directory.Exists(_configurationManagerConsoleInfo.ActionsExtensionsPath))
             {
                 throw new SccmToolsException("Unable to locate Configuration Manager Console on this machine. Failed to install action command: " + commandName);
             }
@@ -38,14 +39,14 @@ namespace SccmTools.Library.Common.Install
             var extensionNodepath = Path.Combine(_configurationManagerConsoleInfo.ActionsExtensionsPath, nodeGuid); 
             if(!Directory.Exists(extensionNodepath))
             {
-                installContext.LogMessage(string.Format("Creating action node directory '{0}'", extensionNodepath));
+                installContext.LogMessage(string.Format("Creating action node directory '{0}'...", extensionNodepath));
                 Directory.CreateDirectory(extensionNodepath);
             }
             var actionDescriptionFile = Path.Combine(extensionNodepath, commandName + ".xml");
             var serializer = new XmlSerializer(typeof(ActionDescription));
             using(var sw = new StreamWriter(actionDescriptionFile))
             {
-                installContext.LogMessage(string.Format("saving action description to file '{0}'", actionDescriptionFile));
+                installContext.LogMessage(string.Format("Saving action description to file '{0}'...", actionDescriptionFile));
                 serializer.Serialize(sw, actionDescriptionDescription);
             }                        
         }
@@ -53,7 +54,7 @@ namespace SccmTools.Library.Common.Install
         public void UnInstall(string nodeGuid, string commandName, InstallContext installContext)
         {
             installContext.LogMessage(string.Format("Uninstalling command '{0}' from node guid '{1}'", commandName, nodeGuid));
-            if(!Directory.Exists(_configurationManagerConsoleInfo.ActionsExtensionsPath))
+            if(!string.IsNullOrWhiteSpace(_configurationManagerConsoleInfo.ActionsExtensionsPath) && Directory.Exists(_configurationManagerConsoleInfo.ActionsExtensionsPath))
             {            
                 var extensionNodepath = Path.Combine(_configurationManagerConsoleInfo.ActionsExtensionsPath, nodeGuid); 
                 var actionDescriptionFile = Path.Combine(extensionNodepath, commandName + ".xml");

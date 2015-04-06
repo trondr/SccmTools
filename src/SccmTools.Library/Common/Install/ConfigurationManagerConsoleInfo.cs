@@ -21,15 +21,13 @@ namespace SccmTools.Library.Common.Install
                         {
                             if (adminUiBinDirectory.Parent.Parent != null)
                             {
-                                var adminConsoleDirectory = adminUiBinDirectory.Parent.Parent.Parent;
-                                if (adminConsoleDirectory != null)
+                                var adminConsoleDirectory = adminUiBinDirectory.Parent.Parent;
+                                var extensionPath = Path.Combine(adminConsoleDirectory.FullName, "XmlStorage", "Extensions", "Actions");
+                                if (Directory.Exists(extensionPath))
                                 {
-                                    var extensionPath = Path.Combine(adminConsoleDirectory.FullName,"XmlStorage", "Extensions", "Actions");
-                                    if(Directory.Exists(extensionPath))
-                                    {
-                                        _actionExtensionsPath = extensionPath;
-                                    }
+                                    _actionExtensionsPath = extensionPath;
                                 }
+                                
                             }
                         }
                     }
