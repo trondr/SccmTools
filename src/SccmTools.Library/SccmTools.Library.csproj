@@ -61,6 +61,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -80,6 +81,12 @@
     <Compile Include="Common\Caching\ICacheProvider.cs" />
     <Compile Include="Common\Caching\ICacheValidator.cs" />
     <Compile Include="Common\Caching\ICurrentDateTimeService.cs" />
+    <Compile Include="Common\Install\ConfigurationManagerConsoleInfo.cs" />
+    <Compile Include="Common\Install\ConfigurationManagerContextMenuInstaller.cs" />
+    <Compile Include="Common\Install\IConfigurationManagerConsoleInfo.cs" />
+    <Compile Include="Common\Install\IConfigurationManagerContextMenuInstaller.cs" />
+    <Compile Include="Common\IO\IPathOperation.cs" />
+    <Compile Include="Common\IO\PathOperation.cs" />
     <Compile Include="Common\Wmi\IWmi.cs" />
     <Compile Include="Common\Wmi\Wmi.cs" />
     <Compile Include="Common\Wmi\WmiManagementObjectExtensions.cs" />

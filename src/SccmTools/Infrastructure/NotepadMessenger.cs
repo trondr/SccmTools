@@ -65,7 +65,7 @@ namespace SccmTools.Infrastructure
             {
                 this.Sw.Write(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 Console.WriteLine("Error in format message: " + formatMessage);
                 throw;
@@ -78,7 +78,7 @@ namespace SccmTools.Infrastructure
             {
                 this.Sw.WriteLine(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 Console.WriteLine("Error in format message: " + formatMessage);
                 throw;

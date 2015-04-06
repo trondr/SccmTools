@@ -3,6 +3,8 @@ using System.IO;
 using Common.Logging;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 using Microsoft.ConfigurationManagement.ApplicationManagement.Serialization;
+using Microsoft.Win32;
+using SccmTools.Library.Common.IO;
 using SccmTools.Library.Infrastructure;
 using SccmTools.Library.Services;
 
@@ -14,23 +16,46 @@ namespace SccmTools.Library.Commands.CreateApplication
         private readonly ISccmInfoProvider _sccmInfoProvider;
         private readonly ISccmApplication _sccmApplication;
         private readonly IPackageDefinitionFactory _packageDefinitionFactory;
+        private readonly IPathOperation _pathOperation;
         private readonly ILog _logger;
 
-        public CreateApplicationFromPackageDefinitionCommandProvider(IProductCodeProvider productCodeProvider, ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, ILog logger)
+        public CreateApplicationFromPackageDefinitionCommandProvider(IProductCodeProvider productCodeProvider, ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, IPathOperation pathOperation, ILog logger)
         {
             _productCodeProvider = productCodeProvider;
             _sccmInfoProvider = sccmInfoProvider;
             _sccmApplication = sccmApplication;
             _packageDefinitionFactory = packageDefinitionFactory;
+            _pathOperation = pathOperation;
             _logger = logger;
         }
 
         public int CreateApplicationFromPackageDefinition(string packageDefinitionFile)
         {
+            if(string.IsNullOrWhiteSpace(packageDefinitionFile))
+            {
+                var openFileDialog = new OpenFileDialog
+                {
+                    Filter = string.Format("Package Definition (*.sms)|*.sms"),
+                    Multiselect = false
+                };
+                var ok = openFileDialog.ShowDialog();
+                if(ok == true)
+                {
+                    packageDefinitionFile = openFileDialog.FileName;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
             packageDefinitionFile = Environment.ExpandEnvironmentVariables(packageDefinitionFile);
             if (!File.Exists(packageDefinitionFile)) throw new FileNotFoundException("Package definition file not found.", packageDefinitionFile);
+            packageDefinitionFile = _pathOperation.GetUncPath(packageDefinitionFile);
             var packageDefinitionUri = new Uri(packageDefinitionFile);
-            if (!packageDefinitionUri.IsUnc) throw new SccmToolsException("Package definition file path is not an UNC path: " + packageDefinitionFile);
+            if (!packageDefinitionUri.IsUnc)
+            { 
+                throw new SccmToolsException(string.Format("Package definition file path '{0}' is not a network path. The path is not a UNC path or network drive that can be resolve to an UNC path.", packageDefinitionFile));
+            }
             _logger.InfoFormat("Creating application from package definition file '{0}'...", packageDefinitionFile);
             var packageDefinition = _packageDefinitionFactory.GetPackageDefinition(packageDefinitionFile);
             var returnValue = 0;

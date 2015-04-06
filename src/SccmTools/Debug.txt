@@ -2,3 +2,6 @@
 CreateApplicationFromPackageDefinition /packageDefinitionFile="S:\Applications\github-com-trondr NCmdLiner Solution Creator 1.0.15092.30\Pkg\PackageDefinition.sms"
 
 CreateApplicationFromPackageDefinition /packageDefinitionFile="\\%MySccmServer%\pkgsrc\Applications\github-com-trondr NCmdLiner Solution Creator 1.0.15092.30\Pkg\PackageDefinition.sms"
+
+
+CreateApplicationFromPackageDefinition /packageDefinitionFile=""
