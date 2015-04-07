@@ -12,12 +12,12 @@ SccmTools provides various commands for SCCM 2012 interaction
 * Wix Toolset 3.8 (http://wix.codeplex.com/downloads/get/762937)
 * System Center 2012 R2 Configuration Manager Console
 * The directory '.\SccmTools\bin\Libs' in the solution directory must contain and referenced from the library project:
-	** AdminUI.WqlQueryEngine.dll (from the Configuration Manager Console)
-	** DcmObjectModel.dll (from the Configuration Manager Console)
-	** Microsoft.ConfigurationManagement.ApplicationManagement.dll (from the Configuration Manager Console)
-	** Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll (from the Configuration Manager Console)
-	** Microsoft.ConfigurationManagement.ManagementProvider.dll (from the Configuration Manager Console)
-	** Microsoft.Deployment.WindowsInstaller.dll (from the Windows Installer XML Toolset)
+** AdminUI.WqlQueryEngine.dll (from the Configuration Manager Console)
+** DcmObjectModel.dll (from the Configuration Manager Console)
+** Microsoft.ConfigurationManagement.ApplicationManagement.dll (from the Configuration Manager Console)
+** Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll (from the Configuration Manager Console)
+** Microsoft.ConfigurationManagement.ManagementProvider.dll (from the Configuration Manager Console)
+** Microsoft.Deployment.WindowsInstaller.dll (from the Windows Installer XML Toolset)
 	
 ## Commands
 
@@ -29,16 +29,16 @@ The package definition file is required to have a [INSTALL] program and a [UNINS
 
 #### Recognized package definition values:
 	
-	*[Package Definition]Name
-	*[Package Definition]Version
-	*[Package Definition]Publisher
-	*[Package Definition]Language
-	*[Package Definition]Comment=<msi product code can be provided manually somewhere in this comment field>
-	*[INSTALL]CommandLine
-	*[INSTALL]Icon
-	*[UNINSTALL]CommandLine
+* [Package Definition]Name
+* [Package Definition]Version
+* [Package Definition]Publisher
+* [Package Definition]Language
+* [Package Definition]Comment=<msi product code can be provided manually somewhere in this comment field>
+* [INSTALL]CommandLine
+* [INSTALL]Icon
+* [UNINSTALL]CommandLine
 		
-	All other values in package definition file are ignored.
+All other values in package definition file are ignored.
 	
 #### Example package definition file
 
