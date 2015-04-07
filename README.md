@@ -23,19 +23,7 @@ SccmTools provides various commands for SCCM 2012 interaction
 =========================	
 ### CreateApplicationFromPackageDefinition
 
-Create a SCCM 2012 application from a package definition file (PackageDefinition.sms ref. https://technet.microsoft.com/en-ca/library/bb632631.aspx). 
-
-This is useful in simpler script install scenarios where only INSTALL and UNINSTALL command line is necessary and the application is installed by a msi file. 
-
-Application detection method will be based on the msi product code. The product code, on the format '{{...guid...}}', 
-
-can be manually defined anywhere in the [Package Definition]Comment value. If the product code is not manually defined 
-
-the msi product code will be attempted automatically retrieved from the msi file found by directory search of the 
-
-content folder (the folder where the package definition file is located). If more than one msi file is found, 
-
-an exception is thrown asking for manual definition of product code. 
+Create a SCCM 2012 application from a package definition file (PackageDefinition.sms ref. https://technet.microsoft.com/en-ca/library/bb632631.aspx). This is useful in simpler script install scenarios where only INSTALL and UNINSTALL command line is necessary and the application is installed by a msi file. Application detection method will be based on the msi product code. The product code, on the format {...guid...}, can be manually defined anywhere in the [Package Definition]Comment value. If the product code is not manually defined the msi product code will be attempted automatically retrieved from the msi file found by directory search of the content folder (the folder where the package definition file is located). If more than one msi file is found, an exception is thrown asking for manual definition of product code. 
 
 The package definition file is required to have a [INSTALL] program and a [UNINSTALL] program. 
 
