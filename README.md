@@ -1,9 +1,9 @@
 # SccmTools
-=========================
+
 SccmTools provides various commands for SCCM 2012 interaction
 
 ## Minimum Build Requirements
-=========================
+
 * MSBuild (http://www.microsoft.com/en-us/download/details.aspx?id=40760)
 * Windows SDK (http://msdn.microsoft.com/en-us/windows/desktop/bg162891.aspx)
 * .NET Framework 4.5.2 Runtime (http://go.microsoft.com/fwlink/?LinkId=397674)
@@ -12,15 +12,15 @@ SccmTools provides various commands for SCCM 2012 interaction
 * Wix Toolset 3.8 (http://wix.codeplex.com/downloads/get/762937)
 * System Center 2012 R2 Configuration Manager Console
 * The directory '.\SccmTools\bin\Libs' in the solution directory must contain and referenced from the library project:
-	AdminUI.WqlQueryEngine.dll (from the Configuration Manager Console)
-	DcmObjectModel.dll (from the Configuration Manager Console)
-	Microsoft.ConfigurationManagement.ApplicationManagement.dll (from the Configuration Manager Console)
-	Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll (from the Configuration Manager Console)
-	Microsoft.ConfigurationManagement.ManagementProvider.dll (from the Configuration Manager Console)
-	Microsoft.Deployment.WindowsInstaller.dll (from the Windows Installer XML Toolset)
+	** AdminUI.WqlQueryEngine.dll (from the Configuration Manager Console)
+	** DcmObjectModel.dll (from the Configuration Manager Console)
+	** Microsoft.ConfigurationManagement.ApplicationManagement.dll (from the Configuration Manager Console)
+	** Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll (from the Configuration Manager Console)
+	** Microsoft.ConfigurationManagement.ManagementProvider.dll (from the Configuration Manager Console)
+	** Microsoft.Deployment.WindowsInstaller.dll (from the Windows Installer XML Toolset)
 	
 ## Commands
-=========================	
+
 ### CreateApplicationFromPackageDefinition
 
 Create a SCCM 2012 application from a package definition file (PackageDefinition.sms ref. https://technet.microsoft.com/en-ca/library/bb632631.aspx). This is useful in simpler script install scenarios where only INSTALL and UNINSTALL command line is necessary and the application is installed by a msi file. Application detection method will be based on the msi product code. The product code, on the format {...guid...}, can be manually defined anywhere in the [Package Definition]Comment value. If the product code is not manually defined the msi product code will be attempted automatically retrieved from the msi file found by directory search of the content folder (the folder where the package definition file is located). If more than one msi file is found, an exception is thrown asking for manual definition of product code. 
