@@ -71,7 +71,7 @@ namespace SccmTools.Library.Services
             {
                 if(string.IsNullOrWhiteSpace(_comment))
                 {
-                    _comment = GetValue("Package Definition", "Comment", false);
+                    _comment = GetValue("Package Definition", "Comment", true);
                     
                 }
                 return _comment;

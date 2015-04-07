@@ -57,6 +57,10 @@
     <Reference Include="Microsoft.ConfigurationManagement.ManagementProvider">
       <HintPath>..\..\bin\Libs\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Libs\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -87,6 +91,8 @@
     <Compile Include="Common\Install\IConfigurationManagerContextMenuInstaller.cs" />
     <Compile Include="Common\IO\IPathOperation.cs" />
     <Compile Include="Common\IO\PathOperation.cs" />
+    <Compile Include="Common\Msi\IMsiHelper.cs" />
+    <Compile Include="Common\Msi\MsiHelper.cs" />
     <Compile Include="Common\Wmi\IWmi.cs" />
     <Compile Include="Common\Wmi\Wmi.cs" />
     <Compile Include="Common\Wmi\WmiManagementObjectExtensions.cs" />

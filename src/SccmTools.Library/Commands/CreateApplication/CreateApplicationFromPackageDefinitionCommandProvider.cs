@@ -93,9 +93,13 @@ namespace SccmTools.Library.Commands.CreateApplication
 
             _logger.Info("Creating application script installer with msi product code detection method...");
             var productCode = _productCodeProvider.GetProductCodeFromText(packageDefinition.Comment);
+            if(string.IsNullOrWhiteSpace(productCode))
+            {
+                productCode = _productCodeProvider.GetProductCodeFromMsiFileSearch(contentDirectory.FullName);
+            }
             if (string.IsNullOrWhiteSpace(productCode))
             {
-                throw new SccmToolsException("ProductCode was not found in package definition file comment.");
+                throw new SccmToolsException(string.Format("ProductCode was not found any where in the [Package Definition]Comment nor from automatically searching for a msi file and its product code in content directory '{0}'. If there is more than one msi file in the content directory and its sub folders, the product code must be provided any where in the [Package Definition]Comment value.", contentDirectory.FullName));
             }
             var scriptInstaller = new ScriptInstaller
             {

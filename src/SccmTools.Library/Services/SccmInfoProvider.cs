@@ -49,7 +49,7 @@ namespace SccmTools.Library.Services
         public string GetScopeId()
         {
             var siteId = GetSiteId().Substring(1,36);
-            return string.Format("ScopeId_" + GetSiteCode() + "_" + siteId);
+            return string.Format("ScopeId_" + siteId);
         }
     }
 }
