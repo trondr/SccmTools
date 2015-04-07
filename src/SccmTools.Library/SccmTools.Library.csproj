@@ -105,8 +105,8 @@
     <Compile Include="Infrastructure\CommandProvider.cs" />
     <Compile Include="Infrastructure\ILoggingConfiguration.cs" />
     <Compile Include="Infrastructure\LoggingConfiguration.cs" />
-    <Compile Include="Commands\CreateApplication\ICreateApplicationFromPackageDefinitionCommandProvider.cs" />
-    <Compile Include="Commands\CreateApplication\CreateApplicationFromPackageDefinitionCommandProvider.cs" />
+    <Compile Include="Commands\CreateApplication\ICreateApplicationFromDefinitionCommandProvider.cs" />
+    <Compile Include="Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
     <Compile Include="Infrastructure\ApplicationInfoHelper.cs" />
     <Compile Include="Infrastructure\CommandDefinition.cs" />
     <Compile Include="Infrastructure\SingletonAttribute.cs" />

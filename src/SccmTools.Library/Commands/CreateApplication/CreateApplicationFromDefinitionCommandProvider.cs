@@ -10,7 +10,7 @@ using SccmTools.Library.Services;
 
 namespace SccmTools.Library.Commands.CreateApplication
 {
-    public class CreateApplicationFromPackageDefinitionCommandProvider : CommandProvider, ICreateApplicationFromPackageDefinitionCommandProvider
+    public class CreateApplicationFromDefinitionCommandProvider : CommandProvider, ICreateApplicationFromDefinitionCommandProvider
     {
         private readonly IProductCodeProvider _productCodeProvider;
         private readonly ISccmInfoProvider _sccmInfoProvider;
@@ -19,7 +19,7 @@ namespace SccmTools.Library.Commands.CreateApplication
         private readonly IPathOperation _pathOperation;
         private readonly ILog _logger;
 
-        public CreateApplicationFromPackageDefinitionCommandProvider(IProductCodeProvider productCodeProvider, ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, IPathOperation pathOperation, ILog logger)
+        public CreateApplicationFromDefinitionCommandProvider(IProductCodeProvider productCodeProvider, ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, IPathOperation pathOperation, ILog logger)
         {
             _productCodeProvider = productCodeProvider;
             _sccmInfoProvider = sccmInfoProvider;
@@ -29,7 +29,7 @@ namespace SccmTools.Library.Commands.CreateApplication
             _logger = logger;
         }
 
-        public int CreateApplicationFromPackageDefinition(string packageDefinitionFile)
+        public int CreateApplicationFromDefinition(string packageDefinitionFile)
         {
             if(string.IsNullOrWhiteSpace(packageDefinitionFile))
             {

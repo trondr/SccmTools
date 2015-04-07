@@ -108,7 +108,7 @@
     <Compile Include="Infrastructure\CustomTypeFactoryComponentSelector.cs" />
     <Compile Include="Infrastructure\LoggerSubDependencyResolver.cs" />
     <Compile Include="Infrastructure\NotepadMessenger.cs" />
-    <Compile Include="Commands\CreateApplicationFromPackageDefintionCommandDefinition.cs" />
+    <Compile Include="Commands\CreateApplicationFromDefinitionCommandDefinition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CustomInstaller.cs">
