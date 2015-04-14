@@ -24,7 +24,7 @@ namespace SccmTools.Library.Common.IO
             var errorCode = Marshal.GetLastWin32Error();
             if(errorCode != 0)
             {
-                throw new Win32Exception(errorCode);
+                throw new Win32Exception(errorCode, string.Format("Failed to read '\"{0}\"[{1}]{2}'", path, section, key));
             }
             return value.ToString();
         }
@@ -35,7 +35,7 @@ namespace SccmTools.Library.Common.IO
             var errorCode = Marshal.GetLastWin32Error();
             if(errorCode != 0)
             {
-                throw new Win32Exception(errorCode);
+                throw new Win32Exception(errorCode, string.Format("Failed to write '\"{0}\"[{1}]{2}={3}'", path, section, key, value));
             }
         }
     }
