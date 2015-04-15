@@ -101,7 +101,7 @@ namespace SccmTools.Library.Commands.CreateApplication
             {
                 throw new SccmToolsException(string.Format("ProductCode was not found any where in the [Package Definition]Comment nor from automatically searching for a msi file and its product code in content directory '{0}'. If there is more than one msi file in the content directory and its sub folders, the product code must be provided any where in the [Package Definition]Comment value.", contentDirectory.FullName));
             }
-            var scriptInstaller = new ScriptInstaller
+            var installer = new MsiInstaller
             {
                 InstallCommandLine = packageDefinition.InstallCommandLine,
                 UninstallCommandLine = packageDefinition.UnInstallCommandLine,
@@ -109,11 +109,12 @@ namespace SccmTools.Library.Commands.CreateApplication
                 ProductCode = productCode,
                 InstallContent = new ContentRef(content)
             };
-            scriptInstaller.Contents.Add(content);
+            installer.Contents.Add(content);
             _logger.Info("Creating application deployment method...");
-            var deploymentType = new DeploymentType(scriptInstaller, ScriptInstaller.TechnologyId, NativeHostingTechnology.TechnologyId)
+            var deploymentType = new DeploymentType(installer, MsiInstaller.TechnologyId, NativeHostingTechnology.TechnologyId)
             {
                 Title = "Custom-Script-Installer-MSI",
+                Version = 1,                
             };
             application.DeploymentTypes.Add(deploymentType);
             _logger.Info("Saving application to SCCM...");
