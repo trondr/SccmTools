@@ -2,6 +2,8 @@
 {
     public interface IPathOperation
     {
-        string GetUncPath(string path);
+        string GetUncPath(string path, bool useAdminShareForLocalDrive);
+
+        bool IsUncPath(string path);
     }
 }

@@ -19,5 +19,9 @@ namespace SccmTools.Library.Services
         string UnInstallCommandLine { get; set; }
 
         Icon Icon { get; set; }
+
+        string MsiProductCode { get; set;}
+
+        string ContentDirectory { get; set; }
     }
 }

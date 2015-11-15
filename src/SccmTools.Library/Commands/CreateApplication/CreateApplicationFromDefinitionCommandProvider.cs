@@ -11,17 +11,15 @@ using SccmTools.Library.Services;
 namespace SccmTools.Library.Commands.CreateApplication
 {
     public class CreateApplicationFromDefinitionCommandProvider : CommandProvider, ICreateApplicationFromDefinitionCommandProvider
-    {
-        private readonly IProductCodeProvider _productCodeProvider;
+    {        
         private readonly ISccmInfoProvider _sccmInfoProvider;
         private readonly ISccmApplication _sccmApplication;
         private readonly IPackageDefinitionFactory _packageDefinitionFactory;
         private readonly IPathOperation _pathOperation;
         private readonly ILog _logger;
 
-        public CreateApplicationFromDefinitionCommandProvider(IProductCodeProvider productCodeProvider, ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, IPathOperation pathOperation, ILog logger)
+        public CreateApplicationFromDefinitionCommandProvider(ISccmInfoProvider sccmInfoProvider, ISccmApplication sccmApplication, IPackageDefinitionFactory packageDefinitionFactory, IPathOperation pathOperation, ILog logger)
         {
-            _productCodeProvider = productCodeProvider;
             _sccmInfoProvider = sccmInfoProvider;
             _sccmApplication = sccmApplication;
             _packageDefinitionFactory = packageDefinitionFactory;
@@ -35,7 +33,7 @@ namespace SccmTools.Library.Commands.CreateApplication
             {
                 var openFileDialog = new OpenFileDialog
                 {
-                    Filter = string.Format("Package Definition (*.sms)|*.sms"),
+                    Filter = "Package Definition (*.sms)|*.sms",
                     Multiselect = false
                 };
                 var ok = openFileDialog.ShowDialog();
@@ -50,7 +48,7 @@ namespace SccmTools.Library.Commands.CreateApplication
             }
             packageDefinitionFile = Environment.ExpandEnvironmentVariables(packageDefinitionFile);
             if (!File.Exists(packageDefinitionFile)) throw new FileNotFoundException("Package definition file not found.", packageDefinitionFile);
-            packageDefinitionFile = _pathOperation.GetUncPath(packageDefinitionFile);
+            packageDefinitionFile = _pathOperation.GetUncPath(packageDefinitionFile, false);
             var packageDefinitionUri = new Uri(packageDefinitionFile);
             if (!packageDefinitionUri.IsUnc)
             { 
@@ -92,21 +90,12 @@ namespace SccmTools.Library.Commands.CreateApplication
             content.FallbackToUnprotectedDP = false;
 
             _logger.Info("Creating application script installer with msi product code detection method...");
-            var productCode = _productCodeProvider.GetProductCodeFromText(packageDefinition.Comment);
-            if(string.IsNullOrWhiteSpace(productCode))
-            {
-                productCode = _productCodeProvider.GetProductCodeFromMsiFileSearch(contentDirectory.FullName);
-            }
-            if (string.IsNullOrWhiteSpace(productCode))
-            {
-                throw new SccmToolsException(string.Format("ProductCode was not found any where in the [Package Definition]Comment nor from automatically searching for a msi file and its product code in content directory '{0}'. If there is more than one msi file in the content directory and its sub folders, the product code must be provided any where in the [Package Definition]Comment value.", contentDirectory.FullName));
-            }
             var installer = new MsiInstaller
             {
                 InstallCommandLine = packageDefinition.InstallCommandLine,
                 UninstallCommandLine = packageDefinition.UnInstallCommandLine,
                 DetectionMethod = DetectionMethod.ProductCode,
-                ProductCode = productCode,
+                ProductCode = packageDefinition.MsiProductCode,
                 InstallContent = new ContentRef(content)
             };
             installer.Contents.Add(content);

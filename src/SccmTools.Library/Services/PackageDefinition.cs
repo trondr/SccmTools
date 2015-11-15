@@ -9,6 +9,7 @@ namespace SccmTools.Library.Services
     {
         private readonly string _packageDefinitionFile;
         private readonly IIniFileOperation _iniFileOperation;
+        private readonly IProductCodeProvider _productCodeProvider;
         private string _name;
         private string _version;
         private string _publisher;
@@ -17,11 +18,14 @@ namespace SccmTools.Library.Services
         private string _installCommandLine;
         private string _unInstallCommandLine;
         private Icon _icon;
+        private string _msiProductCode;
+        private string _contentDirectory;
 
-        public PackageDefinition(string packageDefinitionFile, IIniFileOperation iniFileOperation)
+        public PackageDefinition(string packageDefinitionFile, IIniFileOperation iniFileOperation, IProductCodeProvider productCodeProvider)
         {
             _packageDefinitionFile = packageDefinitionFile;
             _iniFileOperation = iniFileOperation;
+            _productCodeProvider = productCodeProvider;
         }
 
         public string Name
@@ -145,7 +149,40 @@ namespace SccmTools.Library.Services
             set { _icon = value; }
         }
 
-        string GetValue(string section, string key, bool allowNullOrEmpty)
+        public string MsiProductCode
+        {
+            get
+            {
+                _msiProductCode = _productCodeProvider.GetProductCodeFromText(GetValue("DetectionMethod", "MsiProductCode", true));
+                if(string.IsNullOrWhiteSpace(_msiProductCode))
+                {
+                    _msiProductCode = _productCodeProvider.GetProductCodeFromMsiFileSearch(ContentDirectory);
+                }
+                if (string.IsNullOrWhiteSpace(_msiProductCode))
+                {
+                    throw new SccmToolsException(string.Format("ProductCode was not found in the section value [DetectionMethod]MsiProductCode in package definition file '{0}' or from automatically searching for a msi file and its product code in content directory '{1}'. If there is more than one msi file in the content directory and its sub folders, the product code must be provided any where in the [DetectionMethod]MsiProductCode value on the format {{...guid...}}.", _packageDefinitionFile, ContentDirectory));
+                }
+                return _msiProductCode;
+            }
+            set { _msiProductCode = value; }
+        }
+
+        public string ContentDirectory
+        {
+            get
+            {
+                if(string.IsNullOrEmpty(_contentDirectory))
+                {
+                    var contentDirectory = new FileInfo(_packageDefinitionFile).Directory;
+                    if (contentDirectory == null) { throw new SccmToolsException("Failed to derive parent directory for package definition file: " + _packageDefinitionFile); }
+                    _contentDirectory = contentDirectory.FullName;
+                }
+                return _contentDirectory;
+            }
+            set { _contentDirectory = value; }
+        }
+
+        private string GetValue(string section, string key, bool allowNullOrEmpty)
         {
             var value = _iniFileOperation.Read(_packageDefinitionFile, section, key);
             if(!allowNullOrEmpty && string.IsNullOrWhiteSpace(value))
