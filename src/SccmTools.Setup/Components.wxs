@@ -2,215 +2,264 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Fragment>
     <DirectoryRef Id="TargetFolder">
-      <Component Id="Id_AdminUI_WqlQueryEngine_dll_2076966392_WixComponent" Guid="5088FF5F-EAF1-486F-8B28-9DC283CCCE77" DiskId="1">
+      <Component Id="Id_AdminUI_WqlQueryEngine_dll_1186950856_WixComponent" Guid="A21A3609-14B3-4F59-95ED-934CFA043961" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_1225137814_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_1073137348_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_AdminUI_WqlQueryEngine_dll_1486478804_WixFile" Name="AdminUI.WqlQueryEngine.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\AdminUI.WqlQueryEngine.dll" />
+        <RemoveFolder Id="Id_Libs_1843465864_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1085771240_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_AdminUI_WqlQueryEngine_dll_1164769743_WixFile" Name="AdminUI.WqlQueryEngine.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\AdminUI.WqlQueryEngine.dll" />
       </Component>
-      <Component Id="Id_Castle_Core_dll_1247253934_WixComponent" Guid="3C236963-E778-4E74-B3A1-90F967A514BE" DiskId="1">
+      <Component Id="Id_Castle_Core_dll_1221857359_WixComponent" Guid="B5E38A61-3998-4EE4-9190-4BD3DBDBEE7B" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_779972349_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_727296011_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Castle_Core_dll_1905667300_WixFile" Name="Castle.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Core.dll" />
+        <RemoveFolder Id="Id_Libs_1365153099_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_17064920_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Castle_Core_dll_1168327634_WixFile" Name="Castle.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Core.dll" />
       </Component>
-      <Component Id="Id_Castle_Facilities_Logging_dll_271610958_WixComponent" Guid="6460DAFE-6585-4FB5-A203-A41A6E7F909F" DiskId="1">
+      <Component Id="Id_Castle_Facilities_Logging_dll_1357492804_WixComponent" Guid="CAC7D3B7-774D-42CC-84C1-CFCFC8C31A48" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_1421948211_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_873380007_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Castle_Facilities_Logging_dll_687857619_WixFile" Name="Castle.Facilities.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Facilities.Logging.dll" />
+        <RemoveFolder Id="Id_Libs_2052990749_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1981350784_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Castle_Facilities_Logging_dll_1990184907_WixFile" Name="Castle.Facilities.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Facilities.Logging.dll" />
       </Component>
-      <Component Id="Id_Castle_Services_Logging_Log4netIntegrati_1000013489_WixComponent" Guid="0A326A4E-5327-49EB-8E63-6EB39CA13D4F" DiskId="1">
+      <Component Id="Id_Castle_Services_Logging_Log4netIntegrati_856021432_WixComponent" Guid="CB905535-5A37-4593-8A86-2D3BC35F59C1" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_1822210533_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_1198321738_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Castle_Services_Logging_Log4netIntegrati_1866798967_WixFile" Name="Castle.Services.Logging.Log4netIntegration.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Services.Logging.Log4netIntegration.dll" />
+        <RemoveFolder Id="Id_Libs_498802349_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1407451238_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Castle_Services_Logging_Log4netIntegrati_2039549757_WixFile" Name="Castle.Services.Logging.Log4netIntegration.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Services.Logging.Log4netIntegration.dll" />
       </Component>
-      <Component Id="Id_Castle_Windsor_dll_1139137718_WixComponent" Guid="18572857-5A2D-460F-AC9E-3D6D1F9F41D5" DiskId="1">
+      <Component Id="Id_Castle_Windsor_dll_1339698782_WixComponent" Guid="33C96FFA-9F01-48BB-9E32-4F617006061F" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_2050352304_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_1940407459_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Castle_Windsor_dll_1151869201_WixFile" Name="Castle.Windsor.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Windsor.dll" />
+        <RemoveFolder Id="Id_Libs_1320073466_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_904345234_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Castle_Windsor_dll_1173460138_WixFile" Name="Castle.Windsor.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Castle.Windsor.dll" />
       </Component>
-      <Component Id="Id_Common_Logging_dll_1760570881_WixComponent" Guid="50E82E42-9428-45E9-8511-F623C7471329" DiskId="1">
+      <Component Id="Id_Common_Logging_Core_dll_379653114_WixComponent" Guid="BAB75AD9-A6FF-4C2F-B382-83AFF42C8B58" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_745044287_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_2143620454_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Common_Logging_dll_1656546681_WixFile" Name="Common.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.dll" />
+        <RemoveFolder Id="Id_Libs_350579184_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1536883230_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Common_Logging_Core_dll_559540689_WixFile" Name="Common.Logging.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.Core.dll" />
       </Component>
-      <Component Id="Id_Common_Logging_Log4Net_dll_1694029902_WixComponent" Guid="B5A80D5D-E8BC-42B2-9E42-6260C669AD8B" DiskId="1">
+      <Component Id="Id_Common_Logging_dll_1939984110_WixComponent" Guid="91FFC31A-C13E-4269-B59C-D24D9C38A275" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_810260872_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_1315027910_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Common_Logging_Log4Net_dll_668403646_WixFile" Name="Common.Logging.Log4Net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.Log4Net.dll" />
+        <RemoveFolder Id="Id_Libs_415166773_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1225137750_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Common_Logging_dll_2007446140_WixFile" Name="Common.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.dll" />
       </Component>
-      <Component Id="Id_DcmObjectModel_dll_1154414200_WixComponent" Guid="6E6E3B27-19FB-4B72-B45E-296CAEA0C02E" DiskId="1">
+      <Component Id="Id_Common_Logging_Log4Net_dll_483988334_WixComponent" Guid="3CDB8B56-D91F-4A69-A2D2-3CA2B54B5D64" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_171022972_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_2022128365_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_DcmObjectModel_dll_980069789_WixFile" Name="DcmObjectModel.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\DcmObjectModel.dll" />
+        <RemoveFolder Id="Id_Libs_2100412337_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_590894879_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Common_Logging_Log4Net_dll_2047013660_WixFile" Name="Common.Logging.Log4Net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.Log4Net.dll" />
       </Component>
-      <Component Id="Id_log4net_dll_686196343_WixComponent" Guid="173684C4-D015-45E2-967E-FB6FB6E4217B" DiskId="1">
+      <Component Id="Id_Common_Logging_Log4Net1210_dll_1539883110_WixComponent" Guid="28DB9956-C35D-4AFD-A812-9CBC46E3E275" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_1071892298_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_511007685_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_log4net_dll_2033628046_WixFile" Name="log4net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\log4net.dll" />
+        <RemoveFolder Id="Id_Libs_1783929126_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1528081693_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Common_Logging_Log4Net1210_dll_2098987884_WixFile" Name="Common.Logging.Log4Net1210.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Common.Logging.Log4Net1210.dll" />
       </Component>
-      <Component Id="Id_Microsoft_ConfigurationManagement_Applic_1619415239_WixComponent" Guid="A1A7831F-F28F-4415-94D1-F6EBCFC31000" DiskId="1">
+      <Component Id="Id_DcmObjectModel_dll_1697767197_WixComponent" Guid="4DC52ED5-9F3C-4250-B93C-49B2F5F88029" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_229759939_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_595453683_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Microsoft_ConfigurationManagement_Applic_284534283_WixFile" Name="Microsoft.ConfigurationManagement.ApplicationManagement.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ApplicationManagement.dll" />
+        <RemoveFolder Id="Id_Libs_1044493909_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_437458013_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_DcmObjectModel_dll_2014732457_WixFile" Name="DcmObjectModel.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\DcmObjectModel.dll" />
       </Component>
-      <Component Id="Id_Microsoft_ConfigurationManagement_Applic_404264913_WixComponent" Guid="F9312967-754D-41F1-811D-A527D1DA8BA1" DiskId="1">
+      <Component Id="Id_log4net_dll_1254073453_WixComponent" Guid="292CCA7D-CF3D-4298-ADD1-8810E999FDE7" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_190750613_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_44721683_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Microsoft_ConfigurationManagement_Applic_790626408_WixFile" Name="Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll" />
+        <RemoveFolder Id="Id_Libs_1989519202_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_494926539_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_log4net_dll_1916449151_WixFile" Name="log4net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\log4net.dll" />
       </Component>
-      <Component Id="Id_Microsoft_ConfigurationManagement_Manage_591775043_WixComponent" Guid="3CC4A3E0-2336-423E-B04C-1542AFFBBDBA" DiskId="1">
+      <Component Id="Id_Microsoft_ConfigurationManagement_Applic_662525860_WixComponent" Guid="89465021-1888-462C-B3DD-6B5615E49A0E" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_824270580_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_530568607_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Microsoft_ConfigurationManagement_Manage_1929614058_WixFile" Name="Microsoft.ConfigurationManagement.ManagementProvider.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ManagementProvider.dll" />
+        <RemoveFolder Id="Id_Libs_608478692_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1906212486_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Microsoft_ConfigurationManagement_Applic_763376293_WixFile" Name="Microsoft.ConfigurationManagement.ApplicationManagement.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ApplicationManagement.dll" />
       </Component>
-      <Component Id="Id_NCmdLiner_dll_2078823366_WixComponent" Guid="636BDA50-85AD-42A4-99DB-FE8F713BA8F1" DiskId="1">
+      <Component Id="Id_Microsoft_ConfigurationManagement_Applic_114981695_WixComponent" Guid="BAC7A64E-BE37-4EBF-ACB9-FA755686022A" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_1337098727_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_197503782_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_NCmdLiner_dll_901334321_WixFile" Name="NCmdLiner.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NCmdLiner.dll" />
+        <RemoveFolder Id="Id_Libs_1963630322_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1925543282_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Microsoft_ConfigurationManagement_Applic_719103662_WixFile" Name="Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll" />
       </Component>
-      <Component Id="Id_Newtonsoft_Json_dll_381800734_WixComponent" Guid="CEF6BBB1-711F-4334-B1CE-32D6273D7800" DiskId="1">
+      <Component Id="Id_Microsoft_ConfigurationManagement_Manage_1645487829_WixComponent" Guid="A5720DDC-4E0B-4D1E-9686-95E14DB5129E" DiskId="1">
         <CreateFolder />
-        <RemoveFolder Id="Id_Libs_613447084_WixRemoveFolder" On="uninstall" />
-        <RemoveFile Id="Id_Libs_2130227147_WixRemoveFile" Name="*.*" On="uninstall" />
-        <File Id="Id_Newtonsoft_Json_dll_1331922105_WixFile" Name="Newtonsoft.Json.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Newtonsoft.Json.dll" />
+        <RemoveFolder Id="Id_Libs_498777507_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1317101065_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Microsoft_ConfigurationManagement_Manage_836371672_WixFile" Name="Microsoft.ConfigurationManagement.ManagementProvider.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.ConfigurationManagement.ManagementProvider.dll" />
       </Component>
-      <Directory Id="Id_NMultiTool_1229001007_WixDirectory" Name="NMultiTool">
-        <Component Id="Id_Castle_Core_dll_1564074314_WixComponent" Guid="0E001FBB-9527-403C-83B1-CFD4F64E5613" DiskId="1">
+      <Component Id="Id_Microsoft_Deployment_WindowsInstaller_dl_306582634_WixComponent" Guid="535DC948-3327-4AF8-A2B7-FAB00C55265F" DiskId="1">
+        <CreateFolder />
+        <RemoveFolder Id="Id_Libs_526230551_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_1372269280_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Microsoft_Deployment_WindowsInstaller_dl_806690586_WixFile" Name="Microsoft.Deployment.WindowsInstaller.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Microsoft.Deployment.WindowsInstaller.dll" />
+      </Component>
+      <Component Id="Id_NCmdLiner_dll_140015349_WixComponent" Guid="FFD7D1D9-07CD-460A-9E1A-0A319A0EF299" DiskId="1">
+        <CreateFolder />
+        <RemoveFolder Id="Id_Libs_157102427_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_684339300_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_NCmdLiner_dll_1404564114_WixFile" Name="NCmdLiner.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NCmdLiner.dll" />
+      </Component>
+      <Component Id="Id_Newtonsoft_Json_dll_1462095870_WixComponent" Guid="5FA02C74-B216-4C9F-9592-3FF91512A274" DiskId="1">
+        <CreateFolder />
+        <RemoveFolder Id="Id_Libs_2081820771_WixRemoveFolder" On="uninstall" />
+        <RemoveFile Id="Id_Libs_450301797_WixRemoveFile" Name="*.*" On="uninstall" />
+        <File Id="Id_Newtonsoft_Json_dll_1219575953_WixFile" Name="Newtonsoft.Json.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\Newtonsoft.Json.dll" />
+      </Component>
+      <Directory Id="Id_NMultiTool_1118204303_WixDirectory" Name="NMultiTool">
+        <Component Id="Id_Castle_Core_dll_1455947001_WixComponent" Guid="462A9E77-A641-4A2F-9D48-B4A7EE6DC3C4" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_1939932549_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_436993062_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Castle_Core_dll_1612428086_WixFile" Name="Castle.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Core.dll" />
+          <RemoveFolder Id="Id_NMultiTool_341782560_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_295204873_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Castle_Core_dll_882615453_WixFile" Name="Castle.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Core.dll" />
         </Component>
-        <Component Id="Id_Castle_Facilities_Logging_dll_58892365_WixComponent" Guid="301B9593-7E75-4029-9381-CDA110924E29" DiskId="1">
+        <Component Id="Id_Castle_Facilities_Logging_dll_1037096424_WixComponent" Guid="08F880F2-F9F1-4E51-8E8F-F2FDF94A7399" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_751253100_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_100587986_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Castle_Facilities_Logging_dll_1547303493_WixFile" Name="Castle.Facilities.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Facilities.Logging.dll" />
+          <RemoveFolder Id="Id_NMultiTool_2066870332_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_537617559_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Castle_Facilities_Logging_dll_2003136292_WixFile" Name="Castle.Facilities.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Facilities.Logging.dll" />
         </Component>
-        <Component Id="Id_Castle_Services_Logging_Log4netIntegrati_2040793865_WixComponent" Guid="0132938E-7D13-444A-9ED8-483491912B3D" DiskId="1">
+        <Component Id="Id_Castle_Services_Logging_Log4netIntegrati_1767917726_WixComponent" Guid="CA8B3CC9-3EA7-4C84-A0D9-BAF823CDDC35" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_1661276_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_2075604838_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Castle_Services_Logging_Log4netIntegrati_1311202848_WixFile" Name="Castle.Services.Logging.Log4netIntegration.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Services.Logging.Log4netIntegration.dll" />
+          <RemoveFolder Id="Id_NMultiTool_2044498476_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1331505418_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Castle_Services_Logging_Log4netIntegrati_656437934_WixFile" Name="Castle.Services.Logging.Log4netIntegration.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Services.Logging.Log4netIntegration.dll" />
         </Component>
-        <Component Id="Id_Castle_Windsor_dll_1312177339_WixComponent" Guid="6634E290-DE32-4FA8-B9F8-3A93CC7C1359" DiskId="1">
+        <Component Id="Id_Castle_Windsor_dll_461761457_WixComponent" Guid="980CD05F-0946-4F77-A969-1D041A698405" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_247383728_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_909377779_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Castle_Windsor_dll_1454898621_WixFile" Name="Castle.Windsor.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Windsor.dll" />
+          <RemoveFolder Id="Id_NMultiTool_1892464445_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_667841659_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Castle_Windsor_dll_174869055_WixFile" Name="Castle.Windsor.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Castle.Windsor.dll" />
         </Component>
-        <Component Id="Id_Common_Logging_dll_1655873176_WixComponent" Guid="80EBE0BD-A748-45CE-BEAB-6587316FFA53" DiskId="1">
+        <Component Id="Id_Common_Logging_Core_dll_2019274864_WixComponent" Guid="612F43AA-D9D5-4548-BF02-60D69820B3A1" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_747604288_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_1569820268_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Common_Logging_dll_700322604_WixFile" Name="Common.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.dll" />
+          <RemoveFolder Id="Id_NMultiTool_401525831_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1041105603_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_Core_dll_466828061_WixFile" Name="Common.Logging.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.Core.dll" />
         </Component>
-        <Component Id="Id_Common_Logging_Log4Net_dll_1352994046_WixComponent" Guid="67E53F67-0C30-4630-970D-3EB216B1A026" DiskId="1">
+        <Component Id="Id_Common_Logging_Core_pdb_691710021_WixComponent" Guid="997720C4-DA1B-4550-85CA-5119B3B7DAA1" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_1064771638_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_869759322_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Common_Logging_Log4Net_dll_279692265_WixFile" Name="Common.Logging.Log4Net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.Log4Net.dll" />
+          <RemoveFolder Id="Id_NMultiTool_1792405250_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1171536646_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_Core_pdb_1819708276_WixFile" Name="Common.Logging.Core.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.Core.pdb" />
         </Component>
-        <Component Id="Id_log4net_dll_1532897499_WixComponent" Guid="680FC573-165B-4A16-9433-645705037285" DiskId="1">
+        <Component Id="Id_Common_Logging_dll_1778251074_WixComponent" Guid="134476D8-8433-472D-A3FF-05239E1C80C8" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_737063927_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_1964799120_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_log4net_dll_2121002837_WixFile" Name="log4net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\log4net.dll" />
+          <RemoveFolder Id="Id_NMultiTool_1874717108_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1096971026_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_dll_1305179902_WixFile" Name="Common.Logging.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.dll" />
         </Component>
-        <Component Id="Id_Microsoft_Web_XmlTransform_dll_1120794044_WixComponent" Guid="E9B1D8E4-2E68-4BDC-AC5E-2B9B5DAAF1F0" DiskId="1">
+        <Component Id="Id_Common_Logging_Log4Net1210_dll_1237846072_WixComponent" Guid="04FAAA25-2033-4574-AAB3-AC8DF9092BD0" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_598269055_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_72749259_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_Microsoft_Web_XmlTransform_dll_1089148798_WixFile" Name="Microsoft.Web.XmlTransform.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Microsoft.Web.XmlTransform.dll" />
+          <RemoveFolder Id="Id_NMultiTool_454353281_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_728188736_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_Log4Net1210_dll_158176895_WixFile" Name="Common.Logging.Log4Net1210.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.Log4Net1210.dll" />
         </Component>
-        <Component Id="Id_NCmdLiner_dll_1326569227_WixComponent" Guid="4F1C21DA-FE4C-4142-A712-85878946C3B8" DiskId="1">
+        <Component Id="Id_Common_Logging_Log4Net1210_pdb_686636533_WixComponent" Guid="D8875FFF-32BA-412F-81C7-638D46613794" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_804627039_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_55340925_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NCmdLiner_dll_437311037_WixFile" Name="NCmdLiner.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NCmdLiner.dll" />
+          <RemoveFolder Id="Id_NMultiTool_1792655637_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_806518341_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_Log4Net1210_pdb_1621847762_WixFile" Name="Common.Logging.Log4Net1210.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.Log4Net1210.pdb" />
         </Component>
-        <Component Id="Id_NMultiTool_exe_158460621_WixComponent" Guid="BAC7BCCC-534A-48EC-AF47-A4B802B684A0" DiskId="1">
+        <Component Id="Id_Common_Logging_pdb_1630338409_WixComponent" Guid="DB336CF0-FCEA-41DF-915A-12C7360EB811" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_819589844_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_345372548_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NMultiTool_exe_1586981160_WixFile" Name="NMultiTool.exe" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.exe" />
+          <RemoveFolder Id="Id_NMultiTool_1983971856_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_608391405_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Common_Logging_pdb_579390822_WixFile" Name="Common.Logging.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Common.Logging.pdb" />
         </Component>
-        <Component Id="Id_NMultiTool_exe_config_2091617344_WixComponent" Guid="91121C78-F057-4B25-A355-269469DF2998" DiskId="1">
+        <Component Id="Id_log4net_dll_779483506_WixComponent" Guid="390C525D-B83D-4503-BBC3-411E7277DFB6" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_1390806562_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_698464825_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NMultiTool_exe_config_822609304_WixFile" Name="NMultiTool.exe.config" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.exe.config" />
+          <RemoveFolder Id="Id_NMultiTool_980719027_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_686148555_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_log4net_dll_629215722_WixFile" Name="log4net.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\log4net.dll" />
         </Component>
-        <Component Id="Id_NMultiTool_Library_dll_602447416_WixComponent" Guid="4B332123-F180-4A5D-BD03-0FAB72ED27D2" DiskId="1">
+        <Component Id="Id_Microsoft_Web_XmlTransform_dll_40763862_WixComponent" Guid="E9F530A2-F894-49AA-8431-737465EB6F3F" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_618411210_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_766646027_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NMultiTool_Library_dll_1089714999_WixFile" Name="NMultiTool.Library.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.Library.dll" />
+          <RemoveFolder Id="Id_NMultiTool_150252652_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1825737539_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_Microsoft_Web_XmlTransform_dll_412121629_WixFile" Name="Microsoft.Web.XmlTransform.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\Microsoft.Web.XmlTransform.dll" />
         </Component>
-        <Component Id="Id_NMultiTool_Library_pdb_1435609650_WixComponent" Guid="DF727D6B-F65B-465B-ADB7-F91D41AA038E" DiskId="1">
+        <Component Id="Id_NCmdLiner_dll_16497641_WixComponent" Guid="AA256D55-D8F1-4A73-AECE-B48E9756AA92" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_1593919347_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_873411205_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NMultiTool_Library_pdb_2013326443_WixFile" Name="NMultiTool.Library.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.Library.pdb" />
+          <RemoveFolder Id="Id_NMultiTool_1229695059_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1590304653_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NCmdLiner_dll_1680294940_WixFile" Name="NCmdLiner.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NCmdLiner.dll" />
         </Component>
-        <Component Id="Id_NMultiTool_pdb_560406879_WixComponent" Guid="D2B1FD10-5920-471A-8550-7100EAB3EDC2" DiskId="1">
+        <Component Id="Id_NMultiTool_exe_1556679841_WixComponent" Guid="E7D22709-DF7A-43DA-9CE3-F3359DD3795E" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_631599501_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_2023490608_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NMultiTool_pdb_499302676_WixFile" Name="NMultiTool.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.pdb" />
+          <RemoveFolder Id="Id_NMultiTool_752747892_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_426494282_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NMultiTool_exe_1811025398_WixFile" Name="NMultiTool.exe" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.exe" />
         </Component>
-        <Component Id="Id_NuGet_Core_dll_1070173227_WixComponent" Guid="5C9095EA-BE62-4754-9366-81851CCF28A2" DiskId="1">
+        <Component Id="Id_NMultiTool_exe_config_1317729561_WixComponent" Guid="F6E8734D-088A-4C51-99AD-9538491DAE6F" DiskId="1">
           <CreateFolder />
-          <RemoveFolder Id="Id_NMultiTool_157300797_WixRemoveFolder" On="uninstall" />
-          <RemoveFile Id="Id_NMultiTool_79530587_WixRemoveFile" Name="*.*" On="uninstall" />
-          <File Id="Id_NuGet_Core_dll_1469312085_WixFile" Name="NuGet.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NuGet.Core.dll" />
+          <RemoveFolder Id="Id_NMultiTool_622980244_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1251848026_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NMultiTool_exe_config_1309862963_WixFile" Name="NMultiTool.exe.config" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.exe.config" />
+        </Component>
+        <Component Id="Id_NMultiTool_Library_dll_969899306_WixComponent" Guid="E1AB9E0F-C250-47C1-8D78-5F0C0B100244" DiskId="1">
+          <CreateFolder />
+          <RemoveFolder Id="Id_NMultiTool_1379921304_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_765290220_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NMultiTool_Library_dll_1313564445_WixFile" Name="NMultiTool.Library.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.Library.dll" />
+        </Component>
+        <Component Id="Id_NMultiTool_Library_pdb_1316309740_WixComponent" Guid="8D37F69A-FF98-4829-8CCC-7FA3DB786833" DiskId="1">
+          <CreateFolder />
+          <RemoveFolder Id="Id_NMultiTool_1173328523_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_2117285048_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NMultiTool_Library_pdb_816589467_WixFile" Name="NMultiTool.Library.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.Library.pdb" />
+        </Component>
+        <Component Id="Id_NMultiTool_pdb_1085946104_WixComponent" Guid="2076E37C-930C-4520-A066-9C95CAF8B17C" DiskId="1">
+          <CreateFolder />
+          <RemoveFolder Id="Id_NMultiTool_1193477544_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_692014293_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NMultiTool_pdb_35303008_WixFile" Name="NMultiTool.pdb" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NMultiTool.pdb" />
+        </Component>
+        <Component Id="Id_NuGet_Core_dll_1940618073_WixComponent" Guid="164D8DA1-81E6-482F-8622-D0645ED8457C" DiskId="1">
+          <CreateFolder />
+          <RemoveFolder Id="Id_NMultiTool_461714781_WixRemoveFolder" On="uninstall" />
+          <RemoveFile Id="Id_NMultiTool_1834828202_WixRemoveFile" Name="*.*" On="uninstall" />
+          <File Id="Id_NuGet_Core_dll_1858474641_WixFile" Name="NuGet.Core.dll" KeyPath="yes" Source="C:\Dev\github\SccmTools\bin\Release\SccmTools\Libs\NMultiTool\NuGet.Core.dll" />
         </Component>
       </Directory>
     </DirectoryRef>
   </Fragment>
   <Fragment>
     <ComponentGroup Id="Components_WiXComponentGroup">
-      <ComponentRef Id="Id_AdminUI_WqlQueryEngine_dll_2076966392_WixComponent" />
-      <ComponentRef Id="Id_Castle_Core_dll_1247253934_WixComponent" />
-      <ComponentRef Id="Id_Castle_Facilities_Logging_dll_271610958_WixComponent" />
-      <ComponentRef Id="Id_Castle_Services_Logging_Log4netIntegrati_1000013489_WixComponent" />
-      <ComponentRef Id="Id_Castle_Windsor_dll_1139137718_WixComponent" />
-      <ComponentRef Id="Id_Common_Logging_dll_1760570881_WixComponent" />
-      <ComponentRef Id="Id_Common_Logging_Log4Net_dll_1694029902_WixComponent" />
-      <ComponentRef Id="Id_DcmObjectModel_dll_1154414200_WixComponent" />
-      <ComponentRef Id="Id_log4net_dll_686196343_WixComponent" />
-      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Applic_1619415239_WixComponent" />
-      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Applic_404264913_WixComponent" />
-      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Manage_591775043_WixComponent" />
-      <ComponentRef Id="Id_NCmdLiner_dll_2078823366_WixComponent" />
-      <ComponentRef Id="Id_Newtonsoft_Json_dll_381800734_WixComponent" />
-      <ComponentRef Id="Id_Castle_Core_dll_1564074314_WixComponent" />
-      <ComponentRef Id="Id_Castle_Facilities_Logging_dll_58892365_WixComponent" />
-      <ComponentRef Id="Id_Castle_Services_Logging_Log4netIntegrati_2040793865_WixComponent" />
-      <ComponentRef Id="Id_Castle_Windsor_dll_1312177339_WixComponent" />
-      <ComponentRef Id="Id_Common_Logging_dll_1655873176_WixComponent" />
-      <ComponentRef Id="Id_Common_Logging_Log4Net_dll_1352994046_WixComponent" />
-      <ComponentRef Id="Id_log4net_dll_1532897499_WixComponent" />
-      <ComponentRef Id="Id_Microsoft_Web_XmlTransform_dll_1120794044_WixComponent" />
-      <ComponentRef Id="Id_NCmdLiner_dll_1326569227_WixComponent" />
-      <ComponentRef Id="Id_NMultiTool_exe_158460621_WixComponent" />
-      <ComponentRef Id="Id_NMultiTool_exe_config_2091617344_WixComponent" />
-      <ComponentRef Id="Id_NMultiTool_Library_dll_602447416_WixComponent" />
-      <ComponentRef Id="Id_NMultiTool_Library_pdb_1435609650_WixComponent" />
-      <ComponentRef Id="Id_NMultiTool_pdb_560406879_WixComponent" />
-      <ComponentRef Id="Id_NuGet_Core_dll_1070173227_WixComponent" />
+      <ComponentRef Id="Id_AdminUI_WqlQueryEngine_dll_1186950856_WixComponent" />
+      <ComponentRef Id="Id_Castle_Core_dll_1221857359_WixComponent" />
+      <ComponentRef Id="Id_Castle_Facilities_Logging_dll_1357492804_WixComponent" />
+      <ComponentRef Id="Id_Castle_Services_Logging_Log4netIntegrati_856021432_WixComponent" />
+      <ComponentRef Id="Id_Castle_Windsor_dll_1339698782_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Core_dll_379653114_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_dll_1939984110_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Log4Net_dll_483988334_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Log4Net1210_dll_1539883110_WixComponent" />
+      <ComponentRef Id="Id_DcmObjectModel_dll_1697767197_WixComponent" />
+      <ComponentRef Id="Id_log4net_dll_1254073453_WixComponent" />
+      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Applic_662525860_WixComponent" />
+      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Applic_114981695_WixComponent" />
+      <ComponentRef Id="Id_Microsoft_ConfigurationManagement_Manage_1645487829_WixComponent" />
+      <ComponentRef Id="Id_Microsoft_Deployment_WindowsInstaller_dl_306582634_WixComponent" />
+      <ComponentRef Id="Id_NCmdLiner_dll_140015349_WixComponent" />
+      <ComponentRef Id="Id_Newtonsoft_Json_dll_1462095870_WixComponent" />
+      <ComponentRef Id="Id_Castle_Core_dll_1455947001_WixComponent" />
+      <ComponentRef Id="Id_Castle_Facilities_Logging_dll_1037096424_WixComponent" />
+      <ComponentRef Id="Id_Castle_Services_Logging_Log4netIntegrati_1767917726_WixComponent" />
+      <ComponentRef Id="Id_Castle_Windsor_dll_461761457_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Core_dll_2019274864_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Core_pdb_691710021_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_dll_1778251074_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Log4Net1210_dll_1237846072_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_Log4Net1210_pdb_686636533_WixComponent" />
+      <ComponentRef Id="Id_Common_Logging_pdb_1630338409_WixComponent" />
+      <ComponentRef Id="Id_log4net_dll_779483506_WixComponent" />
+      <ComponentRef Id="Id_Microsoft_Web_XmlTransform_dll_40763862_WixComponent" />
+      <ComponentRef Id="Id_NCmdLiner_dll_16497641_WixComponent" />
+      <ComponentRef Id="Id_NMultiTool_exe_1556679841_WixComponent" />
+      <ComponentRef Id="Id_NMultiTool_exe_config_1317729561_WixComponent" />
+      <ComponentRef Id="Id_NMultiTool_Library_dll_969899306_WixComponent" />
+      <ComponentRef Id="Id_NMultiTool_Library_pdb_1316309740_WixComponent" />
+      <ComponentRef Id="Id_NMultiTool_pdb_1085946104_WixComponent" />
+      <ComponentRef Id="Id_NuGet_Core_dll_1940618073_WixComponent" />
     </ComponentGroup>
   </Fragment>
 </Wix>

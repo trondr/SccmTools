@@ -16,7 +16,7 @@ namespace SccmTools
             var returnValue = 0;
             try
             {
-                var logger = LogManager.GetCurrentClassLogger();
+                var logger = LogManager.GetLogger<Program>();
                 var applicationInfo = BootStrapper.Container.Resolve<IApplicationInfo>();
                 try
                 {
