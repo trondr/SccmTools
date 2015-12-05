@@ -6,7 +6,7 @@
 <?define PackageDescription="SccmTools provides various commands for Sccm 2012 interaction" ?>
 <?define ProductUpgradeCode="{17257f0b-5366-472b-a65b-3206fddbcbfe}" ?>
 <?define PackageKeywords="SccmTools" ?>
-<?define CompanyName="github.com-trondr" ?>
+<?define CompanyName="github.com.trondr" ?>
 <?define ProductExeBaseName="SccmTools" ?>
 <?define ProductLibraryBaseName="SccmTools.Library" ?>
 <?define ProductExeReleaseFolder="..\..\bin\release\SccmTools" ?>
