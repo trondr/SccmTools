@@ -23,11 +23,14 @@ SccmTools provides various commands for SCCM 2012 interaction
 
 ### CreateApplicationFromDefinition
 
-Create a SCCM 2012 application from a package definition file (PackageDefinition.sms ref. https://technet.microsoft.com/en-ca/library/bb632631.aspx). This is useful in simpler script install scenarios where only INSTALL and UNINSTALL command line is necessary and the application is installed by a msi file. Application detection method will be based on the msi product code. The product code, on the format {...guid...}, can be manually defined anywhere in the [Package Definition]Comment value. If the product code is not manually defined the msi product code will be attempted automatically retrieved from the msi file found by directory search of the content folder (the folder where the package definition file is located). If more than one msi file is found, an exception is thrown asking for manual definition of product code. The package definition file is required to have a [INSTALL] program and a [UNINSTALL] program.
+Create a SCCM 2012 application from a package definition file. The PackageDefinition.sms format is documented here: https://technet.microsoft.com/en-ca/library/bb632631.aspx. This is useful in simpler script install scenarios where only install and uninstall command line is necessary and the application is installed by a msi file. Application detection method will be based on the msi product code. The msi product  code on the format '{...guid...}', can be stored in the custom section key [DetectionMethod]MsiProductCode or can be  manually defined anywhere in the [Package Definition]Comment value. If the product  code is not manually defined, the msi product code will be attempted automatically retrieved from the msi file found by directory search of the content folder, the folder where the package definition file is located. If more than one msi file is found, an exception is thrown asking for manual definition of  product code. The package definition file is required to have a [INSTALL] program and a [UNINSTALL] program. The following values are recognized and read from the package definition file: [Package Definition]Name, [Package Definition]Version, [Package Definition]Publisher, [Package Definition]Language, [Package Definition]Comment=<msi product code can be provided somewhere in this comment field>, [INSTALL]CommandLine, [INSTALL]Icon, [UNINSTALL]CommandLine.
 
 The command can be run from:
 
 * **Command line**
+```
+SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
+```
 * **Windows Explorer context menu:** 
 
 ![](./ExplorerContextMenu.png)
@@ -42,10 +45,10 @@ The command can be run from:
 * [Package Definition]Version
 * [Package Definition]Publisher
 * [Package Definition]Language
-* [Package Definition]Comment=<msi product code can be provided manually somewhere in this comment field>
 * [INSTALL]CommandLine
 * [INSTALL]Icon
 * [UNINSTALL]CommandLine
+* [DetectionMethod]MsiProductCode
 		
 All other values in package definition file are ignored.
 	
@@ -56,38 +59,44 @@ All other values in package definition file are ignored.
 Version=2.0
 
 [Package Definition]
-Name=NCmdLiner Solution Creator
-Version=1.0.15092.30
-Publisher=github-com-trondr
+Name=My Product
+Version=1.0.15318.1
+Publisher=My Company AS
 Language=EN
-Comment=NCmdLiner Solution Creator installs solution creator command into Windows Explorer context menu. The command creates a starting point solution.  Product code: {1D3BF4CD-E8F1-482C-9B86-5DEE24CFF8EB}
+Comment=
 Programs=INSTALL,UNINSTALL
 
 [INSTALL]
 Name=INSTALL
-CommandLine=Install.cmd Install > "%Public%\InstallLogs\NCmdLiner_Solution_Creator_1_0_15092_30_Install.cmd.log"
+CommandLine=Install.cmd Install > "%Public%\Logs\MyCompany_My_Product1_0_15318_1_Install.cmd.log"
 CanRunWhen=AnyUserStatus
 UserInputRequired=False
 AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
-Icon=NCmdLiner.png
+Icon=App.ico
+Comment=
 
 [UNINSTALL]
 Name=UNINSTALL
-CommandLine=Install.cmd UnInstall > "%Public%\InstallLogs\NCmdLiner_Solution_Creator_1_0_15092_30_UnInstall.cmd.log"
+CommandLine=Install.cmd UnInstall > "%Public%\Logs\MyCompany_My_Product1_0_15318_1_UnInstall.cmd.log"
 CanRunWhen=AnyUserStatus
 UserInputRequired=False
 AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
+Comment=
+
+[DetectionMethod]
+MsiProductCode={E1C62E82-D565-4C5D-9665-2D9D27A95086}
+
 ```
 
 ## Command line help
 
 ```
-SccmTools 1.0.15092.0.32d74d9 - SccmTools provides various commands for Sccm 2012 interaction
-Copyright © github.com/trondr 2015
+SccmTools 1.0.15319.1.0108ea5 - SccmTools provides various commands for Sccm 2012 interaction
+Copyright © github.com.trondr 2015
 Author: github.com/trondr
 Usage: SccmTools.exe <command> [parameters]
 
@@ -97,24 +106,27 @@ Help                              Display this help text
 License                           Display license
 Credits                           Display credits
 CreateApplicationFromDefinition   Create a SCCM 2012 application from a
-                                  package definition file
-                                  (PackageDefinition.sms as documented here:
-                                  https://technet.microsoft.com/en-ca/library/bb632631.aspx).
+                                  package definition file. The
+                                  PackageDefinition.sms format is documented
+                                  here:
+                                  https://technet.microsoft.com/en-ca/library/bb632631.aspx.
                                   This is useful in simpler script install
                                   scenarios where only install and uninstall
                                   command line is necessary and the
                                   application is installed by a msi file.
                                   Application detection method will be based
-                                  on the msi product code. The product code,
-                                  on the format '{...guid...}', can be
+                                  on the msi product code. The msi product
+                                  code on the format '{...guid...}', can be
+                                  stored in the custom section key
+                                  [DetectionMethod]MsiProductCode or can be
                                   manually defined anywhere in the [Package
                                   Definition]Comment value. If the product
-                                  code is not manually defined the msi
+                                  code is not manually defined, the msi
                                   product code will be attempted
                                   automatically retrieved from the msi file
                                   found by directory search of the content
-                                  folder (the folder where the package
-                                  definition file is located). If more than
+                                  folder, the folder where the package
+                                  definition file is located. If more than
                                   one msi file is found, an exception is
                                   thrown asking for manual definition of
                                   product code. The package definition file
@@ -133,24 +145,27 @@ CreateApplicationFromDefinition   Create a SCCM 2012 application from a
 Commands and parameters:
 ------------------------
 CreateApplicationFromDefinition   Create a SCCM 2012 application from a
-                                  package definition file
-                                  (PackageDefinition.sms as documented here:
-                                  https://technet.microsoft.com/en-ca/library/bb632631.aspx).
+                                  package definition file. The
+                                  PackageDefinition.sms format is documented
+                                  here:
+                                  https://technet.microsoft.com/en-ca/library/bb632631.aspx.
                                   This is useful in simpler script install
                                   scenarios where only install and uninstall
                                   command line is necessary and the
                                   application is installed by a msi file.
                                   Application detection method will be based
-                                  on the msi product code. The product code,
-                                  on the format '{...guid...}', can be
+                                  on the msi product code. The msi product
+                                  code on the format '{...guid...}', can be
+                                  stored in the custom section key
+                                  [DetectionMethod]MsiProductCode or can be
                                   manually defined anywhere in the [Package
                                   Definition]Comment value. If the product
-                                  code is not manually defined the msi
+                                  code is not manually defined, the msi
                                   product code will be attempted
                                   automatically retrieved from the msi file
                                   found by directory search of the content
-                                  folder (the folder where the package
-                                  definition file is located). If more than
+                                  folder, the folder where the package
+                                  definition file is located. If more than
                                   one msi file is found, an exception is
                                   thrown asking for manual definition of
                                   product code. The package definition file
@@ -177,5 +192,3 @@ CreateApplicationFromDefinition   Create a SCCM 2012 application from a
    Example: SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
    Example (alternative): SccmTools.exe CreateApplicationFromDefinition /pf="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
 ```
-
-
