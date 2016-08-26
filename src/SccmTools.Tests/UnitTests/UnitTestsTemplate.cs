@@ -5,6 +5,7 @@ using Common.Logging;
 using Common.Logging.Simple;
 using NUnit.Framework;
 using SccmTools.Library.Infrastructure;
+using SccmTools.Library.Infrastructure.LifeStyles;
 
 namespace SccmTools.Tests.UnitTests
 {

@@ -7,7 +7,7 @@ obj*/
 [Dd]ebug*/
 [Rr]elease*/
 
-# Ignore Visual Studio 2008 files
+# Ignore Visual Studio files
 *.obj
 *.user
 *.aps
@@ -40,3 +40,15 @@ _ReSharper*/
 *.shfbproj_*
 Doc\Help
 .metadata/*
+*/tools/NMultiTool/(null)
+*/tools/NuGetPackages/Castle.Core.*/*
+*/tools/NuGetPackages/Castle.Windsor.*/*
+*/tools/NuGetPackages/Common.Logging.*/*
+*/tools/NuGetPackages/Common.Logging.Core.*/*
+*/tools/NuGetPackages/Common.Logging.Log4Net*/*
+*/tools/NuGetPackages/NCmdLiner.*/*
+*/tools/NuGetPackages/NUnit.*/*
+*/tools/NuGetPackages/Newtonsoft.Json.*/*
+*/tools/NuGetPackages/RhinoMocks.*/*
+*/tools/NuGetPackages/log4net.*/*
+*/tools/NuGetPackages/AutoMapper.*/*

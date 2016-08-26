@@ -61,28 +61,12 @@ namespace SccmTools.Infrastructure
 
         public void Write(string formatMessage, params object[] args)
         {
-            try
-            {
-                this.Sw.Write(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Error in format message: " + formatMessage);
-                throw;
-            }            
+            this.Sw.Write(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
         }
 
         public void WriteLine(string formatMessage, params object[] args)
         {
-            try
-            {
-                this.Sw.WriteLine(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Error in format message: " + formatMessage);
-                throw;
-            }
+            this.Sw.WriteLine(formatMessage.Replace("\r\n", "\n").Replace("\n", Environment.NewLine), args);
         }
 
         public void Show()
@@ -97,7 +81,7 @@ namespace SccmTools.Infrastructure
             {
                 using (var sr = new StreamReader(_tempTextFileName))
                 {
-                    Console.WriteLine(sr.ReadToEnd());
+                    System.Console.WriteLine(sr.ReadToEnd());
                 }
             }
             Cleanup();

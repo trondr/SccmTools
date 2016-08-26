@@ -7,6 +7,7 @@ using NUnit.Framework;
 using SccmTools.Library;
 using SccmTools.Library.Common.IO;
 using SccmTools.Library.Infrastructure;
+using SccmTools.Library.Infrastructure.LifeStyles;
 
 namespace SccmTools.Tests.ManualTests
 {

@@ -118,7 +118,7 @@ namespace MSBuildCustomTasks.Common
         {
             var token = IntPtr.Zero;
             var tokenDuplicate = IntPtr.Zero;
-            Console.WriteLine("Before impersonating windows identity: " + SecurityHelper.GetCurrentWindowsIdentityName());
+            System.Console.WriteLine("Before impersonating windows identity: " + SecurityHelper.GetCurrentWindowsIdentityName());
             try
             {
                 if (RevertToSelf())
@@ -162,7 +162,7 @@ namespace MSBuildCustomTasks.Common
                     CloseHandle(tokenDuplicate);
                 }
             }
-            Console.WriteLine("After impersonating windows identity: " + SecurityHelper.GetCurrentWindowsIdentityName());
+            System.Console.WriteLine("After impersonating windows identity: " + SecurityHelper.GetCurrentWindowsIdentityName());
         }
 
         /// <summary>

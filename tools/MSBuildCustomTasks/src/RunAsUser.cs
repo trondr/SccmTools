@@ -91,13 +91,13 @@ namespace MSBuildCustomTasks
                 process.WaitForExit();
                 if (process.ExitCode.ToString(CultureInfo.InvariantCulture) != SuccessErrorCode)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write(standardOutput);
-                    Console.Write(standardError);
-                    Console.ResetColor();
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.Write(standardOutput);
+                    System.Console.Write(standardError);
+                    System.Console.ResetColor();
                     return false;
                 }
-                Console.WriteLine(standardOutput);
+                System.Console.WriteLine(standardOutput);
             }
             return true;
         }

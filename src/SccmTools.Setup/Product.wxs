@@ -3,7 +3,7 @@
 <?define ProductName="SccmTools" ?>
 <?define ProductFeature="SccmTools" ?>
 <?define ProductProjectName="SccmTools" ?>
-<?define PackageDescription="SccmTools provides various commands for Sccm 2012 interaction" ?>
+<?define PackageDescription="SccmTools provides various SCCM 2012 commands" ?>
 <?define ProductUpgradeCode="{17257f0b-5366-472b-a65b-3206fddbcbfe}" ?>
 <?define PackageKeywords="SccmTools" ?>
 <?define CompanyName="github.com.trondr" ?>
@@ -11,7 +11,7 @@
 <?define ProductLibraryBaseName="SccmTools.Library" ?>
 <?define ProductExeReleaseFolder="..\..\bin\release\SccmTools" ?>
 <?define ProductLibraryReleaseFolder="..\..\bin\release\SccmTools.Library" ?>
-<?define ProductHelpLink="https://github.com/trondr.com"?>
+<?define ProductHelpLink="https://github.com/trondr"?>
 <?define TargetFolderName="SccmTools"?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
@@ -24,18 +24,18 @@
       Manufacturer="$(var.CompanyName)"
       >
 
-    <Package 
-      Id="*" 
+    <Package
+      Id="*"
       InstallerVersion="200"
       InstallPrivileges="elevated"
       InstallScope="perMachine"
-      Compressed="yes" 
+      Compressed="yes"
       Platform="x86"
       Description="$(var.PackageDescription)"
       Keywords="$(var.PackageKeywords)"
       Languages="!(loc.LanguageCode)"
       SummaryCodepage="1252"
-      Manufacturer="$(var.CompanyName)"      
+      Manufacturer="$(var.CompanyName)"
       />
 
     <Icon Id="Product_Icon" SourceFile="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).exe"/>
@@ -45,7 +45,7 @@
     <Property Id="ARPCONTACT">$(var.CompanyName)</Property>
 
     <PropertyRef Id ="NETFRAMEWORK45"/>
-    
+
     <Condition Message="!(loc.DotNetFrameWorkConditionMessage)">Installed OR NETFRAMEWORK45</Condition>
 
     <Upgrade Id="$(var.ProductUpgradeCode)">
@@ -56,9 +56,9 @@
 
     <CustomAction Id="NoDowngrade" Error="A later version of $(var.ProductName) is already installed." />
     <CustomAction Id="NoSelf" Error="Same version of $(var.ProductName) is already installed." />
-    <CustomAction Id="Install_Assemblies_CustomAction"             Directory="TargetFolder" Return="check" Execute="deferred" Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.exe&quot; InstallUtil /installAction=Install /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
-    <CustomAction Id="Install_Assemblies_AfterCommit_CustomAction" Directory="TargetFolder" Return="check" Execute="commit"   Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.exe&quot; InstallUtil /installAction=Install /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
-    <CustomAction Id="UnInstall_Assemblies_CustomAction"           Directory="TargetFolder" Return="check" Execute="deferred" Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.exe&quot; InstallUtil /installAction=UnInstall /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
+    <CustomAction Id="Install_Assemblies_CustomAction"             Directory="TargetFolder" Return="check" Execute="deferred" Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.Gui.exe&quot; InstallUtil /installAction=Install /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
+    <CustomAction Id="Install_Assemblies_AfterCommit_CustomAction" Directory="TargetFolder" Return="check" Execute="commit"   Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.Gui.exe&quot; InstallUtil /installAction=Install /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
+    <CustomAction Id="UnInstall_Assemblies_CustomAction"           Directory="TargetFolder" Return="check" Execute="deferred" Impersonate="no" ExeCommand="&quot;[TargetFolder]\NMultiTool\NMultiTool.Gui.exe&quot; InstallUtil /installAction=UnInstall /directory=&quot;[TargetFolder].&quot; /includeFileSpecs=&quot;{'SccmTools.exe'}&quot; /excludeFileSpecs=&quot;{'excludeNothing'}&quot;" />
 
     <InstallExecuteSequence>
       <Custom Action="NoDowngrade" After="FindRelatedProducts"><![CDATA[NEWERFOUND]]></Custom>
@@ -71,7 +71,7 @@
     </InstallExecuteSequence>
 
     <Media Id="1" Cabinet="$(var.ProductProjectName)" EmbedCab="yes" CompressionLevel="high"/>
-    
+
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
         <Directory Id="CompanyFolder" Name="$(var.CompanyName)">
@@ -79,9 +79,9 @@
             <Directory Id="TargetFolder" Name="!(bind.FileVersion.ProductDll)" ></Directory>
           </Directory>
         </Directory>
-      </Directory>      
+      </Directory>
     </Directory>
-    
+
     <Feature Id="ProductFeature" Title="$(var.ProductFeature)" Level="1">
       <ComponentGroupRef Id="ProductComponents_WiXComponentGroup" />
       <ComponentGroupRef Id="Components_WiXComponentGroup" />
@@ -91,33 +91,50 @@
     <WixVariable Id="WixUIDialogBmp" Value="WiXUiDialog.bmp"/>
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf"/>
     <UIRef Id="WixUI_Mondo"/>
-    
+
   </Product>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents_WiXComponentGroup" Directory="TargetFolder">			
-			 <Component Id="ProductExe_WiXComponent" Guid="*">
-         <CreateFolder/>
-         
-         <RemoveFolder Id="TargetFolder_WixRemoveFolder" On="uninstall" Directory="TargetFolder"/>
-         <RemoveFolder Id="TargetBaseFolder_WixRemoveFolder" On="uninstall" Directory="TargetBaseFolder"/>
-         <RemoveFolder Id="CompanyFolder_WixRemoveFolder" On="uninstall" Directory="CompanyFolder"/>
-         <RemoveFile Id="TargetFolderFiles_WixRemoveFile" Name="*.*" On="uninstall" Directory="TargetFolder" />
+  <Fragment>
+    <ComponentGroup Id="ProductComponents_WiXComponentGroup" Directory="TargetFolder">
+      <Component Id="ProductExe_WiXComponent" Guid="*">
+        <CreateFolder/>
 
-         <File Id="ProductExe" Name="$(var.ProductExeBaseName).exe" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).exe" KeyPath="yes" />
-         <File Id="ProductExePdb" Name="$(var.ProductExeBaseName).pdb" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).pdb" KeyPath="no"/>
-         <File Id="ProductExeConfig" Name="$(var.ProductExeBaseName).exe.config" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).exe.config" KeyPath="no" />
+        <RemoveFolder Id="TargetFolder_WixRemoveFolder" On="uninstall" Directory="TargetFolder"/>
+        <RemoveFolder Id="TargetBaseFolder_WixRemoveFolder" On="uninstall" Directory="TargetBaseFolder"/>
+        <RemoveFolder Id="CompanyFolder_WixRemoveFolder" On="uninstall" Directory="CompanyFolder"/>
+        <RemoveFile Id="TargetFolderFiles_WixRemoveFile" Name="*.*" On="uninstall" Directory="TargetFolder" />
 
-         <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" />
-         <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" Value="[#ProductExe]" Type="string" Action="write" />
-         <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" Name="path" Value="[TargetFolder]" Type="string" Action="write" />
-       </Component>
+        <File Id="ProductExe" Name="$(var.ProductExeBaseName).exe" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).exe" KeyPath="yes" />
+        <File Id="ProductExePdb" Name="$(var.ProductExeBaseName).pdb" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).pdb" KeyPath="no"/>
+        <File Id="ProductExeConfig" Name="$(var.ProductExeBaseName).exe.config" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).exe.config" KeyPath="no" />
 
-        <Component Id="ProductLibraryDll_WixComponent" Guid="*">
-          <CreateFolder/>
-          <File Id="ProductDll" Name="$(var.ProductLibraryBaseName).dll" Source="$(var.ProductLibraryReleaseFolder)\$(var.ProductLibraryBaseName).dll" KeyPath="yes" />
-          <File Id="ProductDllPdb" Name="$(var.ProductLibraryBaseName).pdb" Source="$(var.ProductLibraryReleaseFolder)\$(var.ProductLibraryBaseName).pdb" KeyPath="no"/>
-        </Component>
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" Value="[#ProductExe]" Type="string" Action="write" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).exe" Name="path" Value="[TargetFolder]" Type="string" Action="write" />
+      </Component>
+
+      <Component Id="ProductGuiExe_WiXComponent" Guid="*">
+        <CreateFolder/>
+
+        <RemoveFolder Id="TargetFolder2_WixRemoveFolder" On="uninstall" Directory="TargetFolder"/>
+        <RemoveFolder Id="TargetBaseFolder2_WixRemoveFolder" On="uninstall" Directory="TargetBaseFolder"/>
+        <RemoveFolder Id="CompanyFolder2_WixRemoveFolder" On="uninstall" Directory="CompanyFolder"/>
+        <RemoveFile Id="TargetFolderFiles2_WixRemoveFile" Name="*.*" On="uninstall" Directory="TargetFolder" />
+
+        <File Id="ProductGuiExe" Name="$(var.ProductExeBaseName).Gui.exe" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).Gui.exe" KeyPath="yes" />
+        <File Id="ProductGuiExePdb" Name="$(var.ProductExeBaseName).Gui.pdb" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).Gui.pdb" KeyPath="no"/>
+        <File Id="ProductGuiExeConfig" Name="$(var.ProductExeBaseName).Gui.exe.config" Source="$(var.ProductExeReleaseFolder)\$(var.ProductExeBaseName).Gui.exe.config" KeyPath="no" />
+
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).Gui.exe" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).Gui.exe" Value="[#ProductGuiExe]" Type="string" Action="write" />
+        <RegistryValue Root="HKLM" Key="SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\$(var.ProductExeBaseName).Gui.exe" Name="path" Value="[TargetFolder]" Type="string" Action="write" />
+      </Component>
+
+      <Component Id="ProductLibraryDll_WixComponent" Guid="*">
+        <CreateFolder/>
+        <File Id="ProductDll" Name="$(var.ProductLibraryBaseName).dll" Source="$(var.ProductLibraryReleaseFolder)\$(var.ProductLibraryBaseName).dll" KeyPath="yes" />
+        <File Id="ProductDllPdb" Name="$(var.ProductLibraryBaseName).pdb" Source="$(var.ProductLibraryReleaseFolder)\$(var.ProductLibraryBaseName).pdb" KeyPath="no"/>
+      </Component>
     </ComponentGroup>
-	</Fragment>
+  </Fragment>
 </Wix>

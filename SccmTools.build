@@ -6,7 +6,7 @@
   <PropertyGroup>    
     <ProductName>SccmTools</ProductName>
     <ProductCompany>github.com.trondr</ProductCompany>
-    <ProductDescription>SccmTools provides various commands for Sccm 2012 interaction</ProductDescription>
+    <ProductDescription>SccmTools provides various SCCM 2012 commands</ProductDescription>
     <ProductCopyright>Copyright &#169; github.com.trondr $([System.DateTime]::Now.Year)</ProductCopyright>
     <ProductProjectName>$(ProductName)</ProductProjectName>
 
@@ -178,6 +178,9 @@
     <CreateProperty Value="$(Major).$(Minor).$(Build).$(Revision)">
       <Output TaskParameter="Value" PropertyName="AssemblyVersion" />
     </CreateProperty>
+    <CreateProperty Value="$(Major)_$(Minor)_$(Build)_$(Revision)">
+      <Output TaskParameter="Value" PropertyName="AssemblyVersionU" />
+    </CreateProperty>
     <AssemblyInfo CodeLanguage="CS"
        OutputFile="$(SrcDirectory)\SccmTools\Properties\AssemblyInfo.cs"
        AssemblyDescription="$(ProductDescription)"
@@ -189,6 +192,19 @@
        AssemblyVersion="$(AssemblyVersion)"
        AssemblyFileVersion="$(AssemblyVersion)"
 	  />
+	  
+	<AssemblyInfo CodeLanguage="CS"
+       OutputFile="$(SrcDirectory)\SccmTools.Gui\Properties\AssemblyInfo.cs"
+       AssemblyDescription="$(ProductDescription)"
+       AssemblyCompany="$(ProductCompany)"
+       AssemblyProduct="SccmTools.Gui"
+       AssemblyCopyright="$(ProductCopyright)"
+       CLSCompliant="false"
+       AssemblyInformationalVersion="$(Major).$(Minor).$(Build).$(Revision).$(RevisionHash)"
+       AssemblyVersion="$(AssemblyVersion)"
+       AssemblyFileVersion="$(AssemblyVersion)"
+	  />
+	  
     <AssemblyInfo CodeLanguage="CS"
        OutputFile="$(SrcDirectory)\SccmTools.Library\Properties\AssemblyInfo.cs"
        AssemblyDescription="$(ProductDescription)"
@@ -212,6 +228,7 @@
       AssemblyVersion="$(AssemblyVersion)"
       AssemblyFileVersion="$(AssemblyVersion)"
 	  />
+	    	  
   </Target>
   
   <!--Compile-->
@@ -219,6 +236,7 @@
   <Target Name="Compile" DependsOnTargets="Version">
     <MSBuild Projects="$(SrcDirectory)\SccmTools.Library\SccmTools.Library.csproj" Properties="Configuration=Release;" />
     <MSBuild Projects="$(SrcDirectory)\SccmTools\SccmTools.csproj" Properties="Configuration=Release;" />
+	<MSBuild Projects="$(SrcDirectory)\SccmTools.Gui\SccmTools.Gui.csproj" Properties="Configuration=Release;" />
   </Target>
 
   <Target Name="CompileTests" DependsOnTargets="Compile">
@@ -229,7 +247,8 @@
   
   <Target Name="DownloadNunit" Condition=" '$(NUnitIsAvailable)' == 'false' ">
     <Message Text="Downloading NUnit..." Importance="normal" />
-    <WebDownload FileUri="http://launchpad.net/nunitv2/trunk/2.6.3/+download/NUnit-$(NunitVersion).zip" FileName="$(BinDirectory)\Download\NUnit-$(NunitVersion).zip" />
+	<MakeDir Directories="$(BinDirectory)\Download"/>
+    <WebDownload FileUri="http://github.com/nunit/nunitv2/releases/download/$(NunitVersion)/NUnit-$(NunitVersion).zip" FileName="$(BinDirectory)\Download\NUnit-$(NunitVersion).zip" />
     <Message Text="Extracting NUnit..." Importance="normal" />
     <Unzip ZipFileName="$(BinDirectory)\Download\NUnit-$(NunitVersion).zip" TargetDirectory="$(BinDirectory)\Download"/>
     <ItemGroup>
@@ -307,13 +326,26 @@
          />
     <Message Text="SccmTools.$(AssemblyVersion).msi zip complete" Importance="normal" />
 
-
     <Zip Files="@(SourceFiles)"
          WorkingDirectory="$(MSBuildProjectDirectory)"
          ZipFileName="$(BinDirectory)\Release\SccmTools.Source.$(AssemblyVersion).zip"
          ZipLevel="9"
          />
     <Message Text="SccmTools.Source.$(AssemblyVersion) zip complete" Importance="normal" />    
+	
+	  <ResolveScriptInstallPackage
+      ScriptInstallPackageSourcePath="$(SrcDirectory)\github.com.trondr SccmTools"
+      ScriptInstallPackageTargetPath="$(BinDirectory)\Release\github.com.trondr SccmTools $(AssemblyVersion)"
+      SourceMsiFile="$(BinDirectory)\Release\SccmTools.Setup\en-us\SccmTools.$(AssemblyVersion).msi"
+      TargetMsiFile="$(BinDirectory)\Release\github.com.trondr SccmTools $(AssemblyVersion)\VendorInstall\SccmTools.$(AssemblyVersion).msi"
+      VendorInstallIni="$(BinDirectory)\Release\github.com.trondr SccmTools $(AssemblyVersion)\VendorInstall\VendorInstall.ini"
+      PackageDefinitionSms="$(BinDirectory)\Release\github.com.trondr SccmTools $(AssemblyVersion)\PackageDefinition.sms"
+      PackageDefinitionName="SccmTools"
+      PackageDefinitionVersion="$(AssemblyVersion)"
+      PackageDefinitionPublisher="github.com.trondr"
+      PackageDefinitionInstallCommandLine="Install.cmd Install > &quot;%Public%\Logs\github_com_trondr_SccmTools$(AssemblyVersionU)_Install.cmd.log&quot;"
+      PackageDefinitionUnInstallCommandLine="Install.cmd UnInstall > &quot;%Public%\Logs\github_com_trondr_SccmTools$(AssemblyVersionU)_UnInstall.cmd.log&quot;"
+     />
   </Target>
 
   <Target Name="Build" DependsOnTargets="CompileSetup">

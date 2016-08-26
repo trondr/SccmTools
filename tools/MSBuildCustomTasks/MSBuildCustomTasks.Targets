@@ -9,6 +9,7 @@
 
   <UsingTask AssemblyFile="$(MsBuildCustomTasksLib)" TaskName="MSBuildCustomTasks.Impersonate" />
   <UsingTask AssemblyFile="$(MsBuildCustomTasksLib)" TaskName="MSBuildCustomTasks.RunAsUser" />
+  <UsingTask AssemblyFile="$(MsBuildCustomTasksLib)" TaskName="MSBuildCustomTasks.ResolveScriptInstallPackage" />
 
   <ItemGroup>
     <FxCopRuleAssemblies Include="UsageRules.dll"/>

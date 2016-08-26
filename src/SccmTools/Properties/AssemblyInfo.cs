@@ -14,13 +14,13 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription("SccmTools provides various commands for Sccm 2012 interaction")]
+[assembly: AssemblyDescription("SccmTools provides various SCCM 2012 commands")]
 [assembly: AssemblyCompany("github.com.trondr")]
 [assembly: AssemblyProduct("SccmTools")]
-[assembly: AssemblyCopyright("Copyright © github.com.trondr 2015")]
+[assembly: AssemblyCopyright("Copyright © github.com.trondr 2016")]
 [assembly: CLSCompliant(false)]
-[assembly: AssemblyInformationalVersion("1.0.15339.2.c45fc02")]
-[assembly: AssemblyVersion("1.0.15339.2")]
-[assembly: AssemblyFileVersion("1.0.15339.2")]
+[assembly: AssemblyInformationalVersion("1.0.16239.1.")]
+[assembly: AssemblyVersion("1.0.16239.1")]
+[assembly: AssemblyFileVersion("1.0.16239.1")]
 
 
