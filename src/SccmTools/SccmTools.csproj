@@ -123,7 +123,7 @@
     <Compile Include="Infrastructure\NotepadMessenger.cs" />
     <Compile Include="Module\Commands\CreateApplicationFromDefinitionCommandDefinition.cs" />
     <Compile Include="Infrastructure\ContainerExtensions\TraceLogAspect.cs" />
-    <Compile Include="Module\Infrastructure\ContainerConfiguration\ExampleContainerInstaller.cs" />
+    <Compile Include="Module\Infrastructure\ContainerConfiguration\PackageDefinitionFactoryContainerInstaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Module\CustomInstaller.cs">
