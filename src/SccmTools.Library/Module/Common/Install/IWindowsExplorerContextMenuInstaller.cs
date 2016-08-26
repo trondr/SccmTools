@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace SccmTools.Library.Common.Install
+﻿namespace SccmTools.Library.Module.Common.Install
 {
     public interface IWindowsExplorerContextMenuInstaller
     {

@@ -1,4 +1,4 @@
-﻿namespace SccmTools.Library.Common.IO
+﻿namespace SccmTools.Library.Module.Common.IO
 {
     public interface IIniFileOperation
     {

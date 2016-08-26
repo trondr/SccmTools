@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-
-namespace SccmTools.Library.Services
+﻿namespace SccmTools.Library.Module.Services
 {
     public interface ISccmApplication
     {

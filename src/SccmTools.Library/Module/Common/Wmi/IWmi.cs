@@ -1,6 +1,6 @@
 ﻿using System.Management;
 
-namespace SccmTools.Library.Common.Wmi
+namespace SccmTools.Library.Module.Common.Wmi
 {
     public interface IWmi
     {        

@@ -4,9 +4,9 @@ using Castle.Windsor;
 using Common.Logging;
 using Common.Logging.Simple;
 using NUnit.Framework;
-using SccmTools.Library.Common.Install;
 using SccmTools.Library.Infrastructure;
 using SccmTools.Library.Infrastructure.LifeStyles;
+using SccmTools.Library.Module.Common.Install;
 
 namespace SccmTools.Tests.UnitTests
 {

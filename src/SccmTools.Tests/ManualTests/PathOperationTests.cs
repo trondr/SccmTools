@@ -5,9 +5,10 @@ using Common.Logging;
 using Common.Logging.Simple;
 using NUnit.Framework;
 using SccmTools.Library;
-using SccmTools.Library.Common.IO;
 using SccmTools.Library.Infrastructure;
 using SccmTools.Library.Infrastructure.LifeStyles;
+using SccmTools.Library.Module.Common.IO;
+using SccmTools.Library.Module.Services;
 
 namespace SccmTools.Tests.ManualTests
 {

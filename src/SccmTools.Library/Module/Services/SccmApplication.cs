@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Management;
-using SccmTools.Library.Common.Wmi;
+using SccmTools.Library.Module.Common.Wmi;
 
-namespace SccmTools.Library.Services
+namespace SccmTools.Library.Module.Services
 {
     public class SccmApplication : ISccmApplication
     {

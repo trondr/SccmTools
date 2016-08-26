@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace SccmTools.Library
+namespace SccmTools.Library.Module.Services
 {
     public class SccmToolsException : Exception
     {

@@ -3,9 +3,9 @@ using System.IO;
 using System.Text.RegularExpressions;
 using Common.Logging;
 using Microsoft.Deployment.WindowsInstaller;
-using SccmTools.Library.Common.Msi;
+using SccmTools.Library.Module.Common.Msi;
 
-namespace SccmTools.Library.Services
+namespace SccmTools.Library.Module.Services
 {
     public class ProductCodeProvider : IProductCodeProvider
     {

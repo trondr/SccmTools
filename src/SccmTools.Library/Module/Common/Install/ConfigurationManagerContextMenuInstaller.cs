@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Configuration.Install;
 using System.IO;
-using System.Runtime.Serialization.Formatters;
 using System.Xml.Serialization;
 using Microsoft.ConfigurationManagement.AdminConsole.Schema;
+using SccmTools.Library.Module.Services;
 
-namespace SccmTools.Library.Common.Install
+namespace SccmTools.Library.Module.Common.Install
 {
     public class ConfigurationManagerContextMenuInstaller : IConfigurationManagerContextMenuInstaller
     {

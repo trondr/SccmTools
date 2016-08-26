@@ -1,4 +1,4 @@
-﻿namespace SccmTools.Library.Common.Caching
+﻿namespace SccmTools.Library.Module.Common.Caching
 {
     public class CacheValidator : ICacheValidator
     {

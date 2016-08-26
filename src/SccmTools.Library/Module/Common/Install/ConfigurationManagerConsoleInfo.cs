@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SccmTools.Library.Common.Install
+namespace SccmTools.Library.Module.Common.Install
 {
     public class ConfigurationManagerConsoleInfo : IConfigurationManagerConsoleInfo
     {

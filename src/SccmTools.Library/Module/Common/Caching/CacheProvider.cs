@@ -1,9 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using Common.Logging;
-using SccmTools.Library.Infrastructure;
 using SccmTools.Library.Infrastructure.LifeStyles;
 
-namespace SccmTools.Library.Common.Caching
+namespace SccmTools.Library.Module.Common.Caching
 {
     [Singleton]
     public class CacheProvider : ICacheProvider

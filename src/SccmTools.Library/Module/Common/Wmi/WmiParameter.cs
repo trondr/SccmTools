@@ -1,4 +1,4 @@
-﻿namespace SccmTools.Library.Common.Wmi
+﻿namespace SccmTools.Library.Module.Common.Wmi
 {
     public class WmiParameter
     {

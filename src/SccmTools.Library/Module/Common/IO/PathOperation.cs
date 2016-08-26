@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using SccmTools.Library.Module.Services;
 
-namespace SccmTools.Library.Common.IO
+namespace SccmTools.Library.Module.Common.IO
 {
     public class PathOperation : IPathOperation
     {

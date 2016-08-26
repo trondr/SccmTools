@@ -1,6 +1,6 @@
 ﻿using Microsoft.Deployment.WindowsInstaller;
 
-namespace SccmTools.Library.Common.Msi
+namespace SccmTools.Library.Module.Common.Msi
 {
     public interface IMsiHelper
     {

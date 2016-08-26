@@ -4,11 +4,11 @@ using Common.Logging;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 using Microsoft.ConfigurationManagement.ApplicationManagement.Serialization;
 using Microsoft.Win32;
-using SccmTools.Library.Common.IO;
 using SccmTools.Library.Infrastructure;
-using SccmTools.Library.Services;
+using SccmTools.Library.Module.Common.IO;
+using SccmTools.Library.Module.Services;
 
-namespace SccmTools.Library.Commands.CreateApplication
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public class CreateApplicationFromDefinitionCommandProvider : CommandProvider, ICreateApplicationFromDefinitionCommandProvider
     {        

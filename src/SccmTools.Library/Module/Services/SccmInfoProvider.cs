@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Management;
-using Microsoft.ConfigurationManagement.ManagementProvider.WqlQueryEngine;
-using SccmTools.Library.Common.Wmi;
+﻿using Microsoft.ConfigurationManagement.ManagementProvider.WqlQueryEngine;
+using SccmTools.Library.Module.Common.Wmi;
 using SmsClientLib;
 
-namespace SccmTools.Library.Services
+namespace SccmTools.Library.Module.Services
 {
     public class SccmInfoProvider : ISccmInfoProvider
     {

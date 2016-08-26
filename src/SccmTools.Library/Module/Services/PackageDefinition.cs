@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using System.IO;
-using SccmTools.Library.Common.IO;
+using SccmTools.Library.Module.Common.IO;
 using Icon = Microsoft.ConfigurationManagement.ApplicationManagement.Icon;
 
-namespace SccmTools.Library.Services
+namespace SccmTools.Library.Module.Services
 {
     public class PackageDefinition : IPackageDefinition
     {

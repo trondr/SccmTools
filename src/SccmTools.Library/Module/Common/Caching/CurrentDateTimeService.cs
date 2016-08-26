@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SccmTools.Library.Common.Caching
+namespace SccmTools.Library.Module.Common.Caching
 {
     public class CurrentDateTimeService : ICurrentDateTimeService
     {

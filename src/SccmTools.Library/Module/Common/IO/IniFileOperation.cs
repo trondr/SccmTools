@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Text;
-using SccmTools.Library.Infrastructure;
 using SccmTools.Library.Infrastructure.LifeStyles;
 
-namespace SccmTools.Library.Common.IO
+namespace SccmTools.Library.Module.Common.IO
 {
     
     /// <summary>

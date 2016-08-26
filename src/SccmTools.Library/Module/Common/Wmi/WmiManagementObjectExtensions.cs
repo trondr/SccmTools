@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Management;
 using System.Runtime.InteropServices;
+using SccmTools.Library.Module.Services;
 
-namespace SccmTools.Library.Common.Wmi
+namespace SccmTools.Library.Module.Common.Wmi
 {
     public static class WmiManagementObjectExtensions
     {

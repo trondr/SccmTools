@@ -1,6 +1,6 @@
 ﻿using Microsoft.ConfigurationManagement.ApplicationManagement;
 
-namespace SccmTools.Library.Services
+namespace SccmTools.Library.Module.Services
 {
     public interface IPackageDefinition
     {

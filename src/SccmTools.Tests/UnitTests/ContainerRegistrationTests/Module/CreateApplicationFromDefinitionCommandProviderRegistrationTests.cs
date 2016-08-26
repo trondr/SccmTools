@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using SccmTools.Library.Commands.CreateApplication;
+using SccmTools.Library.Module.Commands.CreateApplication;
 using SccmTools.Tests.Common;
 
 namespace SccmTools.Tests.UnitTests.ContainerRegistrationTests.Module

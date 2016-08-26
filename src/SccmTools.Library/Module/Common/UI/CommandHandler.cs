@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace SccmTools.Library.Common.UI
+namespace SccmTools.Library.Module.Common.UI
 {
     public class CommandHandler : ICommand
     {

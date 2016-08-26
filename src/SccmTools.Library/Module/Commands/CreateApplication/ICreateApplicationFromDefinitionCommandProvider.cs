@@ -1,4 +1,4 @@
-﻿namespace SccmTools.Library.Commands.CreateApplication
+﻿namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public interface ICreateApplicationFromDefinitionCommandProvider
     {
