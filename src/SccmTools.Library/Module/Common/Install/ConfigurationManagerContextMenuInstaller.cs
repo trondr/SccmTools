@@ -2,6 +2,8 @@
 using System.Configuration.Install;
 using System.IO;
 using System.Xml.Serialization;
+using Common.Logging;
+using Common.Logging.Simple;
 using Microsoft.ConfigurationManagement.AdminConsole.Schema;
 using SccmTools.Library.Module.Services;
 
@@ -13,13 +15,13 @@ namespace SccmTools.Library.Module.Common.Install
 
         public ConfigurationManagerContextMenuInstaller()
         {
-            _configurationManagerConsoleInfo = new ConfigurationManagerConsoleInfo();
+            _configurationManagerConsoleInfo = new ConfigurationManagerConsoleInfo(new ConsoleOutLogger("ConfigurationManagerContextMenuInstaller", LogLevel.All, true, true, true, "yyyy-MM-dd HH-mm-ss"));
         }
 
         public void Install(string nodeGuid, string commandName, string command, string arguments, InstallContext installContext)
         {
             installContext.LogMessage(string.Format("Installing command '{0}' to node guid '{1}'", commandName, nodeGuid));
-            if(string.IsNullOrWhiteSpace(_configurationManagerConsoleInfo.ActionsExtensionsPath) || !Directory.Exists(_configurationManagerConsoleInfo.ActionsExtensionsPath))
+            if(string.IsNullOrWhiteSpace(_configurationManagerConsoleInfo.ActionsExtensionsPath))
             {
                 throw new SccmToolsException("Unable to locate Configuration Manager Console on this machine. Failed to install action command: " + commandName);
             }
