@@ -6,6 +6,7 @@ using NCmdLiner;
 using NCmdLiner.Exceptions;
 using SccmTools.Infrastructure;
 using SccmTools.Library.Infrastructure;
+using SccmTools.Library.Module.Services;
 
 namespace SccmTools
 {
@@ -53,6 +54,11 @@ namespace SccmTools
                 {
                     logger.Error(ex.Message);
                     returnValue = 1;
+                }
+                catch (SccmToolsException ex)
+                {
+                    logger.Error(ex.Message);
+                    returnValue = 2;
                 }
                 catch (Exception ex)
                 {

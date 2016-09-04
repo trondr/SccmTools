@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("SccmTools")]
 [assembly: AssemblyCopyright("Copyright © github.com.trondr 2016")]
 [assembly: CLSCompliant(false)]
-[assembly: AssemblyInformationalVersion("1.0.15339.2.5d4336b")]
+[assembly: AssemblyInformationalVersion("1.0.15339.2.08fc98b")]
 [assembly: AssemblyVersion("1.0.15339.2")]
 [assembly: AssemblyFileVersion("1.0.15339.2")]
 

@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using SccmTools.Infrastructure.ContainerExtensions;
+using SccmTools.Library.Module.Commands.CreateApplication2;
 using SccmTools.Library.Module.Services;
 
 namespace SccmTools.Module.Infrastructure.ContainerConfiguration

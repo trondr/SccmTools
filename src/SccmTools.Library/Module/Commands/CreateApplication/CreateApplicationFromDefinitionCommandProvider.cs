@@ -47,7 +47,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
                 }
             }
             packageDefinitionFile = Environment.ExpandEnvironmentVariables(packageDefinitionFile);
-            if (!File.Exists(packageDefinitionFile)) throw new FileNotFoundException("Package definition file not found.", packageDefinitionFile);
+            if (!System.IO.File.Exists(packageDefinitionFile)) throw new FileNotFoundException("Package definition file not found.", packageDefinitionFile);
             packageDefinitionFile = _pathOperation.GetUncPath(packageDefinitionFile, false);
             var packageDefinitionUri = new Uri(packageDefinitionFile);
             if (!packageDefinitionUri.IsUnc)
@@ -99,6 +99,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
                 InstallContent = new ContentRef(content)
             };
             installer.Contents.Add(content);
+
             _logger.Info("Creating application deployment method...");
             var deploymentType = new DeploymentType(installer, MsiInstaller.TechnologyId, NativeHostingTechnology.TechnologyId)
             {

@@ -41,7 +41,8 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AdminUI.WqlQueryEngine">
+    <Reference Include="AdminUI.WqlQueryEngine, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Sccm\AdminUI.WqlQueryEngine.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -92,8 +93,17 @@
     <Compile Include="Infrastructure\ITypeMapper.cs" />
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\IPackageDefinition2.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionFactory2.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\NullFile.cs" />
     <Compile Include="Module\Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\File.cs" />
     <Compile Include="Module\Commands\CreateApplication\ICreateApplicationFromDefinitionCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\ICreateApplicationFromDefinitionCommandProvider2.cs" />
+    <Compile Include="Module\Commands\CreateApplication\IPackageDefinitionFileProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\PackageDefinitionFileProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\RealFile.cs" />
     <Compile Include="Module\Common\Caching\CacheProvider.cs" />
     <Compile Include="Module\Common\Caching\CacheValidator.cs" />
     <Compile Include="Module\Common\Caching\CacheValue.cs" />
@@ -127,6 +137,7 @@
     <Compile Include="Module\Common\Wmi\WmiManagementObjectExtensions.cs" />
     <Compile Include="Module\Common\Wmi\WmiParameter.cs" />
     <Compile Include="Module\Mapping\ExampleMapping.cs" />
+    <Compile Include="Module\Services\Class1.cs" />
     <Compile Include="Module\Services\IPackageDefinition.cs" />
     <Compile Include="Module\Services\IPackageDefinitionFactory.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />
