@@ -26,7 +26,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
         {
             var packageDefinitionFile = _packageDefinitionFileProvider.GetPackageDefinitionFile(packageDefinitionFileName);
             _logger.InfoFormat("Creating application from package definition file '{0}'...", packageDefinitionFile.FileName);
-            var packageDefinition = _packageDefinitionProvider.GetPackageDefinition(packageDefinitionFile.FileName);
+            var packageDefinition = _packageDefinitionProvider.ReadPackageDefinition(packageDefinitionFile.FileName);
             
 
             return 0;

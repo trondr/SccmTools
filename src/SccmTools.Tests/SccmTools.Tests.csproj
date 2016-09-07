@@ -57,6 +57,7 @@
       <HintPath>..\..\tools\NuGetPackages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="NCmdLiner, Version=1.2.16218.181, Culture=neutral, PublicKeyToken=37f01c356c8e03d5, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\NCmdLiner.1.2.16218.181\lib\net452\NCmdLiner.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +90,7 @@
     <Compile Include="IntegrationTests\StandardUser\ExampleStandardUserIntegrationTests.cs" />
     <Compile Include="IntegrationTests\StandardUser\StandardUserImpersonationTests.cs" />
     <Compile Include="ManualTests\PathOperationTests.cs" />
+    <Compile Include="UnitTests\Module\Commands\CreateApplication2\PackageDefinitionProviderTests.cs" />
     <Compile Include="UnitTests\Module\Common\IO\IniFileOperationTests.cs" />
     <Compile Include="UnitTests\ConfigurationManagerConsoleInfoTests.cs" />
     <Compile Include="UnitTests\ContainerRegistrationTests\Infrastructure\LoggingConfigurationRegistrationTests.cs" />
@@ -132,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminUserIntegrationTests\" />
+    <Folder Include="Module\" />
     <Folder Include="StandardUserIntegrationTests\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             string unInstallCommandLine, 
             Icon icon, 
             string[] msiProductCodes,             
-            string[] files, 
+            DetectionMethodFile[] files, 
             string contentDirectory)
         {
             Name = name;
@@ -48,7 +48,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
 
         public string[] MsiProductCodes { get; }
 
-        public string[] Files { get; }
+        public DetectionMethodFile[] Files { get; }
 
         public string ContentDirectory { get; }
     }

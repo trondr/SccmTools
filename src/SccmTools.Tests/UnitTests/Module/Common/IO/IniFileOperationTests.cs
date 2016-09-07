@@ -1,5 +1,4 @@
-﻿using Castle.Windsor.Diagnostics.Extensions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SccmTools.Library.Module.Common.IO;
 
 namespace SccmTools.Tests.UnitTests.Module.Common.IO

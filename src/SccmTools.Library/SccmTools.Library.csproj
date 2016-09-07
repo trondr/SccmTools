@@ -77,6 +77,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Sccm\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -97,9 +101,11 @@
     <Compile Include="Infrastructure\ITypeMapper.cs" />
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\DetectionMethodFile.cs" />
     <Compile Include="Module\Commands\CreateApplication2\PackageDefinition2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionFactory2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\PackageDefinitionProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\NullFile.cs" />
     <Compile Include="Module\Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\File.cs" />
@@ -144,10 +150,12 @@
     <Compile Include="Module\Services\IPackageDefinition.cs" />
     <Compile Include="Module\Services\IPackageDefinitionFactory.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />
+    <Compile Include="Module\Services\IProductCodeProvider2.cs" />
     <Compile Include="Module\Services\ISccmApplication.cs" />
     <Compile Include="Module\Services\ISccmInfoProvider.cs" />
     <Compile Include="Module\Services\PackageDefinition.cs" />
     <Compile Include="Module\Services\ProductCodeProvider.cs" />
+    <Compile Include="Module\Services\ProductCodeProvider2.cs" />
     <Compile Include="Module\Services\SccmApplication.cs" />
     <Compile Include="Module\Services\SccmInfoProvider.cs" />
     <Compile Include="Module\Services\SccmToolsException.cs" />
