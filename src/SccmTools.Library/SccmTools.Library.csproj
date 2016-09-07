@@ -60,6 +60,10 @@
     <Reference Include="DcmObjectModel">
       <HintPath>..\..\tools\Sccm\DcmObjectModel.dll</HintPath>
     </Reference>
+    <Reference Include="INIFileParser, Version=2.3.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement">
       <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ApplicationManagement.dll</HintPath>
     </Reference>
@@ -93,7 +97,7 @@
     <Compile Include="Infrastructure\ITypeMapper.cs" />
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
-    <Compile Include="Module\Commands\CreateApplication2\IPackageDefinition2.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\PackageDefinition2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionFactory2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\NullFile.cs" />
@@ -137,7 +141,6 @@
     <Compile Include="Module\Common\Wmi\WmiManagementObjectExtensions.cs" />
     <Compile Include="Module\Common\Wmi\WmiParameter.cs" />
     <Compile Include="Module\Mapping\ExampleMapping.cs" />
-    <Compile Include="Module\Services\Class1.cs" />
     <Compile Include="Module\Services\IPackageDefinition.cs" />
     <Compile Include="Module\Services\IPackageDefinitionFactory.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />

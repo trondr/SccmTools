@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.InteropServices;
+﻿using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using IniParser;
 using SccmTools.Library.Infrastructure.LifeStyles;
+using SccmTools.Library.Module.Services;
 
 namespace SccmTools.Library.Module.Common.IO
 {
@@ -12,31 +14,40 @@ namespace SccmTools.Library.Module.Common.IO
     [Singleton]
     public class IniFileOperation : IIniFileOperation
     {        
-        [DllImport("kernel32", SetLastError = true)]
-        private static extern int WritePrivateProfileString(string section, string key,string val,string filePath);
-        [DllImport("kernel32", SetLastError = true)]
-        private static extern int GetPrivateProfileString(string section, string key,string def, StringBuilder retVal, int size,string filePath);
-
         public string Read(string path, string section, string key)
         {
-            var value = new StringBuilder(255);
-            GetPrivateProfileString(section, key, "", value, 255, path);
-            var errorCode = Marshal.GetLastWin32Error();
-            if(errorCode != 0)
+            var iniFileParser = new FileIniDataParser();
+            var iniData = iniFileParser.ReadFile(path);
+            if (!iniData.Sections.ContainsSection(section))
             {
-                throw new Win32Exception(errorCode, string.Format("Failed to read '\"{0}\"[{1}]{2}'", path, section, key));
-            }
-            return value.ToString();
+                throw new SccmToolsException("Ini file section not found: " + section);
+            }            
+            var value = iniData[section][key];
+            return value;
         }
 
         public void Write(string path, string section, string key, string value)
         {
-            WritePrivateProfileString(section,key,value,path);
-            var errorCode = Marshal.GetLastWin32Error();
-            if(errorCode != 0)
+            var iniFileParser = new FileIniDataParser();
+            var iniData = iniFileParser.ReadFile(path);
+            if (!iniData.Sections.ContainsSection(section))
             {
-                throw new Win32Exception(errorCode, string.Format("Failed to write '\"{0}\"[{1}]{2}={3}'", path, section, key, value));
+                iniData.Sections.AddSection(section);
             }
+            iniData[section][key] = value;
+            iniFileParser.WriteFile(path, iniData, Encoding.ASCII);
+        }
+
+        public string[] ReadKeys(string path, string section, string regexKeyNamePattern)
+        {
+            var iniFileParser = new FileIniDataParser();
+            var iniData = iniFileParser.ReadFile(path);
+            var keyPatternRegex = new Regex(regexKeyNamePattern);
+            var values = from key in iniData[section]
+                where keyPatternRegex.IsMatch(key.KeyName)
+                select iniData[section][key.KeyName];
+            var valuesArray = values.ToArray();
+            return valuesArray;
         }
     }
 }

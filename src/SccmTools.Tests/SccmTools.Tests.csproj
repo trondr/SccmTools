@@ -89,6 +89,7 @@
     <Compile Include="IntegrationTests\StandardUser\ExampleStandardUserIntegrationTests.cs" />
     <Compile Include="IntegrationTests\StandardUser\StandardUserImpersonationTests.cs" />
     <Compile Include="ManualTests\PathOperationTests.cs" />
+    <Compile Include="UnitTests\Module\Common\IO\IniFileOperationTests.cs" />
     <Compile Include="UnitTests\ConfigurationManagerConsoleInfoTests.cs" />
     <Compile Include="UnitTests\ContainerRegistrationTests\Infrastructure\LoggingConfigurationRegistrationTests.cs" />
     <Compile Include="UnitTests\ContainerRegistrationTests\Infrastructure\NCmdLinerIMessengerRegistrationTests.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="UnitTests\ContainerRegistrationTests\Module\CreateApplicationFromDefinitionCommandDefinitionRegistrationTests.cs" />
     <Compile Include="UnitTests\ContainerRegistrationTests\Module\CreateApplicationFromDefinitionCommandProviderRegistrationTests.cs" />
     <Compile Include="UnitTests\ContainerRegistrationTests\Module\WindowsExplorerContextMenuInstallerRegistrationTests.cs" />
+    <Compile Include="UnitTests\Module\Common\IO\TestIniFile.cs" />
     <Compile Include="UnitTests\ProductCodeProviderTests.cs" />
     <Compile Include="UnitTests\SccmInfoProviderTests.cs" />
     <Compile Include="UnitTests\UnitTestsTemplate.cs" />

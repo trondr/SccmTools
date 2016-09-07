@@ -143,7 +143,8 @@
     <EmbeddedResource Include="Credits\3. NCmdLiner SolutionTemplates Credit.xml" />
     <EmbeddedResource Include="Credits\4. Common.Logging Credit.xml" />
     <EmbeddedResource Include="Credits\6. ContainerInstallerFactory Credit.xml" />
-    <EmbeddedResource Include="Credits\5. Log4Net Credit - Copy.xml" />
+    <EmbeddedResource Include="Credits\5. Log4Net Credit.xml" />
+    <EmbeddedResource Include="Credits\7. Ini-Parser Credit.xml" />
     <Content Include="Debug.txt" />
     <EmbeddedResource Include="License\0 SccmTools License.xml" />
     <EmbeddedResource Include="License\1 Castle Project License.xml" />
@@ -151,6 +152,7 @@
     <EmbeddedResource Include="License\3 NCmLiner Solution Templates License.xml" />
     <EmbeddedResource Include="License\4 Common.Logging License.xml" />
     <EmbeddedResource Include="License\5 Log4Net License.xml" />
+    <EmbeddedResource Include="License\6 Ini-Parser License.xml" />
     <Content Include="NCmdLiner.ico" />
     <Content Include="References.txt" />
   </ItemGroup>

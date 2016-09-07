@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CreditInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ProductName>Ini-Parser</ProductName>
+  <ProductHome>https://github.com/rickyah/ini-parser</ProductHome>
+  <CreditText>SccmTools uses Ini-Parser to provide ini file capabilities for reading package definition files.</CreditText>
+</CreditInfo>

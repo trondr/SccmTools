@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.IO;
 using SccmTools.Library.Module.Common.IO;
@@ -123,6 +124,11 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
                 throw new SccmToolsException(string.Format("'[{0}]{1}' has not bee specified in package definition file '{2}'.", section, key, fileName));
             }
             return value;
+        }
+
+        private string[] GetValues(string fileName, string section, string keyPattern, bool allowNullOrEmpty)
+        {
+            throw new NotImplementedException();
         }
     }
 }
