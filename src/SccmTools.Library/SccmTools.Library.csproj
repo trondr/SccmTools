@@ -70,6 +70,9 @@
     <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller">
       <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ConfigurationManagement.DesiredConfiguration">
+      <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.DesiredConfiguration.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ManagementProvider">
       <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
     </Reference>
@@ -101,12 +104,15 @@
     <Compile Include="Infrastructure\ITypeMapper.cs" />
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\CreateApplicationFromDefinitionCommandProvider2.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\FileRuleType.cs" />
     <Compile Include="Module\Commands\CreateApplication2\DetectionMethodFile.cs" />
     <Compile Include="Module\Commands\CreateApplication2\DetectionMethodFileFormatExeception.cs" />
     <Compile Include="Module\Commands\CreateApplication2\PackageDefinition2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionFactory2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication2\PackageDefinitionProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\RuleOperator.cs" />
     <Compile Include="Module\Commands\CreateApplication\NullFile.cs" />
     <Compile Include="Module\Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\File.cs" />

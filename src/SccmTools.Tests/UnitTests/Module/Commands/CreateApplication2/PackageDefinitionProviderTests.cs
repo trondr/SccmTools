@@ -35,13 +35,13 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
             },
                 new DetectionMethodFile[]
                 {
-                    new DetectionMethodFile(){FileName = "FileName1",FileVersion = new Version("1.0.0.0"),ModifyDateTime = DateTime.Now},
-                    new DetectionMethodFile(){FileName = "FileName2",FileVersion = new Version("2.0.0.0"),ModifyDateTime = DateTime.Now},
+                    new DetectionMethodFile(){FileName = "FileName1",FileVersion = new Version("1.0.0.0"),Modified = DateTime.Now,RuleType = FileRuleType.DateModified},
+                    new DetectionMethodFile(){FileName = "FileName2",FileVersion = new Version("2.0.0.0"),Modified = DateTime.Now,RuleType = FileRuleType.DateModified},
                 }, null);
             return packageDefinition;
         }
 
-        [Test()]
+        [Test]
         public void ReadPackageDefinitionTest()
         {
             string packageDefinitionTestString = GetPackageDefinitionTestString();
@@ -53,12 +53,16 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
                     var actual = target.ReadPackageDefinition(testPacageDefinitionFile.TestIniFileName);
                     Assert.AreEqual("_S_ProductName_S_", actual.Name);
                     Assert.AreEqual("FileName1",actual.Files[0].FileName);
+                    Assert.AreEqual("FileName2",actual.Files[1].FileName);
+                    Assert.AreEqual(FileRuleType.DateModified,actual.Files[0].RuleType);
+                    Assert.AreEqual(FileRuleType.Version,actual.Files[1].RuleType);
+
                 }
             }            
         }
 
 
-        [Test()]
+        [Test]
         public void ReadPackageDefinitionTest_Throws_DetectionMethodFileFormatExeception()
         {
             string packageDefinitionTestString = GetPackageDefinitionTestStringWithFileDetectionMethodFormatError();
@@ -70,7 +74,7 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
                     Assert.Throws<DetectionMethodFileFormatExeception>(() =>
                     {
                         var actual = target.ReadPackageDefinition(testPacageDefinitionFile.TestIniFileName);
-                    });                    
+                    });
                 }
             }            
         }
@@ -113,7 +117,8 @@ Comment =
 
 [DetectionMethod]
 MsiProductCode = {5852FC46-329F-4A34-B42F-48CFE0290BBB}
-File1={""FileName"":""FileName1"",""FileVersion"":{""Major"":1,""Minor"":0,""Build"":0,""Revision"":0,""MajorRevision"":0,""MinorRevision"":0},""ModifyDateTime"":""2017-01-08T13:48:53.2047827+01:00""}
+File1={""FileName"":""FileName1"",""Modified"":""2017-01-08T13:48:53.2047827+01:00"",""RuleType"":""DateModified"",""RuleOperator"":""Equals""}
+File2={""FileName"":""FileName2"",""FileVersion"":{""Major"":1,""Minor"":0,""Build"":0,""Revision"":0,""MajorRevision"":0,""MinorRevision"":0},""Modified"":""2017-01-08T14:51:35.713544+01:00"",""Created"":""0001-01-01T00:00:00"",""SizeInBytes"":0,""RuleType"":""Version"",""RuleOperator"":""Equals""}
 
 ";
             return packageDefinitionTestString;
