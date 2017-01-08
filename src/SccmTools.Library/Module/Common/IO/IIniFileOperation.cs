@@ -1,4 +1,6 @@
-﻿namespace SccmTools.Library.Module.Common.IO
+﻿using System.Collections.Generic;
+
+namespace SccmTools.Library.Module.Common.IO
 {
     public interface IIniFileOperation
     {
@@ -6,6 +8,6 @@
 
         void Write(string path, string section, string key, string value);
 
-        string[] ReadKeys(string path, string section, string regexKeyNamePattern);
+        KeyValuePair<string,string>[] ReadKeys(string path, string section, string regexKeyNamePattern);
     }
 }

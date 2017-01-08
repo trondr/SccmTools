@@ -102,6 +102,7 @@
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
     <Compile Include="Module\Commands\CreateApplication2\DetectionMethodFile.cs" />
+    <Compile Include="Module\Commands\CreateApplication2\DetectionMethodFileFormatExeception.cs" />
     <Compile Include="Module\Commands\CreateApplication2\PackageDefinition2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionFactory2.cs" />
     <Compile Include="Module\Commands\CreateApplication2\IPackageDefinitionProvider.cs" />

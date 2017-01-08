@@ -27,7 +27,7 @@ namespace SccmTools.Tests.UnitTests
 
         }
 
-        [Test]
+        [Test()]
         public void SccmInfoProviderGetSiteCodeTest()
         {            
             using(var testBooStrapper = new TestBootStrapper(GetType()))
@@ -51,7 +51,7 @@ namespace SccmTools.Tests.UnitTests
             }
         }
 
-        [Test]
+        [Test(Description = "Note! This test requires that current user has read access to the SCCM server. Minimum role: Read-only Analyst")]
         public void SccmInfoProviderGetSiteIdTest()
         {            
             using(var testBooStrapper = new TestBootStrapper(GetType()))
@@ -63,7 +63,7 @@ namespace SccmTools.Tests.UnitTests
             }
         }
 
-        [Test]
+        [Test(Description = "Note! This test requires that current user has read access to the SCCM server. Minimum role: Read-only Analyst")]
         public void SccmInfoProviderGetAuthoringScopeIdTest()
         {            
             using(var testBooStrapper = new TestBootStrapper(GetType()))
@@ -74,7 +74,6 @@ namespace SccmTools.Tests.UnitTests
                Assert.IsNotNullOrEmpty(actual);
             }
         }
-
 
         internal class TestBootStrapper: IDisposable
         {

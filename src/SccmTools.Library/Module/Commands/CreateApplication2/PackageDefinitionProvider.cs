@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -12,12 +13,12 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
     public class PackageDefinitionProvider : IPackageDefinitionProvider
     {
         private readonly IIniFileOperation _iniFileOperation;
-        private readonly IProductCodeProvider2 _productCodeProvider;        
+        private readonly IProductCodeProvider2 _productCodeProvider;
 
         public PackageDefinitionProvider(IIniFileOperation iniFileOperation, IProductCodeProvider2 productCodeProvider)
         {
             _iniFileOperation = iniFileOperation;
-            _productCodeProvider = productCodeProvider;            
+            _productCodeProvider = productCodeProvider;
         }
 
         public PackageDefinition2 ReadPackageDefinition(string packageDefinitionFileName)
@@ -33,19 +34,20 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             string[] msiProductCodes = GetMsiProductCodes(packageDefinitionFileName).ToArray();
             DetectionMethodFile[] files = GetFiles(packageDefinitionFileName).ToArray();
             string contentDirectory = GetContentDirectory(packageDefinitionFileName);
-            var packageDefinition = new PackageDefinition2(name, version, publisher, comment, language, installCommandLine, unInstallCommandLine, icon, msiProductCodes, files, contentDirectory);
-            return packageDefinition;            
+            var packageDefinition = new PackageDefinition2(name, version, publisher, comment, language,
+                installCommandLine, unInstallCommandLine, icon, msiProductCodes, files, contentDirectory);
+            return packageDefinition;
         }
 
         public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition2 packageDefinition)
         {
-            SetValue(packageDefinitionFileName,"PDF","Version","2.0");
+            SetValue(packageDefinitionFileName, "PDF", "Version", "2.0");
             SetName(packageDefinitionFileName, packageDefinition.Name);
             SetVersion(packageDefinitionFileName, packageDefinition.Version);
             SetPublisher(packageDefinitionFileName, packageDefinition.Publisher);
             SetComment(packageDefinitionFileName, packageDefinition.Comment);
             SetLanguage(packageDefinitionFileName, packageDefinition.Language);
-            SetValue(packageDefinitionFileName,"Package Definition","Programs","INSTALL,UNINSTALL");
+            SetValue(packageDefinitionFileName, "Package Definition", "Programs", "INSTALL,UNINSTALL");
             SetInstallCommandLine(packageDefinitionFileName, packageDefinition.InstallCommandLine);
             SetUnInstallCommandLine(packageDefinitionFileName, packageDefinition.UnInstallCommandLine);
             //SetIcon(packageDefinitionFileName, packageDefinition.Icon);
@@ -126,7 +128,8 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             return installCommandLine;
         }
 
-        private void SetUnInstallCommandLine(string packageDefinitionFileName, string packageDefinitionUnInstallCommandLine)
+        private void SetUnInstallCommandLine(string packageDefinitionFileName,
+            string packageDefinitionUnInstallCommandLine)
         {
             SetValue(packageDefinitionFileName, "UNINSTALL", "CommandLine", packageDefinitionUnInstallCommandLine);
         }
@@ -134,6 +137,8 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
         private Icon GetIcon(string packageDefinitionFileName)
         {
             var iconPath = GetValue(packageDefinitionFileName, "INSTALL", "Icon", true);
+            if (string.IsNullOrEmpty(iconPath))
+                return null;
             Icon icon = null;
             var directoryInfo = new FileInfo(packageDefinitionFileName).Directory;
             var packageDirectory = string.Empty;
@@ -153,23 +158,23 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
         {
             // Do nothing.
         }
-        
+
         private IEnumerable<string> GetMsiProductCodes(string packageDefinitionFileName)
         {
             var contentDirectory = GetContentDirectory(packageDefinitionFileName);
-            var productCodes = GetValues(packageDefinitionFileName, "DetectionMethod", @"MsiProductCode\d*", true);
+            var productCodes = GetKeyValues(packageDefinitionFileName, "DetectionMethod", @"MsiProductCode\d*", true);
             var msiProductCodeCount = 0;
             if (productCodes.Length > 0)
             {
                 foreach (var productCode in productCodes)
                 {
-                    var msiProductCode = _productCodeProvider.GetProductCodeFromText(productCode);
+                    var msiProductCode = _productCodeProvider.GetProductCodeFromText(productCode.Value);
                     msiProductCodeCount++;
                     yield return msiProductCode;
                 }
             }
             else
-            {                
+            {
                 var msiProductCodes = _productCodeProvider.GetProductCodesFromMsiFileSearch(contentDirectory);
                 foreach (var msiProductCode in msiProductCodes)
                 {
@@ -179,7 +184,10 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             }
             if (msiProductCodeCount == 0)
             {
-                throw new SccmToolsException(string.Format(@"ProductCode(s) was not found in the section value [DetectionMethod]MsiProductCode\d* in package definition file '{0}' or from automatically searching for a msi file and its product code in content directory '{1}'.", packageDefinitionFileName, contentDirectory));
+                throw new SccmToolsException(
+                    string.Format(
+                        @"ProductCode(s) was not found in the section value [DetectionMethod]MsiProductCode\d* in package definition file '{0}' or from automatically searching for a msi file and its product code in content directory '{1}'.",
+                        packageDefinitionFileName, contentDirectory));
             }
         }
 
@@ -189,19 +197,30 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             foreach (var packageDefinitionMsiProductCode in packageDefinitionMsiProductCodes)
             {
                 index++;
-                SetValue(packageDefinitionFileName, "DetectionMethod", "MsiProductCode" + index, packageDefinitionMsiProductCode);
+                SetValue(packageDefinitionFileName, "DetectionMethod", "MsiProductCode" + index,
+                    packageDefinitionMsiProductCode);
             }
         }
 
 
         private IEnumerable<DetectionMethodFile> GetFiles(string packageDefinitionFileName)
         {
-            var files = GetValues(packageDefinitionFileName, "DetectionMethod", @"File\d*", true);
+            var files = GetKeyValues(packageDefinitionFileName, "DetectionMethod", @"File\d*", true);
+
             foreach (var file in files)
             {
-                var detectionMethodFile = JsonConvert.DeserializeObject<DetectionMethodFile>(file);
+                DetectionMethodFile detectionMethodFile;
+                try
+                {
+                    detectionMethodFile = JsonConvert.DeserializeObject<DetectionMethodFile>(file.Value);                    
+                }
+                catch (Exception ex)
+                {
+                    var msg = string.Format("Failed to parse '[DetectionMethod]{0}={1}' section key from package definition file '{2}'.", file.Key,file.Value, packageDefinitionFileName);
+                    throw new DetectionMethodFileFormatExeception(msg, ex);
+                }
                 yield return detectionMethodFile;
-            }            
+            }
         }
 
         private void SetFiles(string packageDefinitionFileName, DetectionMethodFile[] detectionMethodFiles)
@@ -214,20 +233,20 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
                 SetValue(packageDefinitionFileName, "DetectionMethod", "File" + index, detectionMethodFileString);
             }
         }
-        
+
         public string GetContentDirectory(string packageDefinitionFileName)
         {
             var packageDefinitionFile = new FileInfo(packageDefinitionFileName);
             var contentDirectory = packageDefinitionFile.Directory;
             if (contentDirectory == null) { throw new SccmToolsException("Failed to derive parent directory for package definition file: " + packageDefinitionFileName); }
-            return contentDirectory.FullName;            
+            return contentDirectory.FullName;
         }
 
         private string GetValue(string fileName, string section, string key, bool allowNullOrEmpty)
         {
             var value = _iniFileOperation.Read(fileName, section, key);
             if (!allowNullOrEmpty && string.IsNullOrWhiteSpace(value))
-            { 
+            {
                 throw new SccmToolsException(string.Format("'[{0}]{1}' has not bee specified in package definition file '{2}'.", section, key, fileName));
             }
             return value;
@@ -235,17 +254,17 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
 
         private void SetValue(string fileName, string section, string key, string value)
         {
-            _iniFileOperation.Write(fileName, section, key, value);            
+            _iniFileOperation.Write(fileName, section, key, value);
         }
 
-        private string[] GetValues(string fileName, string section, string keyPattern, bool allowNullOrEmpty)
+        private KeyValuePair<string,string>[] GetKeyValues(string fileName, string section, string keyPattern, bool allowNullOrEmpty)
         {
-            var values = _iniFileOperation.ReadKeys(fileName,section,keyPattern);
-            if (!allowNullOrEmpty && values.Length == 0)
-            { 
+            var keyValues = _iniFileOperation.ReadKeys(fileName, section, keyPattern);
+            if (!allowNullOrEmpty && keyValues.Length == 0)
+            {
                 throw new SccmToolsException(string.Format("Key with pattern'[{0}]{1}' has not bee specified in package definition file '{2}'.", section, keyPattern, fileName));
             }
-            return values;
+            return keyValues;
         }
     }
 }
