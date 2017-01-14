@@ -18,7 +18,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
         public File GetPackageDefinitionFile(string packageDefinitionFileName)
         {
             var packageDefinitionFile = GetPackageDefinitionFromParameter(packageDefinitionFileName);
-            if (!packageDefinitionFile.IsNull())
+            if (packageDefinitionFile.IsNull())
             {
                 packageDefinitionFile = GetPackageDefinitionFileFromUser();
             }
