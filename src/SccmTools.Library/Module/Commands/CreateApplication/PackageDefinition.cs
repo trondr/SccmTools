@@ -1,11 +1,10 @@
-using System;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 
-namespace SccmTools.Library.Module.Commands.CreateApplication2
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
-    public class PackageDefinition2
+    public class PackageDefinition
     {
-        public PackageDefinition2(
+        public PackageDefinition(
             string name, 
             string version, 
             string publisher, 

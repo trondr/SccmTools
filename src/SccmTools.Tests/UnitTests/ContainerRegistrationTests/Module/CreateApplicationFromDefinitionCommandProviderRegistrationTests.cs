@@ -8,10 +8,10 @@ namespace SccmTools.Tests.UnitTests.ContainerRegistrationTests.Module
     public class CreateApplicationFromDefinitionCommandProviderRegistrationTests
     {        
         [Test, RequiresSTA]
-        public static void ExampleCommandProviderRegistrationTest()
+        public static void CreateApplicationFromDefinitionCommandProviderRegistrationTest()
         {
             BootStrapperTestsHelper.CheckThatNumberOfResolvedServicesAre<ICreateApplicationFromDefinitionCommandProvider>(1);
-            BootStrapperTestsHelper.CheckThatResolvedServiceIsOfInstanceTypeName<ICreateApplicationFromDefinitionCommandProvider>("ICreateApplicationFromDefinitionCommandProviderProxy");
+            BootStrapperTestsHelper.CheckThatResolvedServiceIsOfInstanceTypeName<ICreateApplicationFromDefinitionCommandProvider>("CreateApplicationFromDefinitionCommandProvider");
             BootStrapperTestsHelper.CheckThatResolvedServiceHasSingletonLifeCycle<ICreateApplicationFromDefinitionCommandProvider>();
         }
 

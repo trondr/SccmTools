@@ -1,6 +1,6 @@
 ﻿using Microsoft.ConfigurationManagement.DesiredConfigurationManagement;
 using NUnit.Framework;
-using SccmTools.Library.Module.Commands.CreateApplication2;
+using SccmTools.Library.Module.Commands.CreateApplication;
 
 namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
 {

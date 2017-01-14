@@ -1,4 +1,4 @@
-namespace SccmTools.Library.Module.Commands.CreateApplication2
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public enum RuleOperator
     {

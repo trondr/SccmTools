@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
 using SccmTools.Infrastructure;
-using SccmTools.Library.Module.Commands.CreateApplication2;
+using SccmTools.Library.Module.Commands.CreateApplication;
 
 namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
 {
@@ -15,7 +15,7 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
             CreateTestApplicationContent(packageDefinitionFileName);
             using (var bootStrapper = new BootStrapper())
             {
-                var target = bootStrapper.Container.Resolve<ICreateApplicationFromDefinitionCommandProvider2>();
+                var target = bootStrapper.Container.Resolve<ICreateApplicationFromDefinitionCommandProvider>();
                 target.CreateApplicationFromDefinition(packageDefinitionFileName);
             }
         }

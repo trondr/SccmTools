@@ -1,6 +1,6 @@
 using Microsoft.ConfigurationManagement.DesiredConfigurationManagement;
 
-namespace SccmTools.Library.Module.Commands.CreateApplication2
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public class RegistryValue
     {

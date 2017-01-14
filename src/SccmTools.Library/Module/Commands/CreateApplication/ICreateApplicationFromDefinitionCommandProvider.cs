@@ -2,6 +2,6 @@
 {
     public interface ICreateApplicationFromDefinitionCommandProvider
     {
-        int CreateApplicationFromDefinition(string packageDefinitionFile);
+        int CreateApplicationFromDefinition(string packageDefinitionFileName);
     }
 }

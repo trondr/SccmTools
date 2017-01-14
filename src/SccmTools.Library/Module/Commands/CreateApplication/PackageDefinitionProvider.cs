@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -6,7 +5,7 @@ using SccmTools.Library.Module.Common.IO;
 using SccmTools.Library.Module.Services;
 using Icon = Microsoft.ConfigurationManagement.ApplicationManagement.Icon;
 
-namespace SccmTools.Library.Module.Commands.CreateApplication2
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public class PackageDefinitionProvider : IPackageDefinitionProvider
     {
@@ -22,7 +21,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             _regfRegistryValueParser = regfRegistryValueParser;
         }
 
-        public PackageDefinition2 ReadPackageDefinition(string packageDefinitionFileName)
+        public PackageDefinition ReadPackageDefinition(string packageDefinitionFileName)
         {
             string name = GetName(packageDefinitionFileName);
             string version = GetVersion(packageDefinitionFileName);
@@ -36,7 +35,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             RegistryValue registryValue = GetRegistryValue(packageDefinitionFileName);
             bool registryValueIs64Bit = GetRegistryValueIs64Bit(packageDefinitionFileName);
             string contentDirectory = GetContentDirectory(packageDefinitionFileName);
-            var packageDefinition = new PackageDefinition2(name, version, publisher, comment, language,
+            var packageDefinition = new PackageDefinition(name, version, publisher, comment, language,
                 installCommandLine, unInstallCommandLine, icon, msiProductCode, registryValue,registryValueIs64Bit ,contentDirectory);
             return packageDefinition;
         }
@@ -68,7 +67,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             return registryValue;
         }
 
-        public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition2 packageDefinition)
+        public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition packageDefinition)
         {
             SetValue(packageDefinitionFileName, "PDF", "Version", "2.0");
             SetName(packageDefinitionFileName, packageDefinition.Name);
@@ -176,7 +175,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
                 packageDirectory = directoryInfo.FullName;
             }
             iconPath = Path.Combine(packageDirectory, iconPath);
-            if (File.Exists(iconPath))
+            if (System.IO.File.Exists(iconPath))
             {
                 icon = new Icon(Image.FromFile(iconPath));
             }

@@ -2,7 +2,7 @@
 using Microsoft.ConfigurationManagement.DesiredConfigurationManagement;
 using NUnit.Framework;
 using SccmTools.Infrastructure;
-using SccmTools.Library.Module.Commands.CreateApplication2;
+using SccmTools.Library.Module.Commands.CreateApplication;
 using SccmTools.Tests.UnitTests.Module.Common.IO;
 
 namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
@@ -26,11 +26,11 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
             }
         }
 
-        private PackageDefinition2 GetTestPackageDefinition()
+        private PackageDefinition GetTestPackageDefinition()
         {
             var registryValue = new RegistryValue(RegistryRootKey.LocalMachine,@"Software\MyCompany\MyApplication","IsInstalled","1",true);
 
-            var packageDefinition = new PackageDefinition2("Example Name", "1.0.0.0", "My Company", "A comment", "EN",
+            var packageDefinition = new PackageDefinition("Example Name", "1.0.0.0", "My Company", "A comment", "EN",
                 "Install.cmd", "UnIntall.cmd", null, "{5852FC46-329F-4A34-B42F-48CFE0290BB1}", registryValue, true, null);
             return packageDefinition;
         }
@@ -46,7 +46,10 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
                     var target = bootStrapper.Container.Resolve<IPackageDefinitionProvider>();
                     var actual = target.ReadPackageDefinition(testPacageDefinitionFile.TestIniFileName);
                     Assert.AreEqual("_S_ProductName_S_", actual.Name);
-                    Assert.AreEqual(@"[HKLM\Software\MyCompany\MyApplication]IsInstalled=1", actual.RegistryValue);
+                    Assert.AreEqual(RegistryRootKey.LocalMachine, actual.RegistryValue.RootKey);
+                    Assert.AreEqual(@"Software\MyCompany\MyApplication", actual.RegistryValue.Key);
+                    Assert.AreEqual(@"IsInstalled", actual.RegistryValue.ValueName);
+                    Assert.AreEqual(@"1", actual.RegistryValue.Value);
                     Assert.AreEqual(true,actual.RegistryValueIs64Bit);
                 }
             }            

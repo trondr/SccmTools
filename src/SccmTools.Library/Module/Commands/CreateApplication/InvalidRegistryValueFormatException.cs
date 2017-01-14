@@ -1,6 +1,6 @@
 using System;
 
-namespace SccmTools.Library.Module.Commands.CreateApplication2
+namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public class InvalidRegistryValueFormatException : Exception
     {
