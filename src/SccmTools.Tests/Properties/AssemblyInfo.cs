@@ -17,10 +17,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("SccmTools provides various SCCM 2012 commands")]
 [assembly: AssemblyCompany("github.com.trondr")]
 [assembly: AssemblyProduct("SccmTools.Tests")]
-[assembly: AssemblyCopyright("Copyright © github.com.trondr 2016")]
+[assembly: AssemblyCopyright("Copyright © github.com.trondr 2017")]
 [assembly: CLSCompliant(false)]
-[assembly: AssemblyInformationalVersion("1.0.15339.2.08fc98b")]
-[assembly: AssemblyVersion("1.0.15339.2")]
-[assembly: AssemblyFileVersion("1.0.15339.2")]
+[assembly: AssemblyInformationalVersion("1.0.17014.3.050baa6")]
+[assembly: AssemblyVersion("1.0.17014.3")]
+[assembly: AssemblyFileVersion("1.0.17014.3")]
 
 
