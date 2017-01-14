@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.ConfigurationManagement.DesiredConfigurationManagement;
 using NUnit.Framework;
 using SccmTools.Infrastructure;
 using SccmTools.Library.Module.Commands.CreateApplication2;
@@ -27,17 +28,10 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
 
         private PackageDefinition2 GetTestPackageDefinition()
         {
-            var packageDefinition = new PackageDefinition2("Example Name", "1.0.0.0", "My Company", "A comment", "EN", "Install.cmd", "UnIntall.cmd", null,
-                new string[]
-            {
-                "{5852FC46-329F-4A34-B42F-48CFE0290BB1}",
-                "{5852FC46-329F-4A34-B42F-48CFE0290BB2}"
-            },
-                new DetectionMethodFile[]
-                {
-                    new DetectionMethodFile(){FileName = "FileName1",FileVersion = new Version("1.0.0.0"),Modified = DateTime.Now,RuleType = FileRuleType.DateModified},
-                    new DetectionMethodFile(){FileName = "FileName2",FileVersion = new Version("2.0.0.0"),Modified = DateTime.Now,RuleType = FileRuleType.DateModified},
-                }, null);
+            var registryValue = new RegistryValue(RegistryRootKey.LocalMachine,@"Software\MyCompany\MyApplication","IsInstalled","1",true);
+
+            var packageDefinition = new PackageDefinition2("Example Name", "1.0.0.0", "My Company", "A comment", "EN",
+                "Install.cmd", "UnIntall.cmd", null, "{5852FC46-329F-4A34-B42F-48CFE0290BB1}", registryValue, true, null);
             return packageDefinition;
         }
 
@@ -52,34 +46,13 @@ namespace SccmTools.Tests.UnitTests.Module.Commands.CreateApplication2
                     var target = bootStrapper.Container.Resolve<IPackageDefinitionProvider>();
                     var actual = target.ReadPackageDefinition(testPacageDefinitionFile.TestIniFileName);
                     Assert.AreEqual("_S_ProductName_S_", actual.Name);
-                    Assert.AreEqual("FileName1",actual.Files[0].FileName);
-                    Assert.AreEqual("FileName2",actual.Files[1].FileName);
-                    Assert.AreEqual(FileRuleType.DateModified,actual.Files[0].RuleType);
-                    Assert.AreEqual(FileRuleType.Version,actual.Files[1].RuleType);
-
+                    Assert.AreEqual(@"[HKLM\Software\MyCompany\MyApplication]IsInstalled=1", actual.RegistryValue);
+                    Assert.AreEqual(true,actual.RegistryValueIs64Bit);
                 }
             }            
         }
 
-
-        [Test]
-        public void ReadPackageDefinitionTest_Throws_DetectionMethodFileFormatExeception()
-        {
-            string packageDefinitionTestString = GetPackageDefinitionTestStringWithFileDetectionMethodFormatError();
-            using (var testPacageDefinitionFile = new TestIniFile(packageDefinitionTestString))
-            {
-                using (var bootStrapper = new BootStrapper())
-                {
-                    var target = bootStrapper.Container.Resolve<IPackageDefinitionProvider>();
-                    Assert.Throws<DetectionMethodFileFormatExeception>(() =>
-                    {
-                        var actual = target.ReadPackageDefinition(testPacageDefinitionFile.TestIniFileName);
-                    });
-                }
-            }            
-        }
-
-        private string GetPackageDefinitionTestString()
+       private string GetPackageDefinitionTestString()
         {
             var packageDefinitionTestString =
 @"
@@ -117,9 +90,8 @@ Comment =
 
 [DetectionMethod]
 MsiProductCode = {5852FC46-329F-4A34-B42F-48CFE0290BBB}
-File1={""FileName"":""FileName1"",""Modified"":""2017-01-08T13:48:53.2047827+01:00"",""RuleType"":""DateModified"",""RuleOperator"":""Equals""}
-File2={""FileName"":""FileName2"",""FileVersion"":{""Major"":1,""Minor"":0,""Build"":0,""Revision"":0,""MajorRevision"":0,""MinorRevision"":0},""Modified"":""2017-01-08T14:51:35.713544+01:00"",""Created"":""0001-01-01T00:00:00"",""SizeInBytes"":0,""RuleType"":""Version"",""RuleOperator"":""Equals""}
-
+RegistryValue = [HKLM\Software\MyCompany\MyApplication]IsInstalled=1
+RegistryValueIs64Bit = true
 ";
             return packageDefinitionTestString;
         }

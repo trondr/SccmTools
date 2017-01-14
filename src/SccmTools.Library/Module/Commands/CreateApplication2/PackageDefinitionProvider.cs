@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
 using SccmTools.Library.Module.Common.IO;
 using SccmTools.Library.Module.Services;
 using Icon = Microsoft.ConfigurationManagement.ApplicationManagement.Icon;
@@ -13,12 +11,15 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
     public class PackageDefinitionProvider : IPackageDefinitionProvider
     {
         private readonly IIniFileOperation _iniFileOperation;
-        private readonly IProductCodeProvider2 _productCodeProvider;
+        private readonly IProductCodeProvider _productCodeProvider;
+        private readonly IRegistryValueParser _regfRegistryValueParser;
 
-        public PackageDefinitionProvider(IIniFileOperation iniFileOperation, IProductCodeProvider2 productCodeProvider)
+        public PackageDefinitionProvider(IIniFileOperation iniFileOperation, 
+            IProductCodeProvider productCodeProvider, IRegistryValueParser regfRegistryValueParser)
         {
             _iniFileOperation = iniFileOperation;
             _productCodeProvider = productCodeProvider;
+            _regfRegistryValueParser = regfRegistryValueParser;
         }
 
         public PackageDefinition2 ReadPackageDefinition(string packageDefinitionFileName)
@@ -31,12 +32,40 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             string installCommandLine = GetInstallCommandLine(packageDefinitionFileName);
             string unInstallCommandLine = GetUnInstallCommandLine(packageDefinitionFileName);
             Icon icon = GetIcon(packageDefinitionFileName);
-            string[] msiProductCodes = GetMsiProductCodes(packageDefinitionFileName).ToArray();
-            DetectionMethodFile[] files = GetFiles(packageDefinitionFileName).ToArray();
+            string msiProductCode = GetMsiProductCode(packageDefinitionFileName);
+            RegistryValue registryValue = GetRegistryValue(packageDefinitionFileName);
+            bool registryValueIs64Bit = GetRegistryValueIs64Bit(packageDefinitionFileName);
             string contentDirectory = GetContentDirectory(packageDefinitionFileName);
             var packageDefinition = new PackageDefinition2(name, version, publisher, comment, language,
-                installCommandLine, unInstallCommandLine, icon, msiProductCodes, files, contentDirectory);
+                installCommandLine, unInstallCommandLine, icon, msiProductCode, registryValue,registryValueIs64Bit ,contentDirectory);
             return packageDefinition;
+        }
+
+        private bool GetRegistryValueIs64Bit(string packageDefinitionFileName)
+        {
+            var isRegistryValue64BitString = GetValue(packageDefinitionFileName, "DetectionMethod","RegistryValueIs64Bit", true);
+            if (string.IsNullOrWhiteSpace(isRegistryValue64BitString))
+                return true;
+            switch (isRegistryValue64BitString)
+            {
+                case "true":
+                case "1":
+                    return true;
+                case "false":
+                case "0":
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        private RegistryValue GetRegistryValue(string packageDefinitionFileName)
+        {
+            var registryValueString = GetValue(packageDefinitionFileName, "DetectionMethod", "RegistryValue", true);
+            var isRegistryValue64BitString = GetValue(packageDefinitionFileName, "DetectionMethod", "RegistryValueIs64Bit", true);
+            if (string.IsNullOrWhiteSpace(isRegistryValue64BitString)) isRegistryValue64BitString = "true";
+            var registryValue =  _regfRegistryValueParser.ParseRegistryValue(registryValueString, isRegistryValue64BitString);
+            return registryValue;
         }
 
         public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition2 packageDefinition)
@@ -51,8 +80,8 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             SetInstallCommandLine(packageDefinitionFileName, packageDefinition.InstallCommandLine);
             SetUnInstallCommandLine(packageDefinitionFileName, packageDefinition.UnInstallCommandLine);
             //SetIcon(packageDefinitionFileName, packageDefinition.Icon);
-            SetMsiProductCodes(packageDefinitionFileName, packageDefinition.MsiProductCodes);
-            SetFiles(packageDefinitionFileName, packageDefinition.Files);
+            SetMsiProductCode(packageDefinitionFileName, packageDefinition.MsiProductCode);
+            SetRegistryValue(packageDefinitionFileName, packageDefinition.RegistryValue);
             //SetContentDirectory(packageDefinitionFileName,packageDefinition.ContentDirectory);
         }
 
@@ -159,79 +188,36 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             // Do nothing.
         }
 
-        private IEnumerable<string> GetMsiProductCodes(string packageDefinitionFileName)
+        private string GetMsiProductCode(string packageDefinitionFileName)
         {
             var contentDirectory = GetContentDirectory(packageDefinitionFileName);
-            var productCodes = GetKeyValues(packageDefinitionFileName, "DetectionMethod", @"MsiProductCode\d*", true);
-            var msiProductCodeCount = 0;
-            if (productCodes.Length > 0)
+            var productCode = GetValue(packageDefinitionFileName, "DetectionMethod", @"MsiProductCode", true);
+            var msiProductCode = productCode;
+            if (!string.IsNullOrWhiteSpace(msiProductCode))
             {
-                foreach (var productCode in productCodes)
-                {
-                    var msiProductCode = _productCodeProvider.GetProductCodeFromText(productCode.Value);
-                    msiProductCodeCount++;
-                    yield return msiProductCode;
-                }
+                msiProductCode = _productCodeProvider.GetProductCodeFromText(productCode);                
             }
-            else
+            if (string.IsNullOrWhiteSpace(msiProductCode))
             {
-                var msiProductCodes = _productCodeProvider.GetProductCodesFromMsiFileSearch(contentDirectory);
-                foreach (var msiProductCode in msiProductCodes)
-                {
-                    msiProductCodeCount++;
-                    yield return msiProductCode;
-                }
+                msiProductCode = _productCodeProvider.GetProductCodeFromMsiFileSearch(contentDirectory);                
             }
-            if (msiProductCodeCount == 0)
-            {
-                throw new SccmToolsException(
-                    string.Format(
-                        @"ProductCode(s) was not found in the section value [DetectionMethod]MsiProductCode\d* in package definition file '{0}' or from automatically searching for a msi file and its product code in content directory '{1}'.",
-                        packageDefinitionFileName, contentDirectory));
-            }
+            return msiProductCode;
         }
 
-        private void SetMsiProductCodes(string packageDefinitionFileName, string[] packageDefinitionMsiProductCodes)
+        private void SetMsiProductCode(string packageDefinitionFileName, string packageDefinitionMsiProductCode)
         {
-            var index = 0;
-            foreach (var packageDefinitionMsiProductCode in packageDefinitionMsiProductCodes)
-            {
-                index++;
-                SetValue(packageDefinitionFileName, "DetectionMethod", "MsiProductCode" + index,
-                    packageDefinitionMsiProductCode);
-            }
+            SetValue(packageDefinitionFileName, "DetectionMethod", "MsiProductCode", packageDefinitionMsiProductCode);
         }
 
 
-        private IEnumerable<DetectionMethodFile> GetFiles(string packageDefinitionFileName)
+        private void SetRegistryValue(string packageDefinitionFileName, RegistryValue registryValue)
         {
-            var files = GetKeyValues(packageDefinitionFileName, "DetectionMethod", @"File\d*", true);
+            var rootkeyString = _regfRegistryValueParser.GetRootKeyString(registryValue.RootKey);
 
-            foreach (var file in files)
-            {
-                DetectionMethodFile detectionMethodFile;
-                try
-                {
-                    detectionMethodFile = JsonConvert.DeserializeObject<DetectionMethodFile>(file.Value);                    
-                }
-                catch (Exception ex)
-                {
-                    var msg = string.Format("Failed to parse '[DetectionMethod]{0}={1}' section key from package definition file '{2}'.", file.Key,file.Value, packageDefinitionFileName);
-                    throw new DetectionMethodFileFormatExeception(msg, ex);
-                }
-                yield return detectionMethodFile;
-            }
-        }
+            var registryValueString = string.Format(@"[{0}\{1}]{2}={3}", rootkeyString, registryValue.Key,
+                registryValue.ValueName, registryValue.Value);
 
-        private void SetFiles(string packageDefinitionFileName, DetectionMethodFile[] detectionMethodFiles)
-        {
-            var index = 0;
-            foreach (var detectionMethodFile in detectionMethodFiles)
-            {
-                index++;
-                var detectionMethodFileString = JsonConvert.SerializeObject(detectionMethodFile);
-                SetValue(packageDefinitionFileName, "DetectionMethod", "File" + index, detectionMethodFileString);
-            }
+            SetValue(packageDefinitionFileName, "DetectionMethod", "RegistryValue", registryValueString);            
         }
 
         public string GetContentDirectory(string packageDefinitionFileName)

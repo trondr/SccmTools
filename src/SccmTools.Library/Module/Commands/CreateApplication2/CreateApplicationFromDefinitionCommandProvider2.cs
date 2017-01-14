@@ -14,8 +14,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
 {
     public class CreateApplicationFromDefinitionCommandProvider2 : ICreateApplicationFromDefinitionCommandProvider2
     {
-        private readonly IPackageDefinitionFileProvider _packageDefinitionFileProvider;
-        private readonly IPackageDefinitionFactory2 _packageDefinitionFactory;
+        private readonly IPackageDefinitionFileProvider _packageDefinitionFileProvider;        
         private readonly IPackageDefinitionProvider _packageDefinitionProvider;
         private readonly ISccmApplication _sccmApplication;
         private readonly ISccmInfoProvider _sccmInfoProvider;
@@ -72,58 +71,32 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             content.OnSlowNetwork = ContentHandlingMode.Download;
             content.FallbackToUnprotectedDP = false;
 
-            _logger.Info("Creating application script installer with msi product code detection method...");
+            _logger.Info("Creating application script installer...");
+            var detectionMethod = GetDetectionMethodFromPackageDefinition(packageDefinition);
             var installer = new ScriptInstaller()
             {
                 InstallCommandLine = packageDefinition.InstallCommandLine,
                 UninstallCommandLine = packageDefinition.UnInstallCommandLine,
-                DetectionMethod = DetectionMethod.Enhanced,                
+                DetectionMethod = detectionMethod,
                 InstallContent = new ContentRef(content)
             };
             installer.Contents.Add(content);
-
-            var enhancedDetectionMethod = new EnhancedDetectionMethod();
-            if (packageDefinition.Files.Length > 0)
+            _logger.Info("Creating installer detection method...");
+            if (detectionMethod == DetectionMethod.ProductCode)
             {
-                var detectionMethodFile = packageDefinition.Files[0];
-                var file = new FileInfo(detectionMethodFile.FileName);
-
-                var detectionMethodDataType = GetDataTypeFromDectionMethodFile(detectionMethodFile);
-                var detectionMethodData = GetDataFromDetectionMethodFile(detectionMethodFile);
-                var constantValue = new ConstantValue(detectionMethodData, detectionMethodDataType);
-
-                var fileSetting = new FileOrFolder(ConfigurationItemPartType.File, null);
-                fileSetting.SettingDataType = detectionMethodDataType;
-                fileSetting.FileOrFolderName = file.Name;
-                fileSetting.Path = file.Directory.FullName;
-                enhancedDetectionMethod.Settings.Add(fileSetting);
-
-                var settingReference = new SettingReference(
-                    application.Scope,
-                    application.Name,
-                    application.Version.GetValueOrDefault(),
-                    fileSetting.LogicalName,
-                    fileSetting.SettingDataType,
-                    fileSetting.SourceType, false);
-
-                settingReference.MethodType = ConfigurationItemSettingMethodType.Value;
-
-                var operands = new CustomCollection<ExpressionBase>();
-                operands.Add(settingReference);
-                operands.Add(constantValue);
-                var expressionOperator = GetExpressionOperator(detectionMethodFile);
-                var expression = new Expression(expressionOperator,operands);
-                var rule = new Rule("IsInstalledRule",NoncomplianceSeverity.Critical, null,expression);
-                enhancedDetectionMethod.ChangeId();
-                enhancedDetectionMethod.Rule = rule;
+                installer.ProductCode = packageDefinition.MsiProductCode;
             }
-            installer.EnhancedDetectionMethod = enhancedDetectionMethod;
-
-            _logger.Info("Creating application deployment method...");
-            var deploymentType = new DeploymentType(installer, MsiInstaller.TechnologyId, NativeHostingTechnology.TechnologyId)
+            else if (detectionMethod == DetectionMethod.Enhanced)
             {
-                Title = "Custom-Script-Installer-MSI",
-                Version = 1,                
+                installer.EnhancedDetectionMethod = GetRegistrySettingEnhancedDetectionMethod(packageDefinition, application);
+            }
+            
+            _logger.Info("Creating application deployment method...");
+            var technologyId = GetTechnologyId(packageDefinition);
+            var deploymentType = new DeploymentType(installer, technologyId, NativeHostingTechnology.TechnologyId)
+            {
+                Title = GetDeploymentTypeTitle(detectionMethod),
+                Version = 1,
             };
             application.DeploymentTypes.Add(deploymentType);
             _logger.Info("Saving application to SCCM...");
@@ -131,77 +104,79 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             if (_logger.IsDebugEnabled) _logger.DebugFormat("Application definition XML:{0}{1}", Environment.NewLine, appDefintionXml);
             _sccmApplication.Save(appDefintionXml);
             _logger.Info("Finished saving application to SCCM.");
-
-
+            
             return 0;
         }
 
-        private ExpressionOperator GetExpressionOperator(DetectionMethodFile detectionMethodFile)
+        private string GetDeploymentTypeTitle(DetectionMethod detectionMethod)
         {
-            switch (detectionMethodFile.RuleOperator)
+            switch (detectionMethod)
             {
-                case RuleOperator.Equals:
-                    return ExpressionOperator.IsEquals;                    
-                case RuleOperator.NotEqualTo:
-                    return ExpressionOperator.NotEquals;                    
-                case RuleOperator.GreaterThanOrEqualTo:
-                    return ExpressionOperator.GreaterEquals;
-                case RuleOperator.GreaterThan:
-                    return ExpressionOperator.GreaterThan;                    
-                case RuleOperator.LessThan:
-                    return ExpressionOperator.LessThan;
-                case RuleOperator.LessThanOrEqualTo:
-                    return ExpressionOperator.LessEquals;                    
+                case DetectionMethod.ProductCode:
+                    return "Custom-Script-Installer-MSI";                    
+                case DetectionMethod.Script:
+                    return "Custom-Script-Installer-SCR";                    
+                case DetectionMethod.Enhanced:
+                    return "Custom-Script-Installer-REG";                    
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException(nameof(detectionMethod), detectionMethod, null);
             }
         }
 
-        private string GetDataFromDetectionMethodFile(DetectionMethodFile detectionMethodFile)
+        private string GetTechnologyId(PackageDefinition2 packageDefinition)
         {
-            switch (detectionMethodFile.RuleType)
-            {
-                case FileRuleType.Unknown:
-                    throw new FileRuleTypeNotSpecifiedException();
-                case FileRuleType.Exists:
-                    return string.Empty;
-                case FileRuleType.DateModified:
-                    return detectionMethodFile.Modified.ToString();
-                case FileRuleType.DateCreated:
-                    return detectionMethodFile.Created.ToString();
-                case FileRuleType.Version:
-                    return detectionMethodFile.FileVersion.ToString();
-                case FileRuleType.Size:
-                    return detectionMethodFile.SizeInBytes.ToString();
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            if(! string.IsNullOrWhiteSpace(packageDefinition.MsiProductCode))
+                return MsiInstaller.TechnologyId;
+            if(packageDefinition.RegistryValue != null)
+                return ScriptInstaller.TechnologyId;
+            throw new DetectionMethodNotSpecifiedException("Unable to determine installer technology id due to detection method has not been specied in the PackageDefinition.sms");
         }
 
-        private DataType GetDataTypeFromDectionMethodFile(DetectionMethodFile detectionMethodFile)
+        private EnhancedDetectionMethod GetRegistrySettingEnhancedDetectionMethod(PackageDefinition2 packageDefinition, Application application)
         {
-            switch (detectionMethodFile.RuleType)
+            var enhancedDetectionMethod = new EnhancedDetectionMethod();
+            var registrySetting = new RegistrySetting(null)
             {
-                case FileRuleType.Unknown:
-                    throw new FileRuleTypeNotSpecifiedException();
-                case FileRuleType.Exists:
-                    return DataType.Boolean;
-                case FileRuleType.DateModified:
-                    return DataType.DateTime;
-                case FileRuleType.DateCreated:
-                    return DataType.DateTime;
-                case FileRuleType.Version:
-                    return DataType.Version;
-                case FileRuleType.Size:
-                    return DataType.Int64;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                RootKey = packageDefinition.RegistryValue.RootKey,
+                Key = packageDefinition.RegistryValue.Key,
+                Is64Bit = packageDefinition.RegistryValueIs64Bit,
+                ValueName = packageDefinition.RegistryValue.ValueName,
+                CreateMissingPath = false,
+                SettingDataType = DataType.String
+            };
+            enhancedDetectionMethod.Settings.Add(registrySetting);
+
+            var expectedValue = new ConstantValue(packageDefinition.RegistryValue.Value, DataType.String);
+
+            var settingReference = new SettingReference(
+                application.Scope,
+                application.Name,
+                application.Version.GetValueOrDefault(),
+                registrySetting.LogicalName,
+                registrySetting.SettingDataType,
+                registrySetting.SourceType,
+                false
+                );
+            settingReference.MethodType = ConfigurationItemSettingMethodType.Value;
+
+            var operands = new CustomCollection<ExpressionBase> {settingReference, expectedValue};
+
+            var expression = new Expression(ExpressionOperator.IsEquals, operands);
+
+            var rule = new Rule("IsInstalledRule", NoncomplianceSeverity.None, null, expression);
+
+            enhancedDetectionMethod.Rule = rule;
+
+            return enhancedDetectionMethod;
+        }
+
+        private DetectionMethod GetDetectionMethodFromPackageDefinition(PackageDefinition2 packageDefinition)
+        {
+            if(! string.IsNullOrWhiteSpace(packageDefinition.MsiProductCode))
+                return DetectionMethod.ProductCode;
+            if(packageDefinition.RegistryValue != null)
+                return DetectionMethod.Enhanced;
+            throw new DetectionMethodNotSpecifiedException("Unable to determine detection method type due to detection method has not been specied in the PackageDefinition.sms");
         }        
-    }
-
-    public class FileRuleTypeNotSpecifiedException : Exception
-    {
-
     }
 }

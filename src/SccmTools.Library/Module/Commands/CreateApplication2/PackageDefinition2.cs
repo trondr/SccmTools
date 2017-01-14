@@ -1,3 +1,4 @@
+using System;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 
 namespace SccmTools.Library.Module.Commands.CreateApplication2
@@ -13,8 +14,9 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             string installCommandLine, 
             string unInstallCommandLine, 
             Icon icon, 
-            string[] msiProductCodes,             
-            DetectionMethodFile[] files, 
+            string msiProductCode,
+            RegistryValue registryValue, 
+            bool registryValueIs64Bit,
             string contentDirectory)
         {
             Name = name;
@@ -24,9 +26,10 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
             Language = language;
             InstallCommandLine = installCommandLine;
             UnInstallCommandLine = unInstallCommandLine;
-            MsiProductCodes = msiProductCodes;
             Icon = icon;
-            Files = files;
+            MsiProductCode = msiProductCode;
+            RegistryValue = registryValue;
+            RegistryValueIs64Bit = registryValueIs64Bit;            
             ContentDirectory = contentDirectory;
         }
 
@@ -46,9 +49,11 @@ namespace SccmTools.Library.Module.Commands.CreateApplication2
 
         public Icon Icon { get; }
 
-        public string[] MsiProductCodes { get; }
+        public string MsiProductCode { get; }
 
-        public DetectionMethodFile[] Files { get; }
+        public RegistryValue RegistryValue { get; }
+
+        public bool RegistryValueIs64Bit { get; set; }
 
         public string ContentDirectory { get; }
     }
