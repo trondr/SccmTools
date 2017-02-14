@@ -63,8 +63,12 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             var registryValueString = GetValue(packageDefinitionFileName, "DetectionMethod", "RegistryValue", true);
             var isRegistryValue64BitString = GetValue(packageDefinitionFileName, "DetectionMethod", "RegistryValueIs64Bit", true);
             if (string.IsNullOrWhiteSpace(isRegistryValue64BitString)) isRegistryValue64BitString = "true";
-            var registryValue =  _regfRegistryValueParser.ParseRegistryValue(registryValueString, isRegistryValue64BitString);
-            return registryValue;
+            if (!string.IsNullOrWhiteSpace(registryValueString))
+            {
+                var registryValue =  _regfRegistryValueParser.ParseRegistryValue(registryValueString, isRegistryValue64BitString);
+                return registryValue;    
+            }
+            return null;
         }
 
         public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition packageDefinition)
