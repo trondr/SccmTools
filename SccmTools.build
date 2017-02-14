@@ -6,7 +6,7 @@
   <PropertyGroup>    
     <ProductName>SccmTools</ProductName>
     <ProductCompany>github.com.trondr</ProductCompany>
-    <ProductDescription>SccmTools provides various SCCM 2012 commands</ProductDescription>
+    <ProductDescription>SccmTools provides a command for creating an SCCM 2012 application from a package definition file.</ProductDescription>
     <ProductCopyright>Copyright &#169; github.com.trondr $([System.DateTime]::Now.Year)</ProductCopyright>
     <ProductProjectName>$(ProductName)</ProductProjectName>
 
