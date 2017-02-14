@@ -211,5 +211,6 @@ CreateApplicationFromDefinition   Create SCCM 2012 application from a package
 	* **DcmObjectModel.dll** (from the Configuration Manager Console)
 	* **Microsoft.ConfigurationManagement.ApplicationManagement.dll** (from the Configuration Manager Console)
 	* **Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll** (from the Configuration Manager Console)
+	* **Microsoft.ConfigurationManagement.DesiredConfiguration.dll
 	* **Microsoft.ConfigurationManagement.ManagementProvider.dll** (from the Configuration Manager Console)
 	* **Microsoft.Deployment.WindowsInstaller.dll** (from the Windows Installer XML Toolset)
