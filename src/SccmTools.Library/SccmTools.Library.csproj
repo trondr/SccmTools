@@ -105,6 +105,7 @@
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
     <Compile Include="Module\Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\Dependency.cs" />
     <Compile Include="Module\Commands\CreateApplication\DetectionMethodNotSpecifiedException.cs" />
     <Compile Include="Module\Commands\CreateApplication\InvalidFormatedBooleanException.cs" />
     <Compile Include="Module\Commands\CreateApplication\InvalidRegistryKeyFormatException.cs" />

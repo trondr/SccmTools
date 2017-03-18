@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using SccmTools.Library.Module.Common.IO;
 using SccmTools.Library.Module.Services;
 using Icon = Microsoft.ConfigurationManagement.ApplicationManagement.Icon;
@@ -23,21 +24,67 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
 
         public PackageDefinition ReadPackageDefinition(string packageDefinitionFileName)
         {
-            string name = GetName(packageDefinitionFileName);
-            string version = GetVersion(packageDefinitionFileName);
-            string publisher = GetPublisher(packageDefinitionFileName);
-            string comment = GetComment(packageDefinitionFileName);
-            string language = GetLanguage(packageDefinitionFileName);
-            string installCommandLine = GetInstallCommandLine(packageDefinitionFileName);
-            string unInstallCommandLine = GetUnInstallCommandLine(packageDefinitionFileName);
-            Icon icon = GetIcon(packageDefinitionFileName);
-            string msiProductCode = GetMsiProductCode(packageDefinitionFileName);
-            RegistryValue registryValue = GetRegistryValue(packageDefinitionFileName);
-            bool registryValueIs64Bit = GetRegistryValueIs64Bit(packageDefinitionFileName);
-            string contentDirectory = GetContentDirectory(packageDefinitionFileName);
-            var packageDefinition = new PackageDefinition(name, version, publisher, comment, language,
-                installCommandLine, unInstallCommandLine, icon, msiProductCode, registryValue,registryValueIs64Bit ,contentDirectory);
+            var name = GetName(packageDefinitionFileName);
+            var version = GetVersion(packageDefinitionFileName);
+            var publisher = GetPublisher(packageDefinitionFileName);
+            var comment = GetComment(packageDefinitionFileName);
+            var language = GetLanguage(packageDefinitionFileName);
+            var installCommandLine = GetInstallCommandLine(packageDefinitionFileName);
+            var unInstallCommandLine = GetUnInstallCommandLine(packageDefinitionFileName);
+            var icon = GetIcon(packageDefinitionFileName);
+            var msiProductCode = GetMsiProductCode(packageDefinitionFileName);
+            var registryValue = GetRegistryValue(packageDefinitionFileName);
+            var registryValueIs64Bit = GetRegistryValueIs64Bit(packageDefinitionFileName);
+            var contentDirectory = GetContentDirectory(packageDefinitionFileName);
+            var dependencies = GetDependencies(packageDefinitionFileName);
+            var packageDefinition = new PackageDefinition(
+                                                    name, 
+                                                    version, 
+                                                    publisher, 
+                                                    comment, 
+                                                    language,
+                                                    installCommandLine, 
+                                                    unInstallCommandLine, 
+                                                    icon, msiProductCode, 
+                                                    registryValue,
+                                                    registryValueIs64Bit,
+                                                    contentDirectory, 
+                                                    dependencies);
             return packageDefinition;
+        }
+
+        private IEnumerable<Dependency> GetDependencies(string packageDefinitionFileName)
+        {
+            const string dependenciesSectionName = "Dependencies";
+
+            var dependencyKeys = _iniFileOperation.ReadKeys(packageDefinitionFileName, dependenciesSectionName, @"Dependency\d+");
+            foreach (var dependencyKeyValuePair in dependencyKeys)
+            {
+                var dependencyValue = dependencyKeyValuePair.Value;
+                var dependency = GetDependency(dependencyValue);
+                if (dependency != null)
+                {
+                    yield return dependency;
+                }
+            }
+        }
+
+        private Dependency GetDependency(string dependencyValue)
+        {
+            var regEx = new Regex(@"""(.+)"";""(.+)""");
+            var match = regEx.Match(dependencyValue);
+            if (match.Success)
+            {
+                var applicationName = match.Groups[1].Value;
+                var applicationVersion = match.Groups[2].Value;
+                var dependency = new Dependency()
+                {
+                    ApplicationName = applicationName,
+                    ApplicationVersion = applicationVersion
+                };
+                return dependency;
+            }
+            return null;
         }
 
         private bool GetRegistryValueIs64Bit(string packageDefinitionFileName)
