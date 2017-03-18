@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Common.Logging;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 using Microsoft.ConfigurationManagement.ApplicationManagement.Serialization;
@@ -17,6 +19,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
         private readonly IPackageDefinitionProvider _packageDefinitionProvider;
         private readonly ISccmApplication _sccmApplication;
         private readonly ISccmInfoProvider _sccmInfoProvider;
+        private readonly ISccmApplicationProvider _sccmApplicationProvider;
         private readonly ILog _logger;
 
         public CreateApplicationFromDefinitionCommandProvider(
@@ -24,12 +27,14 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             IPackageDefinitionProvider packageDefinitionProvider,
             ISccmApplication sccmApplication, 
             ISccmInfoProvider sccmInfoProvider,
+            ISccmApplicationProvider sccmApplicationProvider,
             ILog logger)
         {
             _packageDefinitionFileProvider = packageDefinitionFileProvider;            
             _packageDefinitionProvider = packageDefinitionProvider;
             _sccmApplication = sccmApplication;
             _sccmInfoProvider = sccmInfoProvider;
+            _sccmApplicationProvider = sccmApplicationProvider;
             _logger = logger;
         }
 
@@ -97,14 +102,67 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
                 Title = GetDeploymentTypeTitle(detectionMethod),
                 Version = 1,
             };
+
+            AddDependenciesToDeploymentType(packageDefinition.Dependencies, deploymentType);
+
             application.DeploymentTypes.Add(deploymentType);
-            _logger.Info("Saving application to SCCM...");
-            var appDefintionXml = SccmSerializer.SerializeToString(application);
-            if (_logger.IsDebugEnabled) _logger.DebugFormat("Application definition XML:{0}{1}", Environment.NewLine, appDefintionXml);
-            _sccmApplication.Save(appDefintionXml);
+
+            _logger.Info("Saving application to SCCM...");            
+            _sccmApplication.Save(application);
             _logger.Info("Finished saving application to SCCM.");
             
             return 0;
+        }
+
+        private void AddDependenciesToDeploymentType(IEnumerable<Dependency> packageDefinitionDependencies, DeploymentType deploymentType)
+        {
+            foreach (var packageDefinitionDependency in packageDefinitionDependencies)
+            {
+                var dependentApplication = FindSccmApplicationByNameAndVersion(packageDefinitionDependency.ApplicationName, packageDefinitionDependency.ApplicationVersion);
+                if (dependentApplication == null)
+                {
+                    throw new SccmToolsException($"Dependent application {packageDefinitionDependency.ApplicationName} does not exist in SCCM.");
+                }
+                var dependentDeploymentType = dependentApplication.DeploymentTypes.FirstOrDefault();
+                if (dependentDeploymentType != null)
+                {
+                    var operands = new CustomCollection<DeploymentTypeIntentExpression>();
+                    operands.Add(new DeploymentTypeIntentExpression(
+                        dependentApplication.Scope,
+                        dependentApplication.Name,
+                        dependentApplication.Version.Value,
+                        dependentDeploymentType.Scope,
+                        dependentDeploymentType.Name,
+                        dependentDeploymentType.Version.Value,
+                        DeploymentTypeDesiredState.Required,
+                        true));
+
+                    var expression = new DeploymentTypeExpression(ExpressionOperator.Or, operands);
+                    var dependencyRule = new DeploymentTypeRule("Dependency_" + Guid.NewGuid().ToString("B"), NoncomplianceSeverity.Critical, null, expression);
+                    
+                    deploymentType.Dependencies.Add(dependencyRule);
+                }
+                else
+                {
+                    _logger.Error($"Failed to create dependency. Dependent application {packageDefinitionDependency.ApplicationName} do not have a deployment type.");
+                }
+            }
+        }
+
+        private Application FindSccmApplicationByNameAndVersion(string applicationName, string applicationVersion)
+        {
+            var applications = _sccmApplicationProvider.FindApplication(applicationName, applicationVersion);
+            var applicationList = applications.ToList();
+            if (applicationList.Count > 1)
+            {
+                throw new SccmToolsException($"More than instance of {applicationName}-{applicationVersion}");
+            }
+            if (applicationList.Count == 1)
+            {
+                var application = applicationList[0];
+                return application;
+            }
+            return null;
         }
 
         private string GetDeploymentTypeTitle(DetectionMethod detectionMethod)

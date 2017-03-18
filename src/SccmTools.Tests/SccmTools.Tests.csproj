@@ -94,6 +94,7 @@
     <Compile Include="IntegrationTests\StandardUser\ExampleStandardUserIntegrationTests.cs" />
     <Compile Include="IntegrationTests\StandardUser\StandardUserImpersonationTests.cs" />
     <Compile Include="ManualTests\PathOperationTests.cs" />
+    <Compile Include="Module\Services\SccmApplicationProviderTests.cs" />
     <Compile Include="UnitTests\Module\Commands\CreateApplication2\RegistryValueParserTests.cs" />
     <Compile Include="UnitTests\Module\Commands\CreateApplication2\CreateApplicationFromDefinitionCommandProvider2Tests.cs" />
     <Compile Include="UnitTests\Module\Commands\CreateApplication2\PackageDefinitionProviderTests.cs" />

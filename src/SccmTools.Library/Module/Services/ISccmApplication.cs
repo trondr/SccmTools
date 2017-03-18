@@ -1,7 +1,9 @@
-﻿namespace SccmTools.Library.Module.Services
+﻿using Microsoft.ConfigurationManagement.ApplicationManagement;
+
+namespace SccmTools.Library.Module.Services
 {
     public interface ISccmApplication
     {
-        void Save(string pakageDefinitionXml);
+        void Save(Application application);
     }
 }
