@@ -44,6 +44,17 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             _logger.InfoFormat("Creating application from package definition file '{0}'...", packageDefinitionFile.FileName);
             var packageDefinition = _packageDefinitionProvider.ReadPackageDefinition(packageDefinitionFile.FileName);
             
+            _logger.Info("Checking to see if application allready exists");
+
+            var applicationName = packageDefinition.Name;
+            var applicationVersion = packageDefinition.Version;
+            var applications = _sccmApplicationProvider.FindApplication(applicationName, applicationVersion).ToList();
+            if (applications.Count > 0)
+            {
+                _logger.Error($"Application '{applicationName}-{applicationVersion}' allready exists in SCCM");
+                return 1;
+            }
+            
              NamedObject.DefaultScope = _sccmInfoProvider.GetScopeId();
             _logger.Info("Creating application object...");
             var appId = new ObjectId(_sccmInfoProvider.GetAuthoringScopeId(), "Application_" + Guid.NewGuid());
@@ -102,8 +113,8 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
                 Title = GetDeploymentTypeTitle(detectionMethod),
                 Version = 1,
             };
-
-            AddDependenciesToDeploymentType(packageDefinition.Dependencies, deploymentType);
+            var dependencies = packageDefinition.Dependencies.ToList();
+            AddDependenciesToDeploymentType(dependencies, deploymentType);
 
             application.DeploymentTypes.Add(deploymentType);
 
@@ -114,7 +125,7 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             return 0;
         }
 
-        private void AddDependenciesToDeploymentType(IEnumerable<Dependency> packageDefinitionDependencies, DeploymentType deploymentType)
+        private void AddDependenciesToDeploymentType(List<Dependency> packageDefinitionDependencies, DeploymentType deploymentType)
         {
             foreach (var packageDefinitionDependency in packageDefinitionDependencies)
             {

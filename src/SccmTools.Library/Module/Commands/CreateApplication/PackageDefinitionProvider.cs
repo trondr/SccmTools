@@ -57,6 +57,10 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
         {
             const string dependenciesSectionName = "Dependencies";
 
+            var dependenciesExist = _iniFileOperation.SectionExists(packageDefinitionFileName, dependenciesSectionName);
+            if(!dependenciesExist)
+                yield break;
+
             var dependencyKeys = _iniFileOperation.ReadKeys(packageDefinitionFileName, dependenciesSectionName, @"Dependency\d+");
             foreach (var dependencyKeyValuePair in dependencyKeys)
             {
