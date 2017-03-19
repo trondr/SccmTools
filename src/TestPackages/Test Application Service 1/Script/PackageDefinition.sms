@@ -1,0 +1,38 @@
+
+[PDF]
+Version = 2.0
+
+[Package Definition]
+Name = Test Application Service 1
+Version = 1.0.16239.2
+Publisher = MyCompany
+Language = EN
+Comment = Test Comment
+Programs = INSTALL,UNINSTALL
+
+[INSTALL]
+Name = INSTALL
+CommandLine = Install.cmd > "%Public%\Logs\Test_Application_Service_1_1_0_16239_2_Install.cmd.log"
+CanRunWhen = AnyUserStatus
+UserInputRequired = False
+AdminRightsRequired = True
+UseInstallAccount = True
+Run = Minimized
+Icon = App.ico
+Comment = 
+
+[UNINSTALL]
+Name = UNINSTALL
+CommandLine = UnInstall.cmd > "%Public%\Logs\Test_Application_Service_1_1_0_16239_2_UnInstall.cmd.log"
+CanRunWhen = AnyUserStatus
+UserInputRequired = False
+AdminRightsRequired = True
+UseInstallAccount = True
+Run = Minimized
+Comment = 
+
+[DetectionMethod]
+MsiProductCode = 
+RegistryValue = [HKLM\Software\MyCompany\Test Application Service 1]InstalledStamp=tas1_1.0.16239.2
+RegistryValueIs64Bit = true
+
