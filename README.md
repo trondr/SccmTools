@@ -28,12 +28,17 @@ SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\serverna
 * [Package Definition]Version
 * [Package Definition]Publisher
 * [Package Definition]Language
+* [Package Definition]Comment
 * [INSTALL]CommandLine
 * [INSTALL]Icon
 * [UNINSTALL]CommandLine
 * [DetectionMethod]MsiProductCode
 * [DetectionMethod]RegistryValue
 * [DetectionMethod]RegistryValueIs64Bit
+* [Dependencies]Dependency01
+* [Dependencies]Dependency02
+* ...
+* [Dependencies]DependencyXX
 		
 All other values in package definition file are ignored.
 	
@@ -115,6 +120,53 @@ Comment=
 [DetectionMethod]
 RegistryValue = [HKLM\SOFTWARE\My Company\My Product\Setup]InstallRevision=Product_revision_1
 RegistryValueIs64Bit = true
+
+```
+
+#### Example package definition file with dependencies
+
+```dosini
+
+[PDF]
+Version = 2.0
+
+[Package Definition]
+Name = Test Application with dependency
+Version = 1.0.16239.2
+Publisher = MyCompany
+Language = EN
+Comment = Test Comment
+Programs = INSTALL,UNINSTALL
+
+[INSTALL]
+Name = INSTALL
+CommandLine = Install.cmd > "%Public%\Logs\Test_Application_with_dependency_1_0_16239_2_Install.cmd.log"
+CanRunWhen = AnyUserStatus
+UserInputRequired = False
+AdminRightsRequired = True
+UseInstallAccount = True
+Run = Minimized
+Icon = App.ico
+Comment = 
+
+[UNINSTALL]
+Name = UNINSTALL
+CommandLine = UnInstall.cmd > "%Public%\Logs\Test_Application_with_dependency_1_0_16239_2_UnInstall.cmd.log"
+CanRunWhen = AnyUserStatus
+UserInputRequired = False
+AdminRightsRequired = True
+UseInstallAccount = True
+Run = Minimized
+Comment = 
+
+[DetectionMethod]
+MsiProductCode = 
+RegistryValue = [HKLM\Software\MyCompany\Test Application with dependency]InstalledStamp=tawd_1.0.16239.2
+RegistryValueIs64Bit = true
+ 
+[Dependencies]
+Dependency1="Test Application Service 1";"1.0.16239.2"
+Dependency2="Test Application Service 2";"1.0.16239.2"
 
 ```
 
