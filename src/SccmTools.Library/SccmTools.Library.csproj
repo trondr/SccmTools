@@ -41,6 +41,12 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdminUI.AppManFoundation">
+      <HintPath>..\..\tools\Sccm\AdminUI.AppManFoundation.dll</HintPath>
+    </Reference>
+    <Reference Include="AdminUI.DcmObjectWrapper">
+      <HintPath>..\..\tools\Sccm\AdminUI.DcmObjectWrapper.dll</HintPath>
+    </Reference>
     <Reference Include="AdminUI.WqlQueryEngine, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Sccm\AdminUI.WqlQueryEngine.dll</HintPath>
@@ -105,6 +111,7 @@
     <Compile Include="Infrastructure\LifeStyles\TrancientAttribute.cs" />
     <Compile Include="Infrastructure\TypeMapper.cs" />
     <Compile Include="Module\Commands\CreateApplication\CreateApplicationFromDefinitionCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateApplication\Dependency.cs" />
     <Compile Include="Module\Commands\CreateApplication\DetectionMethodNotSpecifiedException.cs" />
     <Compile Include="Module\Commands\CreateApplication\InvalidFormatedBooleanException.cs" />
     <Compile Include="Module\Commands\CreateApplication\InvalidRegistryKeyFormatException.cs" />
@@ -158,9 +165,11 @@
     <Compile Include="Module\Mapping\ExampleMapping.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />
     <Compile Include="Module\Services\ISccmApplication.cs" />
+    <Compile Include="Module\Services\ISccmApplicationProvider.cs" />
     <Compile Include="Module\Services\ISccmInfoProvider.cs" />
     <Compile Include="Module\Services\ProductCodeProvider.cs" />
     <Compile Include="Module\Services\SccmApplication.cs" />
+    <Compile Include="Module\Services\SccmApplicationProvider.cs" />
     <Compile Include="Module\Services\SccmInfoProvider.cs" />
     <Compile Include="Module\Services\SccmToolsException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

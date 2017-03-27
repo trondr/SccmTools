@@ -39,16 +39,24 @@ namespace SccmTools.Library.Module.Common.IO
             iniFileParser.WriteFile(path, iniData, Encoding.ASCII);
         }
 
-        public KeyValuePair<string, string>[] ReadKeys(string path, string section, string regexKeyNamePattern)
+        public KeyValuePair<string, string>[] ReadKeys(string path, string sectionName, string regexKeyNamePattern)
         {
             var iniFileParser = new FileIniDataParser();
             var iniData = iniFileParser.ReadFile(path);
-            var keyPatternRegex = new Regex(regexKeyNamePattern);
-            var values = from key in iniData[section]
+            var keyPatternRegex = new Regex(regexKeyNamePattern);            
+            var values = from key in iniData[sectionName]
                          where keyPatternRegex.IsMatch(key.KeyName)
-                         select new KeyValuePair<string, string>(key.KeyName, iniData[section][key.KeyName]);
+                         select new KeyValuePair<string, string>(key.KeyName, iniData[sectionName][key.KeyName]);
             var valuesArray = values.ToArray();
             return valuesArray;
+        }
+
+        public bool SectionExists(string path, string sectionName)
+        {
+            var iniFileParser = new FileIniDataParser();
+            var iniData = iniFileParser.ReadFile(path);            
+            var sectionExists = iniData.Sections.ContainsSection(sectionName);
+            return sectionExists;
         }
     }
 }

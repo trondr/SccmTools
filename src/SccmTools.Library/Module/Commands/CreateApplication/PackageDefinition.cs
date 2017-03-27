@@ -1,9 +1,13 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.ConfigurationManagement.ApplicationManagement;
 
 namespace SccmTools.Library.Module.Commands.CreateApplication
 {
     public class PackageDefinition
     {
+        private IEnumerable<Dependency> _dependencies;
+
         public PackageDefinition(
             string name, 
             string version, 
@@ -16,8 +20,11 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             string msiProductCode,
             RegistryValue registryValue, 
             bool registryValueIs64Bit,
-            string contentDirectory)
+            string contentDirectory,
+            IEnumerable<Dependency> dependencies             
+            )
         {
+            if (dependencies == null) throw new ArgumentNullException(nameof(dependencies));
             Name = name;
             Version = version;
             Publisher = publisher;
@@ -28,8 +35,9 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             Icon = icon;
             MsiProductCode = msiProductCode;
             RegistryValue = registryValue;
-            RegistryValueIs64Bit = registryValueIs64Bit;            
+            RegistryValueIs64Bit = registryValueIs64Bit;
             ContentDirectory = contentDirectory;
+            _dependencies = dependencies;
         }
 
         public string Name { get; }
@@ -52,8 +60,16 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
 
         public RegistryValue RegistryValue { get; }
 
-        public bool RegistryValueIs64Bit { get; set; }
+        public bool RegistryValueIs64Bit { get; }
 
         public string ContentDirectory { get; }
+
+        public IEnumerable<Dependency> Dependencies
+        {
+            get
+            {
+                return _dependencies ?? (_dependencies = new List<Dependency>());
+            }            
+        }
     }
 }
