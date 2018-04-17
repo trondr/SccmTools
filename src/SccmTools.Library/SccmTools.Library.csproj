@@ -70,6 +70,9 @@
       <HintPath>..\..\tools\NuGetPackages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LanguageExt.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\LanguageExt.Core.3.0.1\lib\net451\LanguageExt.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement">
       <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ApplicationManagement.dll</HintPath>
     </Reference>
@@ -98,6 +101,25 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -137,6 +159,9 @@
     <Compile Include="Module\Common\Caching\ICacheProvider.cs" />
     <Compile Include="Module\Common\Caching\ICacheValidator.cs" />
     <Compile Include="Module\Common\Caching\ICurrentDateTimeService.cs" />
+    <Compile Include="Module\DirectoryPath.cs" />
+    <Compile Include="Module\ExistingDirectoryPath.cs" />
+    <Compile Include="Module\LoggingFunctions.cs" />
     <Compile Include="Module\Common\Install\ConfigurationManagerConsoleInfo.cs" />
     <Compile Include="Module\Common\Install\ConfigurationManagerContextMenuInstaller.cs" />
     <Compile Include="Module\Common\Install\IConfigurationManagerConsoleInfo.cs" />
@@ -162,6 +187,7 @@
     <Compile Include="Module\Common\Wmi\Wmi.cs" />
     <Compile Include="Module\Common\Wmi\WmiManagementObjectExtensions.cs" />
     <Compile Include="Module\Common\Wmi\WmiParameter.cs" />
+    <Compile Include="Module\F.cs" />
     <Compile Include="Module\Mapping\ExampleMapping.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />
     <Compile Include="Module\Services\ISccmApplication.cs" />

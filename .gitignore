@@ -52,3 +52,4 @@ Doc\Help
 */tools/NuGetPackages/RhinoMocks.*/*
 */tools/NuGetPackages/log4net.*/*
 */tools/NuGetPackages/AutoMapper.*/*
+.vs/

@@ -1,2 +1,3 @@
 ﻿Help
 CreateSomething /exampleParameter="c:\temp"
+SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms"

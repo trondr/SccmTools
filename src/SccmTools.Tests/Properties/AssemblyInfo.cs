@@ -18,9 +18,9 @@ using System.Runtime.InteropServices;
     " definition file.")]
 [assembly: AssemblyCompany("github.com.trondr")]
 [assembly: AssemblyProduct("SccmTools.Tests")]
-[assembly: AssemblyCopyright("Copyright © github.com.trondr 2017")]
+[assembly: AssemblyCopyright("Copyright © github.com.trondr 2018")]
 [assembly: CLSCompliant(false)]
-[assembly: AssemblyInformationalVersion("1.0.17086.6.ea8afd0")]
+[assembly: AssemblyInformationalVersion("1.0.17086.6.3da91ef")]
 [assembly: AssemblyVersion("1.0.17086.6")]
 [assembly: AssemblyFileVersion("1.0.17086.6")]
 
