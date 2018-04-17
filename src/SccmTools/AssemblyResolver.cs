@@ -10,8 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
+using LanguageExt;
 using SccmTools.Library.Module;
+using static LanguageExt.Prelude;
 
 namespace SccmTools
 {
@@ -163,14 +164,14 @@ namespace SccmTools
             return null;
         }
 
-        private static IEnumerable<string> SearchPaths()
+        private static Func<IEnumerable<string>> SearchPaths => fun(() =>
         {
             var searchPath = F.GetAdminConsoleBinPath().Match(path => path.Value, exception =>
             {
                 typeof(AssemblyResolver).Logger().Error(exception.Message);
                 return string.Empty;
             });
-            return string.IsNullOrWhiteSpace(searchPath) ? new string[] { } : new[] {searchPath};            
-        }        
+            return string.IsNullOrWhiteSpace(searchPath) ? new string[] { } : new[] {searchPath};
+        }).Memo();
     }
 }

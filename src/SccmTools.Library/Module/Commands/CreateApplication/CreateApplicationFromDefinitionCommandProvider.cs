@@ -40,6 +40,14 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
 
         public int CreateApplicationFromDefinition(string packageDefinitionFileName)
         {
+            var configurationManagerConsoleIsInstalled = F.GetAdminConsoleBinPath().Match(path => true, exception =>
+            {
+                typeof(CreateApplicationFromDefinitionCommandProvider).Logger().Error(exception.Message);
+                return false;
+            });
+            if (!configurationManagerConsoleIsInstalled)
+                return 1;
+            
             var packageDefinitionFile = _packageDefinitionFileProvider.GetPackageDefinitionFile(packageDefinitionFileName);
             _logger.InfoFormat("Creating application from package definition file '{0}'...", packageDefinitionFile.FileName);
             var packageDefinition = _packageDefinitionProvider.ReadPackageDefinition(packageDefinitionFile.FileName);
