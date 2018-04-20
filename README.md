@@ -173,8 +173,8 @@ Dependency2="Test Application Service 2";"1.0.16239.2"
 ## Command line help
 
 ```
-SccmTools 1.0.17046.5.c47980e - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
-Copyright © github.com.trondr 2017
+SccmTools 1.0.18110.10.1136d57 - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
+Copyright © github.com.trondr 2018
 Author: trondr@outlook.com
 Usage: SccmTools.exe <command> [parameters]
 
@@ -247,6 +247,7 @@ CreateApplicationFromDefinition   Create SCCM 2012 application from a package
 
    Example: SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
    Example (alternative): SccmTools.exe CreateApplicationFromDefinition /pf="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
+ 
 ```
 
 ## Minimum Build Requirements
@@ -259,10 +260,4 @@ CreateApplicationFromDefinition   Create SCCM 2012 application from a package
 * Wix Toolset 3.8 (http://wix.codeplex.com/downloads/get/762937)
 * System Center 2012 R2 Configuration Manager Console
 * The directory '.\bin\Libs' must contain:
-	* **AdminUI.WqlQueryEngine.dll** (from the Configuration Manager Console)
-	* **DcmObjectModel.dll** (from the Configuration Manager Console)
-	* **Microsoft.ConfigurationManagement.ApplicationManagement.dll** (from the Configuration Manager Console)
-	* **Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll** (from the Configuration Manager Console)
-	* **Microsoft.ConfigurationManagement.DesiredConfiguration.dll
-	* **Microsoft.ConfigurationManagement.ManagementProvider.dll** (from the Configuration Manager Console)
 	* **Microsoft.Deployment.WindowsInstaller.dll** (from the Windows Installer XML Toolset)
