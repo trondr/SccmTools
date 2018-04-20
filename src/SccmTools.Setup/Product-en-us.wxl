@@ -3,4 +3,5 @@
   <String Id="LanguageCode">1033</String>
   <String Id="NewerVersionIsInstalled">A newer version of [ProductName] is already installed.</String>
   <String Id="DotNetFrameWorkConditionMessage">[ProductName] depends on minumum .NET Framework 4.5.2 which can be dowloaded from http://www.microsoft.com/en-gb/download/details.aspx?id=42642 </String>
+  <String Id="MicrosoftConfigurationManagerConsoleMustBeInstalled">Microsoft Configuration Manager Console must be installed.</String>
 </WixLocalization>

@@ -47,6 +47,8 @@
     <PropertyRef Id ="NETFRAMEWORK45"/>
 
     <Condition Message="!(loc.DotNetFrameWorkConditionMessage)">Installed OR NETFRAMEWORK45</Condition>
+    
+    <Condition Message="!(loc.MicrosoftConfigurationManagerConsoleMustBeInstalled)">%SMS_ADMIN_UI_PATH</Condition>
 
     <Upgrade Id="$(var.ProductUpgradeCode)">
       <UpgradeVersion Property="SELFFOUND" OnlyDetect="yes"  Minimum="!(bind.FileVersion.ProductDll)" IncludeMinimum='yes'  Maximum="!(bind.FileVersion.ProductDll)" IncludeMaximum='yes' />

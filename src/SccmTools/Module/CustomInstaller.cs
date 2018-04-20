@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Reflection;
 using SccmTools.Library.Module.Common.Install;
@@ -10,6 +11,7 @@ namespace SccmTools.Module
     {
         public CustomInstaller()
         {
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.ResolveHandler;
             InitializeComponent();
         }
 
