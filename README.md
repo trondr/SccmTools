@@ -173,7 +173,7 @@ Dependency2="Test Application Service 2";"1.0.16239.2"
 ## Command line help
 
 ```
-SccmTools 1.0.18110.10.1136d57 - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
+SccmTools 1.0.18114.11.74aeaf1 - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
 Copyright © github.com.trondr 2018
 Author: trondr@outlook.com
 Usage: SccmTools.exe <command> [parameters]
@@ -185,6 +185,8 @@ License                           Display license
 Credits                           Display credits
 CreateApplicationFromDefinition   Create a SCCM 2012 application from a
                                   custom package definition file.
+CreateDefinitionFromApplication   Create PackageDefinition.sms from existing
+                                  Sccm application.
 
 Commands and parameters:
 ------------------------
@@ -247,6 +249,20 @@ CreateApplicationFromDefinition   Create SCCM 2012 application from a package
 
    Example: SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
    Example (alternative): SccmTools.exe CreateApplicationFromDefinition /pf="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms" 
+
+
+CreateDefinitionFromApplication   Create PackageDefinition.sms from existing
+                                  Sccm application. The PackageDefinition.sms
+                                  file will be stored in the content location
+                                  folder of the application if the file does
+                                  not allready exist.
+   /applicationName               [Required] Sccm application name
+                                  Alternative parameter name: /an
+   /applicationVersions           [Required] Sccm application version
+                                  Alternative parameter name: /av
+
+   Example: SccmTools.exe CreateDefinitionFromApplication /applicationName="Citrix Receiver 4.3" /applicationVersions="4.3" 
+   Example (alternative): SccmTools.exe CreateDefinitionFromApplication /an="Citrix Receiver 4.3" /av="4.3" 
  
 ```
 
