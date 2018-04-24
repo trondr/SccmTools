@@ -89,6 +89,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Sccm\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
     </Reference>
+    <Reference Include="NCmdLiner, Version=2.0.18110.340, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\NCmdLiner.2.0.18110.340\lib\net452\NCmdLiner.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -152,6 +155,9 @@
     <Compile Include="Module\Commands\CreateApplication\IPackageDefinitionFileProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\PackageDefinitionFileProvider.cs" />
     <Compile Include="Module\Commands\CreateApplication\RealFile.cs" />
+    <Compile Include="Module\Commands\CreateDefinitionFromApplication\CreateDefinitionFromApplicationCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateDefinitionFromApplication\ICreateDefinitionFromApplicationCommandProvider.cs" />
+    <Compile Include="Module\Commands\CreateDefinitionFromApplication\ICreateDefinitionFromApplicationCommandProviderFactory.cs" />
     <Compile Include="Module\Common\Caching\CacheProvider.cs" />
     <Compile Include="Module\Common\Caching\CacheValidator.cs" />
     <Compile Include="Module\Common\Caching\CacheValue.cs" />

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
+using LanguageExt;
 using SccmTools.Library.Module.Common.IO;
 using SccmTools.Library.Module.Services;
 using Icon = Microsoft.ConfigurationManagement.ApplicationManagement.Icon;
@@ -124,6 +126,14 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
 
         public void WritePackageDefinition(string packageDefinitionFileName, PackageDefinition packageDefinition)
         {
+            if (!System.IO.File.Exists(packageDefinitionFileName))
+            {
+                CreateEmptyPackageDefinitionFile(packageDefinitionFileName).IfFail((exception) =>
+                {
+                    typeof(PackageDefinitionProvider).Logger().Error($"Failed to write package definition file '{packageDefinitionFileName}' due to {exception.Message}");
+                    throw exception;
+                });
+            }
             SetValue(packageDefinitionFileName, "PDF", "Version", "2.0");
             SetName(packageDefinitionFileName, packageDefinition.Name);
             SetVersion(packageDefinitionFileName, packageDefinition.Version);
@@ -134,9 +144,66 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             SetInstallCommandLine(packageDefinitionFileName, packageDefinition.InstallCommandLine);
             SetUnInstallCommandLine(packageDefinitionFileName, packageDefinition.UnInstallCommandLine);
             //SetIcon(packageDefinitionFileName, packageDefinition.Icon);
-            SetMsiProductCode(packageDefinitionFileName, packageDefinition.MsiProductCode);
-            SetRegistryValue(packageDefinitionFileName, packageDefinition.RegistryValue);
+            if(!string.IsNullOrWhiteSpace(packageDefinition.MsiProductCode))
+                SetMsiProductCode(packageDefinitionFileName, packageDefinition.MsiProductCode);
+            if(packageDefinition.RegistryValue != null)
+                SetRegistryValue(packageDefinitionFileName, packageDefinition.RegistryValue);
             //SetContentDirectory(packageDefinitionFileName,packageDefinition.ContentDirectory);
+        }
+
+        private Result<string> CreateEmptyPackageDefinitionFile(string packageDefinitionFileName)
+        {
+            if(System.IO.File.Exists(packageDefinitionFileName))
+                return new Result<string>(new SccmToolsException($"Package definition file '{packageDefinitionFileName}' allready exists."));
+            try
+            {
+                using (var sw = new StreamWriter(packageDefinitionFileName))
+                {
+                    sw.Write(GetEmptyPackageDefinitionFileContent());
+                }
+                return new Result<string>(packageDefinitionFileName);
+            }
+            catch (Exception e)
+            {
+                return new Result<string>(new SccmToolsException($"Failed to write empty package definition file due to {e.Message}", e));
+            }            
+        }
+
+        private string GetEmptyPackageDefinitionFileContent()
+        {
+            return @"[PDF]
+Version=2.0
+
+[Package Definition]
+Name=
+Version=
+Publisher=
+Language=
+Comment=
+Programs=INSTALL,UNINSTALL
+
+[INSTALL]
+Name=INSTALL
+CommandLine=
+CanRunWhen=AnyUserStatus
+UserInputRequired=False
+AdminRightsRequired=True
+UseInstallAccount=True
+Run=Minimized
+Icon=App.ico
+Comment=
+
+[UNINSTALL]
+Name=UNINSTALL
+CommandLine=
+CanRunWhen=AnyUserStatus
+UserInputRequired=False
+AdminRightsRequired=True
+UseInstallAccount=True
+Run=Minimized
+Icon=App.ico
+Comment=
+";
         }
 
         private string GetName(string packageDefinitionFileName)

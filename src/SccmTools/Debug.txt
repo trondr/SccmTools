@@ -1,3 +1,6 @@
 ﻿Help
 CreateSomething /exampleParameter="c:\temp"
 SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms"
+
+CreateApplicationFromDefinition /packageDefinitionFile="X:\Applications\Test Application\Script\PackageDefinition.sms"
+CreateDefinitionFromApplication /applicationName="Microsoft Corporation Win2012r2x64" /applicationVersions="1.0" 

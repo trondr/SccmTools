@@ -10,7 +10,7 @@ namespace SccmTools.Tests.UnitTests.ContainerRegistrationTests.Infrastructure
         [Test, RequiresSTA]
         public void NCmdLinerCommandDefinitionRegistrationTest()
         {
-            BootStrapperTestsHelper.CheckThatNumberOfResolvedServicesAre<CommandDefinition>(1, "The number should equal the number of service implementations. The programmer should manually adjust the expected number in this unit test for each added or removed service implementation.");
+            BootStrapperTestsHelper.CheckThatNumberOfResolvedServicesAre<CommandDefinition>(2, "The number should equal the number of service implementations. The programmer should manually adjust the expected number in this unit test for each added or removed service implementation.");
         }
     }
 }
