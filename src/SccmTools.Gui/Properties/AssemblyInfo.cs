@@ -16,12 +16,12 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyDescription("SccmTools provides a command for creating an SCCM 2012 application from a package" +
     " definition file.")]
+[assembly: CLSCompliant(false)]
+[assembly: AssemblyInformationalVersion("1.0.21108.12.d202e12")]
 [assembly: AssemblyCompany("github.com.trondr")]
 [assembly: AssemblyProduct("SccmTools.Gui")]
-[assembly: AssemblyCopyright("Copyright © github.com.trondr 2018")]
-[assembly: CLSCompliant(false)]
-[assembly: AssemblyInformationalVersion("1.0.18114.11.74aeaf1")]
-[assembly: AssemblyVersion("1.0.18114.11")]
-[assembly: AssemblyFileVersion("1.0.18114.11")]
+[assembly: AssemblyCopyright("Copyright © github.com.trondr 2015-2021")]
+[assembly: AssemblyFileVersion("1.0.21108.12")]
+[assembly: AssemblyVersion("1.0.21108.12")]
 
 

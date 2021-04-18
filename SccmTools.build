@@ -7,7 +7,7 @@
     <ProductName>SccmTools</ProductName>
     <ProductCompany>github.com.trondr</ProductCompany>
     <ProductDescription>SccmTools provides a command for creating an SCCM 2012 application from a package definition file.</ProductDescription>
-    <ProductCopyright>Copyright &#169; github.com.trondr $([System.DateTime]::Now.Year)</ProductCopyright>
+    <ProductCopyright>Copyright &#169; github.com.trondr 2015-$([System.DateTime]::Now.Year)</ProductCopyright>
     <ProductProjectName>$(ProductName)</ProductProjectName>
 
     <ShortYear>$([System.DateTime]::Now.ToString(`yy`))</ShortYear>
