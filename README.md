@@ -22,6 +22,11 @@ SccmTools.exe CreateApplicationFromDefinition /packageDefinitionFile="\\serverna
 
 ![](./doc/ConfigurationManagerContextMenu.png)
 
+
+#### Logging
+
+Check the logs if appliction was not created. Logs are written here: %public%\Logs\SccmTools
+
 #### Recognized package definition values:
 	
 * [Package Definition]Name
@@ -53,7 +58,7 @@ Name=My Product
 Version=1.0.15318.1
 Publisher=My Company AS
 Language=EN
-Comment=
+Comment=Test Comment
 Programs=INSTALL,UNINSTALL
 
 [INSTALL]
@@ -65,7 +70,7 @@ AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
 Icon=App.ico
-Comment=
+Comment=Test Comment
 
 [UNINSTALL]
 Name=UNINSTALL
@@ -75,7 +80,7 @@ UserInputRequired=False
 AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
-Comment=
+Comment=Test Comment
 
 [DetectionMethod]
 MsiProductCode={E1C62E82-D565-4C5D-9665-2D9D27A95086}
@@ -93,7 +98,7 @@ Name=My Product
 Version=1.0.15318.1
 Publisher=My Company AS
 Language=EN
-Comment=
+Comment=Test Comment
 Programs=INSTALL,UNINSTALL
 
 [INSTALL]
@@ -105,7 +110,7 @@ AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
 Icon=App.ico
-Comment=
+Comment=Test Comment
 
 [UNINSTALL]
 Name=UNINSTALL
@@ -115,7 +120,7 @@ UserInputRequired=False
 AdminRightsRequired=True
 UseInstallAccount=True
 Run=Minimized
-Comment=
+Comment=Test Comment
 
 [DetectionMethod]
 RegistryValue = [HKLM\SOFTWARE\My Company\My Product\Setup]InstallRevision=Product_revision_1
@@ -147,7 +152,7 @@ AdminRightsRequired = True
 UseInstallAccount = True
 Run = Minimized
 Icon = App.ico
-Comment = 
+Comment = Test Comment
 
 [UNINSTALL]
 Name = UNINSTALL
@@ -157,7 +162,7 @@ UserInputRequired = False
 AdminRightsRequired = True
 UseInstallAccount = True
 Run = Minimized
-Comment = 
+Comment = Test Comment - uninstall
 
 [DetectionMethod]
 MsiProductCode = 
@@ -173,8 +178,8 @@ Dependency2="Test Application Service 2";"1.0.16239.2"
 ## Command line help
 
 ```
-SccmTools 1.0.18114.11.74aeaf1 - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
-Copyright © github.com.trondr 2018
+SccmTools 1.0.21108.12.d202e12 - SccmTools provides a command for creating an SCCM 2012 application from a package definition file.
+Copyright © github.com.trondr 2015-2021
 Author: trondr@outlook.com
 Usage: SccmTools.exe <command> [parameters]
 
