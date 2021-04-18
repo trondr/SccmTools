@@ -34,7 +34,7 @@ namespace SccmTools.Tests.UnitTests
             using(var testBooStrapper = new TestBootStrapper(GetType()))
             {
                 var target = testBooStrapper.Container.Resolve<IConfigurationManagerConsoleInfo>();
-                const string expected = @"C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\XmlStorage\Extensions\Actions";
+                const string expected = @"C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\XmlStorage\Extensions\Actions";
                 var actual = target.ActionsExtensionsPath;
                 Assert.AreEqual(expected,actual);    
             }
