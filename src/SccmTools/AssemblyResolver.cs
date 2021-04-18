@@ -87,20 +87,10 @@ namespace SccmTools
         {
             var resourceAssembly = ResourceAssembly(assemblyName);
             var resourceName = ResourceName(assemblyName);
-            var assembly = LoadAssemblyFromResource(resourceAssembly, resourceName) ?? LoadAssemblyFromSearchPath(assemblyName, SearchPaths());
+            var assembly = LoadAssemblyFromSearchPath(assemblyName, SearchPaths());
             return assembly;
         }
-
-        private static Assembly LoadAssemblyFromResource(Assembly resourceAssembly, string resourceName)
-        {
-            if (resourceAssembly == null) throw new ArgumentNullException(nameof(resourceAssembly));
-            if (string.IsNullOrWhiteSpace(resourceName)) throw new ArgumentException("Value cannot be null or whitespace.", nameof(resourceName));
-            DebugConsoleLogging($"Trying to find and load assembly '{resourceName}' from embedded resource in assembly '{resourceAssembly.FullName}'...");
-            var assemblyData = GetAssemblyData(resourceAssembly, resourceName);
-            var assembly = assemblyData?.LoadAssemblyFromAssemblyData();
-            return assembly;
-        }
-
+        
         private static Assembly LoadAssemblyFromSearchPath(string assemblyName, IEnumerable<string> searchPaths)
         {
             if (assemblyName == null) throw new ArgumentNullException(nameof(assemblyName));
