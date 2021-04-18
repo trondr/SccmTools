@@ -9,6 +9,7 @@ namespace SccmTools.Library.Infrastructure
     {
         private string _logDirectoryPath;
         private string _logFileName;
+        private string _logLevel;
         private readonly string _sectionName;
 
         public LoggingConfiguration()
@@ -50,6 +51,24 @@ namespace SccmTools.Library.Infrastructure
                 return _logFileName;
             }
             set { _logFileName = value; }
+        }
+
+        public string LogLevel
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_logLevel))
+                {
+                    var section = (NameValueCollection)ConfigurationManager.GetSection(_sectionName);
+                    if (section == null)
+                    {
+                        throw new ConfigurationErrorsException("Missing section in application configuration file: " + _sectionName);
+                    }
+                    _logLevel = Environment.ExpandEnvironmentVariables(section["LogLevel"]);
+                }
+                return _logLevel;
+            }
+            set { _logLevel = value; }
         }
     }
 }

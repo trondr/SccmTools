@@ -10,12 +10,20 @@ using Common.Logging;
 using NCmdLiner;
 using SccmTools.Infrastructure.ContainerExtensions;
 using SccmTools.Library.Infrastructure;
+using SccmTools.Library.Module;
+using Serilog;
+using Serilog.Configuration;
+using Serilog.Sinks.SystemConsole;
+using Serilog.Sinks;
+using Serilog.Formatting.Json;
+
 
 namespace SccmTools.Infrastructure.ContainerConfiguration
 {
     [InstallerPriority(0)]
     public class ContainerInstallerFirst : IWindsorInstaller
     {
+
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             //
@@ -29,8 +37,16 @@ namespace SccmTools.Infrastructure.ContainerConfiguration
             //   Configure logging
             //
             ILoggingConfiguration loggingConfiguration = new LoggingConfiguration();
-            log4net.GlobalContext.Properties["LogFile"] = Path.Combine(loggingConfiguration.LogDirectoryPath, loggingConfiguration.LogFileName);
-            log4net.Config.XmlConfigurator.ConfigureAndWatch(new FileInfo(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile));
+
+            var loglevel = LoggingFunctions.ToLogLevel(loggingConfiguration.LogLevel).ToLogEventLevel();
+            var logFile = Path.Combine(loggingConfiguration.LogDirectoryPath, loggingConfiguration.LogFileName);
+            var log = new Serilog.LoggerConfiguration()
+                .MinimumLevel.Is(loglevel)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.File(logFile)
+                .CreateLogger();
+            Log.Logger = log;
             var applicationRootNameSpace = typeof (Program).Namespace;
             container.Kernel.Register(Component.For<ILog>().Instance(LogManager.GetLogger(applicationRootNameSpace))); //Default logger
             container.Kernel.Resolver.AddSubResolver(new LoggerSubDependencyResolver()); //Enable injection of class specific loggers

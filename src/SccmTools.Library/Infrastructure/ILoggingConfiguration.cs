@@ -4,5 +4,6 @@
     {
         string LogDirectoryPath { get; set; }
         string LogFileName { get; set; }
+        string LogLevel { get; set; }
     }
 }

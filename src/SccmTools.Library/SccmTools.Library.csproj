@@ -9,12 +9,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SccmTools.Library</RootNamespace>
     <AssemblyName>SccmTools.Library</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BinDirectory Condition=" '$(BinDirectory)' == ''">..\..\bin</BinDirectory>
     <BaseIntermediateOutputPath>$(BinDirectory)\obj\$(AssemblyName)\</BaseIntermediateOutputPath>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,59 +43,51 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdminUI.AppManFoundation">
-      <HintPath>..\..\tools\Sccm\AdminUI.AppManFoundation.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\AdminUI.AppManFoundation.dll</HintPath>
     </Reference>
     <Reference Include="AdminUI.DcmObjectWrapper">
-      <HintPath>..\..\tools\Sccm\AdminUI.DcmObjectWrapper.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\AdminUI.DcmObjectWrapper.dll</HintPath>
     </Reference>
     <Reference Include="AdminUI.WqlQueryEngine, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Sccm\AdminUI.WqlQueryEngine.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\AdminUI.WqlQueryEngine.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
     <Reference Include="DcmObjectModel">
-      <HintPath>..\..\tools\Sccm\DcmObjectModel.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\DcmObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="INIFileParser, Version=2.3.0.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="LanguageExt.Core, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\LanguageExt.Core.3.0.1\lib\net451\LanguageExt.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement">
-      <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ApplicationManagement.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\Microsoft.ConfigurationManagement.ApplicationManagement.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller">
-      <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ConfigurationManagement.DesiredConfiguration">
-      <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.DesiredConfiguration.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\Microsoft.ConfigurationManagement.ApplicationManagement.MsiInstaller.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ConfigurationManagement.ManagementProvider">
-      <HintPath>..\..\tools\Sccm\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\Microsoft.ConfigurationManagement.ManagementProvider.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Sccm\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
     </Reference>
     <Reference Include="NCmdLiner, Version=2.0.18110.340, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\NCmdLiner.2.0.18110.340\lib\net452\NCmdLiner.dll</HintPath>
+      <HintPath>..\..\tools\NuGetPackages\NCmdLiner.2.0.18110.340\lib\net462\NCmdLiner.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -104,23 +97,23 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive.Core, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Core.3.1.1\lib\net46\System.Reactive.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Reactive.Linq, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.Linq.3.1.1\lib\net46\System.Reactive.Linq.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    <Reference Include="System.Reactive.PlatformServices, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\..\tools\NuGetPackages\System.Reactive.PlatformServices.3.1.1\lib\net46\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\..\tools\NuGetPackages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\tools\NuGetPackages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <HintPath>..\..\tools\NuGetPackages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="System.Xaml" />
@@ -166,6 +159,7 @@
     <Compile Include="Module\Common\Caching\ICacheValidator.cs" />
     <Compile Include="Module\Common\Caching\ICurrentDateTimeService.cs" />
     <Compile Include="Module\DirectoryPath.cs" />
+    <Compile Include="Module\EnumUtils.cs" />
     <Compile Include="Module\ExistingDirectoryPath.cs" />
     <Compile Include="Module\LoggingFunctions.cs" />
     <Compile Include="Module\Common\Install\ConfigurationManagerConsoleInfo.cs" />
@@ -195,6 +189,7 @@
     <Compile Include="Module\Common\Wmi\WmiParameter.cs" />
     <Compile Include="Module\F.cs" />
     <Compile Include="Module\Mapping\ExampleMapping.cs" />
+    <Compile Include="Module\RunTimeRequirements.cs" />
     <Compile Include="Module\Services\IProductCodeProvider.cs" />
     <Compile Include="Module\Services\ISccmApplication.cs" />
     <Compile Include="Module\Services\ISccmApplicationProvider.cs" />
@@ -210,9 +205,6 @@
     <Folder Include="Module\Model\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="SmsClientLib">
       <Guid>{2C505D98-35C3-47B7-BFD9-47A09C878385}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -222,6 +214,10 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
