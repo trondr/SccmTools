@@ -52,14 +52,14 @@ namespace SccmTools.Library.Module.Commands.CreateApplication
             _logger.InfoFormat("Creating application from package definition file '{0}'...", packageDefinitionFile.FileName);
             var packageDefinition = _packageDefinitionProvider.ReadPackageDefinition(packageDefinitionFile.FileName);
             
-            _logger.Info("Checking to see if application allready exists");
+            _logger.Info("Checking to see if application already exists");
 
             var applicationName = packageDefinition.Name;
             var applicationVersion = packageDefinition.Version;
             var applications = _sccmApplicationProvider.FindApplication(applicationName, applicationVersion).ToList();
             if (applications.Count > 0)
             {
-                _logger.Error($"Application '{applicationName}-{applicationVersion}' allready exists in SCCM");
+                _logger.Error($"Application '{applicationName}-{applicationVersion}' already exists in SCCM");
                 return 1;
             }
             
