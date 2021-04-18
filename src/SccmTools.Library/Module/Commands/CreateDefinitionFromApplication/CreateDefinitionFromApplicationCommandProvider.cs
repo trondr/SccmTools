@@ -22,14 +22,6 @@ namespace SccmTools.Library.Module.Commands.CreateDefinitionFromApplication
         public Result<int> CreateDefinitionFromApplication(string applicationName, string applicationVersion)
         {
             var logger = typeof(CreateDefinitionFromApplicationCommandProvider).Logger();
-            var configurationManagerConsoleIsInstalled = F.GetAdminConsoleBinPath().Match(path => true, exception =>
-            {
-                logger.Error(exception.Message);
-                return false;
-            });
-            if (!configurationManagerConsoleIsInstalled)
-                return Result.Ok(1);
-
             var applications = _sccmApplicationProvider.FindApplication(applicationName, applicationVersion).ToList();
             if (applications.Count == 0)
             {
