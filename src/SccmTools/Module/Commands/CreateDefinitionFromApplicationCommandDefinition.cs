@@ -23,6 +23,7 @@ namespace SccmTools.Module.Commands
                 ExampleValue = "4.3")]
             string applicationVersions)
         {
+            RunTimeRequirements.AssertAll();
             var commandProvider = _commandProviderFactory.GetCreateDefinitionFromApplicationCommandProvider();
             var result = commandProvider.CreateDefinitionFromApplication(applicationName, applicationVersions);
             return result;

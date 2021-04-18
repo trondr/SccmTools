@@ -24,8 +24,10 @@ namespace SccmTools.Module.Commands
             [OptionalCommandParameter(Description = "Package definition file as specified by https://technet.microsoft.com/en-ca/library/bb632631.aspx. It is required that file path is a unc path or on a network drive. If this package definition file is not specified on the command line a file dialog will be shown to the user.", AlternativeName = "pf", ExampleValue = @"\\servername\appsource\Some Application 1.0\Pkg\PackageDefinition.sms", DefaultValue = "")]
             string packageDefinitionFile
             )
-        {            
+        {
+            RunTimeRequirements.AssertAll();
             return _createApplicationFromDefinitionCommandProvider.CreateApplicationFromDefinition(packageDefinitionFile);
         }
+
     }
 }

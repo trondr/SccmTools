@@ -10,7 +10,7 @@ namespace SccmTools.Library.Module
         public static Func<Result<ExistingDirectoryPath>> GetAdminConsoleBinPath => fun(() =>
         {
             //
-            //SMS_ADMIN_UI_PATH=C:\Program Files (x86)\Microsoft Configuration Manager\AdminConsole\bin\i386
+            //SMS_ADMIN_UI_PATH=C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin\i386
             //
             var smsAdminUiPath = ExistingDirectoryPath.Get(Environment.GetEnvironmentVariable("SMS_ADMIN_UI_PATH"));
             return smsAdminUiPath
