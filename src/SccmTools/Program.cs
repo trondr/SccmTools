@@ -1,5 +1,6 @@
 ﻿using System;
 using NCmdLiner;
+using SccmTools.Library.Module;
 
 namespace SccmTools
 {
@@ -24,6 +25,7 @@ namespace SccmTools
             {
                 LogHelper.WriteErrorToEventLog($"Fatal error when wiring up the application.{Environment.NewLine}{e}");
             }
+            if (exitCode != 0) LoggingFunctions.OpenLogFile();
             return exitCode;
         }
 

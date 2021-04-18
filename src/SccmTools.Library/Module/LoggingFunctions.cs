@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using Common.Logging;
 using LanguageExt;
+using SccmTools.Library.Infrastructure;
 
 namespace SccmTools.Library.Module
 {
@@ -34,6 +36,21 @@ namespace SccmTools.Library.Module
                     return LogLevel.Off;
                 default:
                     throw new ArgumentOutOfRangeException($"Invalid loglevel '{logLevel}' specified in app config. Valid log level values are: {string.Join("|",EnumUtils.EnumStringValueToList<LogLevel>())}");
+            }
+        }
+
+        public static void OpenLogFile()
+        {
+            try
+            {
+                var loggingConfiguration = new LoggingConfiguration();
+                var logFile = Path.Combine(loggingConfiguration.LogDirectoryPath, loggingConfiguration.LogFileName);
+                if(File.Exists(logFile))
+                    System.Diagnostics.Process.Start(logFile);
+            }
+            catch (Exception e)
+            {
+                Logger(typeof(LoggingFunctions)).Error($"Failed to  open log file. {e.Message}");
             }
         }
     }
